@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lonely | Giddie Rey Journal</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#080808;
+  color:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  padding:25px 15px 50px;
+}
+
+.container{
+  max-width:650px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.header h1{
+  font-size:35px;
+  margin-bottom:10px;
+}
+
+.header p{
+  color:#888;
+  line-height:1.6;
+}
+
+.quote{
+  background:#121212;
+  border:1px solid #292929;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:13px;
+  cursor:pointer;
+  line-height:1.6;
+  transition:.25s;
+}
+
+.quote:hover{
+  background:#1c1c1c;
+}
+
+.number{
+  display:block;
+  color:#666;
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  color:#aaa;
+  text-decoration:none;
+  margin-top:30px;
+}
+
+.footer{
+  text-align:center;
+  color:#444;
+  font-size:12px;
+  margin-top:35px;
+}
+
+/* FULL QUOTE */
+
+#quoteScreen{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#080808;
+  z-index:1000;
+  padding:25px;
+}
+
+.quoteContent{
+  min-height:90vh;
+  max-width:650px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  left:20px;
+  background:none;
+  border:none;
+  color:#aaa;
+  font-size:16px;
+  padding:10px;
+}
+
+.quoteNumber{
+  color:#666;
+  font-size:13px;
+}
+
+#bigQuote{
+  font-size:27px;
+  line-height:1.6;
+  margin:30px 0;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+}
+
+.buttons button{
+  background:#171717;
+  border:1px solid #303030;
+  color:white;
+  padding:13px 20px;
+  border-radius:25px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>🌑 Lonely</h1>
+    <p>For the nights when silence feels louder than words.</p>
+  </div>
+
+  <div id="quoteList"></div>
+
+  <a class="back" href="journal.html">← Back to Journal</a>
+
+  <div class="footer">
+    Giddie Rey Journal 🖤
+  </div>
+
+</div>
+
+<div id="quoteScreen">
+
+  <button class="close" onclick="closeQuote()">← Back</button>
+
+  <div class="quoteContent">
+
+    <div class="quoteNumber" id="quoteNumber"></div>
+
+    <div id="bigQuote"></div>
+
+    <div class="buttons">
+      <button onclick="previousQuote()">← Previous</button>
+      <button onclick="nextQuote()">Next →</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const quotes = [
+
+"Sometimes loneliness isn't being alone. It's having no one who truly understands you.",
+"I learned how to smile while quietly feeling empty inside.",
+"Some nights I don't need sleep. I just need someone to talk to.",
+"The hardest part of loneliness is having so much to say and no one to tell.",
+"I can be surrounded by people and still feel completely alone.",
+"Nobody noticed I was becoming quieter.",
+"Sometimes I disappear just to see if anyone notices.",
+"I miss having someone who genuinely wanted to hear about my day.",
+"The room is quiet, but my thoughts are louder than ever.",
+"I wish someone would ask how I really feel and actually wait for the answer.",
+"Being alone is peaceful until your thoughts become your only company.",
+"Some loneliness comes from missing someone. Some comes from realizing nobody feels like home.",
+"I stopped reaching out because I got tired of feeling like a burden.",
+"People see the smile. They don't always see the silence behind it.",
+"Sometimes I just want someone to stay without being asked.",
+"I wonder how many people would notice if I stopped talking.",
+"The saddest conversations are the ones you have with yourself.",
+"I miss conversations that didn't feel forced.",
+"Sometimes the person you want to talk to is the reason you're hurting.",
+"I became comfortable with silence because nobody stayed long enough to hear me.",
+"There are nights when all I want is a familiar voice.",
+"I don't need a crowd. I just need one person who understands.",
+"Sometimes loneliness feels like being forgotten while you're still here.",
+"I got used to checking my phone and finding nothing.",
+"I wish people knew how much their small acts of kindness can mean.",
+"Some days I don't want advice. I just want someone beside me.",
+"I learned to keep things to myself because explaining became exhausting.",
+"Being alone taught me things I never wanted to learn.",
+"Sometimes I feel invisible even when everyone can see me.",
+"I stopped expecting people to notice when something was wrong.",
+"Silence becomes heavy when you have too many thoughts.",
+"I miss being someone's first choice.",
+"Some nights feel longer when you have nobody to share them with.",
+"I wonder if anyone thinks about me when I'm not around.",
+"Loneliness makes small memories feel enormous.",
+"I don't want attention. I just want genuine connection.",
+"Sometimes I laugh with everyone and go quiet the moment I'm alone.",
+"I wish someone would stay long enough to know the real me.",
+"Nobody knows how many conversations I've had in my head.",
+"I became good at saying I'm fine.",
+"Sometimes you don't miss a person. You miss feeling understood.",
+"I hate how normal loneliness has started to feel.",
+"Some people only know the version of me that I show them.",
+"I wish I could explain my silence without having to explain everything.",
+"Sometimes I stay awake because the night is the only time my thoughts feel honest.",
+"I don't always want to be alone. I just don't know who to call.",
+"Being misunderstood can feel lonelier than being alone.",
+"I miss the days when talking to someone felt easy.",
+"Sometimes I wonder if anyone would notice the difference between my smile and my real feelings.",
+"I have people around me, but sometimes I still feel like I'm somewhere else.",
+"I stopped telling people when I was struggling because I didn't want to sound needy.",
+"Loneliness can make you miss people who weren't good for you.",
+"I wish someone would ask twice when I say I'm okay.",
+"Some silence isn't peaceful. It's everything you never got to say.",
+"I became distant because I was tired of feeling unwanted.",
+"Sometimes I just want to sit beside someone without needing to say anything.",
+"I miss feeling important to someone.",
+"Nobody tells you how strange it feels to become a stranger to people you once knew so well.",
+"Some nights I scroll through old conversations just to feel less alone.",
+"I wish memories could keep you company without making you miss the past.",
+"I don't need everyone to understand me. I just wish one person did.",
+"Sometimes loneliness is remembering how connected you used to feel.",
+"I got tired of being the one who always started the conversation.",
+"I wonder when being alone became easier than being disappointed.",
+"Sometimes I want to disappear from everyone's expectations and just breathe.",
+"I miss having someone I could tell everything without overthinking.",
+"People ask where you've been, but rarely ask what you've been feeling.",
+"I learned that not every lonely person wants company. Some just want understanding.",
+"Sometimes you can feel lonely in the middle of a conversation.",
+"I wish someone could hear the things I never say.",
+"Some days I don't need motivation. I need a little kindness.",
+"I stopped explaining my silence because nobody seemed interested in the reason.",
+"Loneliness taught me how much a simple message can mean.",
+"I miss being someone's safe place.",
+"Sometimes I wonder if people miss me or just miss what I did for them.",
+"I don't want to be surrounded. I want to feel connected.",
+"The quietest people can have the loudest minds.",
+"I got used to being the person who listens but isn't heard.",
+"Sometimes I feel like everyone has someone except me.",
+"I wish I had someone I could call without wondering if I'm bothering them.",
+"Some nights I just stare at the ceiling and think about everything.",
+"I became independent because depending on people started hurting.",
+"Sometimes being strong simply means getting through another quiet day.",
+"I miss when someone genuinely cared about the little details.",
+"People can be close to you and still feel miles away.",
+"I stopped chasing conversations that only existed when I started them.",
+"Sometimes the hardest thing is admitting that you're lonely.",
+"I wish someone would notice the things I don't say.",
+"Some days I don't want to talk. I just don't want to feel forgotten.",
+"I learned to enjoy my own company because I couldn't always count on others.",
+"Loneliness isn't always empty rooms. Sometimes it's empty connections.",
+"I miss the feeling of being understood without having to explain.",
+"Sometimes I wish someone would simply say, 'I'm here.'",
+"I don't need constant attention. I just want something genuine.",
+"Some friendships fade so slowly that you don't notice until you're alone.",
+"I became quieter when I realized not everyone deserved access to my thoughts.",
+"Sometimes I miss people I know I shouldn't go back to.",
+"I wish I could tell someone everything without worrying how they would see me afterward.",
+"Being alone isn't what hurts. Feeling unwanted does.",
+"Sometimes I wonder if anyone truly knows me.",
+"I got tired of pretending I didn't care.",
+"The hardest nights are the ones when you have nobody to call.",
+"Sometimes I just want someone to sit with me through the silence.",
+"I miss the version of myself that didn't overthink every goodbye.",
+"Some people don't realize how much their absence changes a room.",
+"I learned to stop waiting for messages that weren't coming.",
+"Sometimes loneliness makes you appreciate people you once took for granted.",
+"I don't want a perfect connection. I just want a real one.",
+"Some days the only person I talk to is myself.",
+"I wish someone would notice when my 'I'm fine' sounds different.",
+"Sometimes I feel forgotten by people I never forgot.",
+"I became comfortable with being alone, but that doesn't mean I stopped wanting company.",
+"Loneliness has a way of making old memories feel new.",
+"I miss having someone who made ordinary days feel special.",
+"Sometimes I just want to know that I matter to someone.",
+"I stopped expecting people to understand what I couldn't explain.",
+"Maybe the loneliest feeling is having something beautiful to share and nobody to share it with.",
+"Some nights I wish the phone would ring just because someone thought of me.",
+"I learned that silence can be both peaceful and painful.",
+"Sometimes you don't need someone to fix anything. You just need someone to stay.",
+"I don't hate being alone. I hate feeling like nobody would notice if I were gone.",
+"One day I hope loneliness becomes a chapter I remember instead of a place I live in."
+
+];
+
+let currentQuote = 0;
+
+const quoteList = document.getElementById("quoteList");
+
+quotes.forEach(function(quote,index){
+
+  const item = document.createElement("div");
+
+  item.className = "quote";
+
+  item.innerHTML =
+    '<span class="number">' +
+    String(index + 1).padStart(2,"0") +
+    '</span>' +
+    quote;
+
+  item.onclick = function(){
+    openQuote(index);
+  };
+
+  quoteList.appendChild(item);
+
+});
+
+function openQuote(index){
+
+  currentQuote = index;
+
+  document.getElementById("bigQuote").textContent =
+    quotes[currentQuote];
+
+  document.getElementById("quoteNumber").textContent =
+    "QUOTE " +
+    String(currentQuote + 1).padStart(2,"0") +
+    " OF " +
+    quotes.length;
+
+  document.getElementById("quoteScreen").style.display = "block";
+
+}
+
+function closeQuote(){
+
+  document.getElementById("quoteScreen").style.display = "none";
+
+}
+
+function nextQuote(){
+
+  currentQuote++;
+
+  if(currentQuote >= quotes.length){
+    currentQuote = 0;
+  }
+
+  openQuote(currentQuote);
+
+}
+
+function previousQuote(){
+
+  currentQuote--;
+
+  if(currentQuote < 0){
+    currentQuote = quotes.length - 1;
+  }
+
+  openQuote(currentQuote);
+
+}
+
+</script>
+
+</body>
+  </html>
