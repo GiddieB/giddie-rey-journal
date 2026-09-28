@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unspoken Feelings — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 45px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>💭 Unspoken Feelings</h1>
+
+    <p class="intro">
+      Some feelings are too deep for words,
+      so they remain quietly inside us.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <div id="quoteScreen">
+
+    <div class="screenContent">
+
+      <div class="number" id="quoteNumber"></div>
+
+      <div id="fullQuote"></div>
+
+      <div class="buttons">
+        <button onclick="previousQuote()">← Previous</button>
+        <button onclick="nextQuote()">Next →</button>
+        <button class="close" onclick="closeQuote()">✕ Back</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      "Some feelings never become words because we are afraid of what the words might change.",
+
+      "I had so much to say, but silence felt safer.",
+
+      "Sometimes I miss you without wanting you to know.",
+
+      "There are things I wish I could tell you, but I don't know how to begin.",
+
+      "I wonder if you ever notice the things I never say.",
+
+      "Some of my deepest feelings have never left my heart.",
+
+      "I smiled because telling you how I really felt would have changed everything.",
+
+      "Sometimes silence isn't emptiness. Sometimes it is everything we couldn't say.",
+
+      "I wanted to tell you that you mattered more than I ever showed.",
+
+      "There are conversations I still have in my head that never happened in real life.",
+
+      "I kept my feelings quiet because I was scared of losing what we already had.",
+
+      "Sometimes the hardest words to say are the ones that begin with 'I miss you.'",
+
+      "I wonder how different things would be if I had said what I felt.",
+
+      "You may never know how many times I wanted to reach out.",
+
+      "I learned to hide feelings so well that even the people close to me stopped noticing.",
+
+      "Some people become important to us without ever knowing how much they mean.",
+
+      "I cared quietly because I didn't want my feelings to become your burden.",
+
+      "There was so much between us that neither of us had the courage to name.",
+
+      "I wanted honesty, but I was afraid the truth would create distance.",
+
+      "Sometimes I stayed silent because I valued the connection more than the answer.",
+
+      "I never told you how much your absence affected me.",
+
+      "Some goodbyes hurt because they contain everything we never said.",
+
+      "I wonder if you ever felt the same things I was too afraid to admit.",
+
+      "There are memories I revisit because they contain words I never got to say.",
+
+      "I pretended not to care because caring felt too dangerous.",
+
+      "Sometimes I wish you could read my thoughts just once.",
+
+      "I had a thousand words in my heart and none of them reached my lips.",
+
+      "Some feelings don't disappear. We simply become better at hiding them.",
+
+      "I wanted you to notice without having to ask you to notice.",
+
+      "Maybe you never knew because I never gave you a reason to know.",
+
+      "I kept waiting for the perfect moment to speak, and eventually the moment passed.",
+
+      "Sometimes the truth stays inside because we don't know what happens after we say it.",
+
+      "I miss the conversations we could have had.",
+
+      "You were someone I wanted to understand without knowing how to explain myself.",
+
+      "I wish I could tell you everything without changing the way you see me.",
+
+      "Some feelings are easier to carry than to confess.",
+
+      "I stayed quiet, hoping my actions would say what my words couldn't.",
+
+      "Sometimes I wonder whether you noticed how different I became around you.",
+
+      "I wanted to ask if you cared, but I was afraid of hearing no.",
+
+      "There are questions I never asked because I already feared the answers.",
+
+      "I never told you that some of your smallest actions meant the most to me.",
+
+      "Sometimes one person occupies your thoughts without ever knowing.",
+
+      "I wanted to tell you I was hurt, but I didn't want sympathy.",
+
+      "Some emotions become heavier when they have nowhere to go.",
+
+      "I learned that keeping everything inside doesn't make the feeling disappear.",
+
+      "I wish I had been brave enough to say what my silence was trying to explain.",
+
+      "Sometimes I wanted reassurance but didn't know how to ask for it.",
+
+      "I acted like everything was fine because explaining the truth felt exhausting.",
+
+      "There are nights when old conversations become new questions.",
+
+      "I remember what I wanted to say more clearly than what I actually said.",
+
+      "Sometimes the words stay unsaid because we care too much about the response.",
+
+      "I wanted to tell you that I noticed every little change.",
+
+      "You probably never realized how often I thought about those moments.",
+
+      "Some feelings hide behind jokes, smiles, and casual conversations.",
+
+      "I laughed when I wanted to admit that something hurt.",
+
+      "Sometimes saying 'I'm fine' is easier than explaining everything that isn't.",
+
+      "I never wanted attention. I just wanted to feel understood.",
+
+      "There were moments when I wanted to tell you I needed you, but pride kept me quiet.",
+
+      "I wish you knew how much your words stayed with me.",
+
+      "Some people never realize the impact they have on someone else's heart.",
+
+      "I kept pretending it didn't matter because admitting that it mattered would make me vulnerable.",
+
+      "Sometimes the person you want to talk to is the person you are most afraid to approach.",
+
+      "I wanted an explanation, but I was too afraid to ask for one.",
+
+      "Some questions remain unanswered because we are afraid to hear the truth.",
+
+      "I wonder if you ever replay our conversations the way I do.",
+
+      "There are moments I wish I could live again just to say one different thing.",
+
+      "I didn't stop caring. I just stopped showing it.",
+
+      "Sometimes distance begins with words that were never spoken.",
+
+      "I wish you knew that my silence was never indifference.",
+
+      "Some people mistake quietness for not caring.",
+
+      "I had feelings I couldn't explain without exposing parts of myself I wanted to protect.",
+
+      "Sometimes the heart knows what the mouth refuses to admit.",
+
+      "I wanted to ask you to stay, but I didn't want you to stay out of pity.",
+
+      "There are people we miss but never contact because we don't know if we still matter to them.",
+
+      "I wonder whether you remember the little things I remember.",
+
+      "Sometimes I wanted you to ask what was wrong because I didn't know how to tell you.",
+
+      "I carried conversations in my head long after they ended.",
+
+      "Some feelings become memories before they ever become confessions.",
+
+      "I wanted to be honest, but I was afraid honesty would cost me your presence.",
+
+      "You may never know how many times I almost told you.",
+
+      "Sometimes the hardest thing is knowing exactly what you feel and still not saying it.",
+
+      "I kept my distance because being close made everything harder to hide.",
+
+      "There were things I wanted to hear from you that I never had the courage to ask for.",
+
+      "Sometimes we hide our feelings because we don't want to become someone else's responsibility.",
+
+      "I wish I could explain why certain memories still matter to me.",
+
+      "I never said goodbye properly because part of me still wasn't ready.",
+
+      "Some people leave without ever knowing how deeply they were felt.",
+
+      "I wanted closure, but what I really wanted was one honest conversation.",
+
+      "Sometimes the heart keeps waiting even after the mind has moved on.",
+
+      "I didn't tell you I was struggling because I didn't want to become a problem.",
+
+      "Some feelings are hidden behind a simple 'take care.'",
+
+      "I wanted to say more, but the conversation ended before I found the courage.",
+
+      "Sometimes we don't confess because we would rather keep the possibility than hear the truth.",
+
+      "I wonder what you would say if you knew everything I kept from you.",
+
+      "There are moments when silence feels like the only language left.",
+
+      "I wish I could turn my thoughts into words without making them sound heavier than they are.",
+
+      "Some things are difficult to explain because they are felt more than understood.",
+
+      "I never told you how much I appreciated the moments you probably forgot.",
+
+      "Sometimes the smallest memories carry the biggest feelings.",
+
+      "I wanted you to know, but I didn't know how to tell you.",
+
+      "I kept my feelings hidden because I didn't want rejection to change the connection.",
+
+      "Some words stay inside us because saying them would make everything real.",
+
+      "I wonder if you noticed the moments when I became unusually quiet.",
+
+      "Sometimes I was quiet because I was trying not to say too much.",
+
+      "I wish I could tell you what I meant instead of letting you guess.",
+
+      "Some misunderstandings survive because neither person says what they truly feel.",
+
+      "I never wanted you to read my silence as anger.",
+
+      "Sometimes I pulled away because staying close made me care even more.",
+
+      "I wanted to explain myself, but I didn't know where to start.",
+
+      "Some emotions don't have simple names.",
+
+      "I wonder how many things between us would be different if we had both been honest.",
+
+      "Sometimes people leave without knowing they were carrying someone's unspoken hope.",
+
+      "I never said you hurt me because I was afraid you would stop caring completely.",
+
+      "Some feelings remain unfinished because the conversation never happened.",
+
+      "I wanted one chance to say everything I kept inside.",
+
+      "Sometimes the words we don't say become the memories we can't forget.",
+
+      "I wish you knew that I cared even when I acted distant.",
+
+      "Some silence is peaceful. Other silence is filled with things waiting to be said.",
+
+      "I never told you how much I noticed when you stopped being the same.",
+
+      "Sometimes we hide behind 'it's nothing' because 'it's everything' feels too honest.",
+
+      "I wanted to tell you I missed you, but I didn't know if you missed me too.",
+
+      "There are feelings that only come out when nobody is around.",
+
+      "I wonder if you ever felt a distance growing between us before I did.",
+
+      "Sometimes I wanted an apology, but what I really wanted was to know that you understood.",
+
+      "I never said how much I valued our time together.",
+
+      "Some people become unforgettable without ever knowing they were important.",
+
+      "I kept quiet because I didn't want my feelings to become the reason you stayed.",
+
+      "Sometimes the strongest feelings are the ones we never get the chance to express.",
+
+      "I wish I had said more when there was still time.",
+
+      "Some stories end without a final conversation.",
+
+      "I never needed perfect words. I just needed the courage to speak.",
+
+      "Sometimes all we want is for someone to notice what we are too afraid to say.",
+
+      "I had so much in my heart, but all you heard was silence.",
+
+      "Maybe someday I'll stop wondering what would have happened if I had spoken.",
+
+      "Until then, some feelings will remain where they began: quietly inside me."
+
+    ];
+
+    const quoteList = document.getElementById("quoteList");
+
+    quotes.forEach((quote, index) => {
+
+      const div = document.createElement("div");
+
+      div.className = "quote";
+
+      div.textContent = quote;
+
+      div.onclick = () => openQuote(index);
+
+      quoteList.appendChild(div);
+
+    });
+
+    let currentQuote = 0;
+
+    function openQuote(index) {
+
+      currentQuote = index;
+
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
+
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(3, "0") +
+        " OF " +
+        quotes.length;
+
+      document.getElementById("quoteScreen").style.display = "flex";
+
+    }
+
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
+
+    function nextQuote() {
+
+      currentQuote++;
+
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
+
+      openQuote(currentQuote);
+
+    }
+
+    function previousQuote() {
+
+      currentQuote--;
+
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
+
+      openQuote(currentQuote);
+
+    }
+
+  </script>
+
+</body>
+  </html>
