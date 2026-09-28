@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overthinking — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 45px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🧠 Overthinking</h1>
+
+    <p class="intro">
+      Sometimes the loudest battles happen inside a quiet mind.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <div id="quoteScreen">
+
+    <div class="screenContent">
+
+      <div class="number" id="quoteNumber"></div>
+
+      <div id="fullQuote"></div>
+
+      <div class="buttons">
+        <button onclick="previousQuote()">← Previous</button>
+        <button onclick="nextQuote()">Next →</button>
+        <button class="close" onclick="closeQuote()">✕ Back</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      "My mind keeps creating conversations I'll never have.",
+
+      "Sometimes I don't need an answer. I just need my mind to stop asking questions.",
+
+      "I replay moments that probably meant nothing to you.",
+
+      "The hardest part of overthinking is arguing with possibilities that may never happen.",
+
+      "I can turn one small moment into a thousand different meanings.",
+
+      "Some nights my thoughts are louder than everything around me.",
+
+      "I wonder why I still think about things everyone else has already forgotten.",
+
+      "My mind remembers everything my heart is trying to forget.",
+
+      "I read between lines that were never written.",
+
+      "Sometimes silence makes me create answers that hurt more than the truth.",
+
+      "I wish I could switch my thoughts off for just one night.",
+
+      "The conversation ended hours ago, but my mind is still responding.",
+
+      "I overthink because I care about things I wish I didn't.",
+
+      "One unanswered message can become an entire story in my head.",
+
+      "I don't know what's worse: knowing the truth or imagining it.",
+
+      "My mind keeps asking 'what if?' even when there is nothing left to change.",
+
+      "I analyze people's words long after they've forgotten saying them.",
+
+      "Sometimes I create problems simply because my mind hates uncertainty.",
+
+      "I can be surrounded by people and still be alone with my thoughts.",
+
+      "I wish my thoughts came with an off button.",
+
+      "The smallest change in someone's tone can keep me thinking all night.",
+
+      "I keep searching for hidden meanings because I’m afraid of the obvious one.",
+
+      "My mind doesn't rest just because the world does.",
+
+      "I think about things I should have said, things I shouldn't have said, and things that no longer matter.",
+
+      "Sometimes I miss people simply because my mind keeps returning to them.",
+
+      "I don't always need someone to hurt me; sometimes my thoughts do enough.",
+
+      "I have lost sleep over conversations that lasted less than a minute.",
+
+      "My imagination can turn uncertainty into fear before reality even arrives.",
+
+      "I wish I could stop caring about every little detail.",
+
+      "Some questions become heavier when you never get an answer.",
+
+      "I keep checking memories like there might be a different ending hidden inside them.",
+
+      "My mind keeps reopening doors my heart already closed.",
+
+      "I can forgive someone and still spend months wondering why they did it.",
+
+      "Sometimes I'm not sad. I'm just thinking too much.",
+
+      "The problem with overthinking is that every possibility starts feeling like the truth.",
+
+      "I wish I could trust the moment without trying to predict what comes next.",
+
+      "I turn silence into meaning and distance into a thousand explanations.",
+
+      "My thoughts know exactly which memories to visit when I need sleep.",
+
+      "I keep asking myself questions that only time can answer.",
+
+      "Maybe nothing happened. Maybe my mind just made everything bigger.",
+
+      "I wish I could experience a moment without immediately analyzing it.",
+
+      "Sometimes I don't miss the person. I miss the version of life I imagined with them.",
+
+      "My mind keeps preparing me for pain that hasn't even arrived.",
+
+      "I worry about losing things I haven't even lost yet.",
+
+      "Some nights I fight battles that exist only inside my thoughts.",
+
+      "I can find ten reasons to worry where there is only one reason to breathe.",
+
+      "I keep looking for certainty in situations that were never certain.",
+
+      "The more I think, the less I understand.",
+
+      "Sometimes my thoughts need comfort more than they need answers.",
+
+      "I wish I could stop turning every little thing into something personal."
+
+    ];
+
+    const quoteList = document.getElementById("quoteList");
+
+    quotes.forEach((quote, index) => {
+
+      const div = document.createElement("div");
+
+      div.className = "quote";
+
+      div.textContent = quote;
+
+      div.onclick = () => openQuote(index);
+
+      quoteList.appendChild(div);
+
+    });
+
+    let currentQuote = 0;
+
+    function openQuote(index) {
+      currentQuote = index;
+
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
+
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(2, "0") +
+        " OF " +
+        quotes.length;
+
+      document.getElementById("quoteScreen").style.display = "flex";
+    }
+
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
+
+    function nextQuote() {
+      currentQuote++;
+
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
+
+      openQuote(currentQuote);
+    }
+
+    function previousQuote() {
+      currentQuote--;
+
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
+
+      openQuote(currentQuote);
+    }
+
+  </script>
+
+</body>
+</html>
