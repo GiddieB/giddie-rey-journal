@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faith & Hope — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 45px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🙏 Faith & Hope</h1>
+
+    <p class="intro">
+      When life feels uncertain, faith reminds us
+      that tomorrow can still hold something beautiful.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <div id="quoteScreen">
+
+    <div class="screenContent">
+
+      <div class="number" id="quoteNumber"></div>
+
+      <div id="fullQuote"></div>
+
+      <div class="buttons">
+        <button onclick="previousQuote()">← Previous</button>
+        <button onclick="nextQuote()">Next →</button>
+        <button class="close" onclick="closeQuote()">✕ Back</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      "Even when I cannot see the way forward, I can still trust that there is a way.",
+
+      "Faith does not mean having every answer. Sometimes it means continuing without them.",
+
+      "A difficult season does not mean the story is over.",
+
+      "When I feel lost, I remind myself that God has not lost sight of me.",
+
+      "Hope can survive even in places where certainty cannot.",
+
+      "Sometimes the strongest prayer is simply refusing to give up.",
+
+      "God can bring meaning from moments I once thought were wasted.",
+
+      "I may not understand today, but I can still trust tomorrow to God.",
+
+      "Some blessings arrive after the patience we thought we could not afford.",
+
+      "Faith teaches me to keep walking even when the road is unclear.",
+
+      "What feels like a delay may become part of a bigger answer.",
+
+      "I do not need to understand everything to remain grateful.",
+
+      "When life changes suddenly, God remains constant.",
+
+      "Hope is remembering that one difficult chapter cannot define the whole story.",
+
+      "Sometimes God answers quietly, through peace instead of explanations.",
+
+      "I am learning to trust God's timing even when mine feels urgent.",
+
+      "The future may be unknown, but it does not have to be hopeless.",
+
+      "Some prayers take time, and patience is part of the journey.",
+
+      "When I have little strength, I can still choose to have faith.",
+
+      "God knows the parts of my story that nobody else sees.",
+
+      "There are seasons when all I can do is trust and keep moving.",
+
+      "A closed door does not mean God has closed the whole journey.",
+
+      "Sometimes the answer comes in a form I never expected.",
+
+      "Faith gives me courage to face what fear tells me to avoid.",
+
+      "I may have questions, but I can still have faith.",
+
+      "Hope is not pretending everything is perfect. It is believing things can become better.",
+
+      "God can make a new beginning out of an ending.",
+
+      "Some of the hardest days can teach the deepest lessons.",
+
+      "I am not walking through life alone.",
+
+      "When my plans fail, I remind myself that life can still unfold beautifully.",
+
+      "Faith reminds me that my present situation is not my permanent destination.",
+
+      "Sometimes I need to stop worrying about tomorrow and trust God with today.",
+
+      "There is strength in believing that better days can still come.",
+
+      "God sees the effort behind the smile and the prayers behind the silence.",
+
+      "I may feel forgotten sometimes, but I am never outside God's sight.",
+
+      "Hope begins when I stop assuming that today is all there will ever be.",
+
+      "Sometimes the blessing is not getting what I wanted, but discovering what I needed.",
+
+      "I trust that God can work through circumstances I cannot control.",
+
+      "Faith does not remove every storm, but it can help me keep going through one.",
+
+      "The waiting season is still part of the journey.",
+
+      "I will not let one bad day convince me that life will always feel this way.",
+
+      "God's timing may be different from mine, but that does not make it empty.",
+
+      "Sometimes peace arrives before the answer does.",
+
+      "I am learning to thank God not only for what I have received, but also for what I have survived.",
+
+      "There are things I once prayed for that I now realize were not meant for me.",
+
+      "God knows what I need even when I struggle to explain it.",
+
+      "Hope gives tomorrow a chance before it even arrives.",
+
+      "Sometimes the smallest reason to keep believing is enough for today.",
+
+      "I can be uncertain about the future without being hopeless about it.",
+
+      "Faith teaches patience when life refuses to move at my speed.",
+
+      "God can turn unexpected paths into meaningful journeys.",
+
+      "Some answers come only after we have learned to wait.",
+
+      "I choose to believe that there is still goodness ahead.",
+
+      "When I cannot control the outcome, I can still control where I place my trust.",
+
+      "Every sunrise reminds me that life keeps giving us another chance.",
+
+      "I have survived days I once thought would break me.",
+
+      "That alone is a reason to believe there is more ahead.",
+
+      "God has carried me through moments I thought I had to face alone.",
+
+      "Sometimes looking back is the proof I need to keep trusting forward.",
+
+      "I do not know what tomorrow holds, but I know today is still a gift.",
+
+      "Gratitude makes room for hope.",
+
+      "Even a small amount of faith can give courage to a tired heart.",
+
+      "I will keep praying even when the answer has not arrived.",
+
+      "Sometimes the waiting changes us before the answer changes our situation.",
+
+      "God can use ordinary moments to create extraordinary memories.",
+
+      "I am learning not to confuse silence with absence.",
+
+      "Sometimes God is working in ways I cannot see yet.",
+
+      "The fact that I am still here means my story still has pages left.",
+
+      "Hope is choosing tomorrow even when today feels heavy.",
+
+      "I can release what I cannot control and trust God with the rest.",
+
+      "Faith allows me to take the next step without knowing every step after it.",
+
+      "Some seasons are about receiving. Others are about becoming.",
+
+      "God can bring peace into places where I once expected only worry.",
+
+      "I am learning that unanswered questions do not require hopeless answers.",
+
+      "A slow season is still a season of growth.",
+
+      "Sometimes the blessing is hidden inside the lesson.",
+
+      "I trust that what is meant for me will not require me to lose myself.",
+
+      "There is always another morning after a difficult night.",
+
+      "I refuse to let temporary circumstances define my permanent hope.",
+
+      "Faith reminds me that difficult does not mean impossible.",
+
+      "God sees the road ahead even when I can only see the next step.",
+
+      "Sometimes I need faith more than I need certainty.",
+
+      "I am allowed to be tired and still hopeful.",
+
+      "A heart can be weary and still believe.",
+
+      "Sometimes hope is simply saying, 'I will try again tomorrow.'",
+
+      "God's presence does not depend on how strong I feel.",
+
+      "I can bring my doubts to God without abandoning my faith.",
+
+      "Some prayers are answered through changes inside us.",
+
+      "I am learning to trust the process without demanding immediate results.",
+
+      "The future is still unwritten, and that means beautiful things are still possible.",
+
+      "I will not let fear write a story that hope has not finished.",
+
+      "There is purpose in continuing even when progress feels invisible.",
+
+      "Sometimes faith means resting instead of constantly trying to control everything.",
+
+      "God can make room for joy after seasons of uncertainty.",
+
+      "I believe that difficult moments can still lead somewhere meaningful.",
+
+      "Every new day is evidence that yesterday did not get the final word.",
+
+      "Hope is not weakness. It is courage that refuses to disappear.",
+
+      "I can trust God with the things I cannot fix myself.",
+
+      "Some doors open only after we stop forcing the wrong ones.",
+
+      "I am learning to recognize blessings that look different from what I expected.",
+
+      "God can turn a detour into a destination.",
+
+      "Sometimes the journey teaches what the destination never could.",
+
+      "I will keep my heart open to possibilities I cannot see yet.",
+
+      "Faith gives me a reason to keep moving when certainty runs out.",
+
+      "Tomorrow deserves a chance before I decide what it will look like.",
+
+      "I am grateful for every moment that taught me to trust more deeply.",
+
+      "Some seasons make sense only when viewed from a distance.",
+
+      "God knows the timing of things I am still learning to wait for.",
+
+      "I do not need to rush what God is preparing.",
+
+      "Hope reminds me that my current situation is only one part of my story.",
+
+      "There is still beauty waiting in places I have not reached yet.",
+
+      "Sometimes faith grows strongest when circumstances give me fewer reasons to rely on myself.",
+
+      "I can choose gratitude even while I am still waiting.",
+
+      "God has brought me this far, and I can trust Him with the next step.",
+
+      "I will not measure God's goodness by one difficult moment.",
+
+      "Some blessings take longer because they require preparation.",
+
+      "I am learning to appreciate the journey instead of only waiting for the destination.",
+
+      "Faith allows me to hope without knowing exactly how things will work out.",
+
+      "Even when plans change, purpose can remain.",
+
+      "God can bring light into places I thought would stay dark forever.",
+
+      "I will keep believing that something good can grow from difficult soil.",
+
+      "Sometimes peace is the answer I needed before the answer I wanted.",
+
+      "I am learning to trust without needing every detail first.",
+
+      "There is courage in waking up and trying again.",
+
+      "My story contains more than the moments that hurt.",
+
+      "God knows how to turn lessons into strength.",
+
+      "I can be thankful for today while still hoping for tomorrow.",
+
+      "Faith gives me permission to believe that the best parts of my story may still be ahead.",
+
+      "I will keep going, keep praying, and keep believing.",
+
+      "Some things take time because good things are worth growing into.",
+
+      "When I cannot see the purpose, I can still choose patience.",
+
+      "Hope is the quiet voice reminding me not to give up on tomorrow.",
+
+      "God is still God on the days when life makes no sense.",
+
+      "I am learning that faith is not the absence of questions; it is the decision to keep trusting.",
+
+      "No matter how uncertain the road becomes, I can still take one faithful step.",
+
+      "There is always a reason to be grateful for another day.",
+
+      "I trust that my story is still unfolding.",
+
+      "And until I see the whole picture, I will keep believing."
+
+    ];
+
+    const quoteList = document.getElementById("quoteList");
+
+    quotes.forEach((quote, index) => {
+      const div = document.createElement("div");
+      div.className = "quote";
+      div.textContent = quote;
+      div.onclick = () => openQuote(index);
+      quoteList.appendChild(div);
+    });
+
+    let currentQuote = 0;
+
+    function openQuote(index) {
+      currentQuote = index;
+
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
+
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(3, "0") +
+        " OF " +
+        quotes.length;
+
+      document.getElementById("quoteScreen").style.display = "flex";
+    }
+
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
+
+    function nextQuote() {
+      currentQuote++;
+
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
+
+      openQuote(currentQuote);
+    }
+
+    function previousQuote() {
+      currentQuote--;
+
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
+
+      openQuote(currentQuote);
+    }
+
+  </script>
+
+</body>
+</html>
