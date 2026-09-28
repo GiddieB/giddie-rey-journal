@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-Reflection — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 45px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🪞 Self-Reflection</h1>
+
+    <p class="intro">
+      Sometimes the person you need to understand most
+      is the person looking back at you.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <div id="quoteScreen">
+
+    <div class="screenContent">
+
+      <div class="number" id="quoteNumber"></div>
+
+      <div id="fullQuote"></div>
+
+      <div class="buttons">
+        <button onclick="previousQuote()">← Previous</button>
+        <button onclick="nextQuote()">Next →</button>
+        <button class="close" onclick="closeQuote()">✕ Back</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      "Sometimes you have to look inward before you can understand what went wrong.",
+
+      "I am learning that not every problem around me is mine to carry.",
+
+      "The person I am becoming deserves more patience than the person I used to be.",
+
+      "Sometimes growth begins with admitting that you were wrong.",
+
+      "I have changed in ways I never noticed until I looked back.",
+
+      "Not every version of me deserves to come with me into the future.",
+
+      "I am learning to understand myself instead of constantly judging myself.",
+
+      "Sometimes I was searching for answers in people when the answers were inside me.",
+
+      "I have made mistakes, but my mistakes are not the whole story of who I am.",
+
+      "Growth is realizing that some things you once accepted no longer belong in your life.",
+
+      "Sometimes the hardest conversation is the one you have with yourself.",
+
+      "I am learning that being honest with myself is more important than looking perfect to others.",
+
+      "The older I become, the more I understand why I reacted the way I did.",
+
+      "Sometimes healing requires admitting that something hurt more than you wanted to admit.",
+
+      "I am becoming someone my younger self would be proud to meet.",
+
+      "Not every mistake needs punishment. Some need understanding.",
+
+      "I have learned that avoiding myself never solves anything.",
+
+      "Sometimes I need to stop asking who hurt me and start asking why I stayed.",
+
+      "Self-awareness begins when excuses stop.",
+
+      "I am learning to take responsibility without destroying myself with blame.",
+
+      "Sometimes the lesson is not about what someone did to me, but what I allowed.",
+
+      "I don't want to become bitter because of things that happened to me.",
+
+      "Every mistake has something to teach if I am willing to listen.",
+
+      "Sometimes I need to forgive the person I was before I can appreciate who I am now.",
+
+      "I am learning that changing my environment means little if I refuse to change myself.",
+
+      "Some patterns continue until we finally become honest enough to break them.",
+
+      "I used to think growth meant becoming someone else. Now I know it means becoming more myself.",
+
+      "Sometimes I confuse being needed with being valued.",
+
+      "I am learning the difference between protecting my peace and running away from problems.",
+
+      "Not everything I feel is a fact, and not every thought deserves my trust.",
+
+      "Sometimes my biggest obstacle is the story I keep telling myself.",
+
+      "I am learning to question the beliefs that once controlled me.",
+
+      "Growth can feel uncomfortable because it asks you to leave familiar versions of yourself behind.",
+
+      "I don't have to remain the person I was during my hardest season.",
+
+      "Sometimes I need to admit that I have outgrown my own habits.",
+
+      "I am learning that saying no does not make me a bad person.",
+
+      "The more I understand myself, the less I need everyone else to understand me.",
+
+      "Sometimes I was looking for validation because I had not learned how to validate myself.",
+
+      "I am learning to stop measuring my worth through other people's attention.",
+
+      "Some days I don't recognize myself, and maybe that is because I am changing.",
+
+      "I have learned that confidence can grow quietly.",
+
+      "Sometimes the person I criticize most is myself.",
+
+      "I am learning to speak to myself with the same kindness I give to others.",
+
+      "Not every failure means I am failing at life.",
+
+      "Sometimes I need to rest without feeling guilty for it.",
+
+      "I am learning that my worth does not increase when people approve of me.",
+
+      "Some things I once considered weaknesses have taught me the most.",
+
+      "I am allowed to change my mind when I learn something new.",
+
+      "Sometimes growth looks like walking away from what once felt familiar.",
+
+      "I don't need to prove that I am worthy of respect.",
+
+      "I am learning to recognize when my own thoughts are making things harder than they need to be.",
+
+      "Sometimes I expect others to understand feelings I have never explained.",
+
+      "I am learning that communication is better than silent assumptions.",
+
+      "Some of my fears are memories pretending to be predictions.",
+
+      "I don't want my past to become the blueprint for my future.",
+
+      "Sometimes I need to stop comparing my journey to someone else's.",
+
+      "I am learning that progress can be slow and still be real.",
+
+      "Not every day needs to produce a big achievement.",
+
+      "Sometimes surviving a difficult season is progress too.",
+
+      "I am learning to appreciate the person I am becoming instead of only noticing what I lack.",
+
+      "Some lessons take years before they finally make sense.",
+
+      "I have become stronger in places nobody can see.",
+
+      "Sometimes I need to be honest about what I actually want.",
+
+      "I am learning that pleasing everyone is an impossible job.",
+
+      "Not everyone has to understand my choices for them to be right for me.",
+
+      "Sometimes I hold onto old versions of myself because they are familiar.",
+
+      "I am learning to let myself grow without asking permission.",
+
+      "The person I was yesterday does not have to make every decision for me today.",
+
+      "Sometimes I need to stop looking backward for approval.",
+
+      "I am learning that mistakes can become turning points.",
+
+      "Not every closed door means I failed. Sometimes it means I need another direction.",
+
+      "Sometimes I was afraid of change because I didn't know who I would become.",
+
+      "I am learning to trust myself again.",
+
+      "Some answers arrive only after you stop forcing them.",
+
+      "Sometimes silence gives you enough space to finally hear yourself.",
+
+      "I am learning that peace starts with the choices I make every day.",
+
+      "My future does not have to repeat my past.",
+
+      "Sometimes I need to stop asking what people think and ask what I think.",
+
+      "I am learning that boundaries are part of self-respect.",
+
+      "Some relationships taught me more about myself than about the other person.",
+
+      "Sometimes I discover who I am by noticing what I refuse to become.",
+
+      "I am learning that being alone and being lonely are not always the same thing.",
+
+      "Not every uncomfortable feeling means I made the wrong choice.",
+
+      "Sometimes growth means tolerating uncertainty while you figure things out.",
+
+      "I am learning to trust the process even when I cannot see the whole path.",
+
+      "Some days I need encouragement. Other days I need accountability.",
+
+      "I don't need to be perfect to be worthy of good things.",
+
+      "Sometimes I forget how far I have already come.",
+
+      "I am learning to celebrate progress that nobody else notices.",
+
+      "The life I want requires choices from the person I am becoming.",
+
+      "Sometimes I need to choose discipline over temporary comfort.",
+
+      "I am learning that consistency matters more than occasional motivation.",
+
+      "Some dreams require me to become someone I have never been before.",
+
+      "Sometimes I need to stop waiting until I feel completely ready.",
+
+      "I am learning to take small steps instead of demanding immediate transformation.",
+
+      "Not every chapter needs to make sense while I am living it.",
+
+      "Sometimes the answer is simply to keep learning.",
+
+      "I am allowed to become different from what people expected.",
+
+      "Some people only know an old version of me, and that is okay.",
+
+      "Sometimes I have to disappoint others to stop disappointing myself.",
+
+      "I am learning that my choices should reflect my values, not my fears.",
+
+      "The more I understand myself, the more carefully I choose what I allow into my life.",
+
+      "Sometimes I need to admit that I was seeking attention instead of connection.",
+
+      "I am learning that being busy does not always mean I am moving forward.",
+
+      "Some habits feel comfortable simply because I have repeated them for years.",
+
+      "Sometimes changing one small habit changes an entire direction.",
+
+      "I am learning that my reactions are mine to manage.",
+
+      "Not everything deserves an emotional response from me.",
+
+      "Sometimes I need to pause before deciding what something means.",
+
+      "I am learning to separate facts from assumptions.",
+
+      "Some of my worries disappear when I stop giving them imaginary futures.",
+
+      "Sometimes my mind creates problems that reality has not created yet.",
+
+      "I am learning to stay present instead of constantly predicting tomorrow.",
+
+      "The person I become depends on the choices I repeat.",
+
+      "Sometimes self-respect means keeping promises I made to myself.",
+
+      "I am learning to take care of myself without waiting until I am exhausted.",
+
+      "Some boundaries become necessary after too many ignored warnings.",
+
+      "Sometimes I need to leave room for people to be human without abandoning my standards.",
+
+      "I am learning that forgiveness and trust are not the same thing.",
+
+      "Not everything needs closure from another person.",
+
+      "Sometimes I can create my own closure by accepting what happened.",
+
+      "I am learning to stop looking for explanations that may never come.",
+
+      "Some chapters end because I have learned what they came to teach me.",
+
+      "Sometimes the best way to honor my past is to live differently because of it.",
+
+      "I am learning that my future deserves more attention than my regrets.",
+
+      "Every day gives me another opportunity to choose differently.",
+
+      "Sometimes becoming better starts with simply becoming honest.",
+
+      "I am not finished becoming who I am meant to be.",
+
+      "Some changes happen quietly before anyone else notices.",
+
+      "Sometimes the strongest growth happens when nobody is watching.",
+
+      "I am learning to respect my own journey, even when it looks slower than everyone else's.",
+
+      "My story is still being written, so I should not judge it from one difficult chapter.",
+
+      "Sometimes I need to remember that I am a work in progress, not a finished product.",
+
+      "I can acknowledge who I was without becoming trapped by who I was.",
+
+      "I am learning, changing, growing, and becoming more honest with myself.",
+
+      "The mirror does not only show who I am. It reminds me that I can still become more.",
+
+      "Sometimes the greatest change begins with one honest conversation with yourself."
+
+    ];
+
+    const quoteList = document.getElementById("quoteList");
+
+    quotes.forEach((quote, index) => {
+      const div = document.createElement("div");
+      div.className = "quote";
+      div.textContent = quote;
+      div.onclick = () => openQuote(index);
+      quoteList.appendChild(div);
+    });
+
+    let currentQuote = 0;
+
+    function openQuote(index) {
+      currentQuote = index;
+
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
+
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(3, "0") +
+        " OF " +
+        quotes.length;
+
+      document.getElementById("quoteScreen").style.display = "flex";
+    }
+
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
+
+    function nextQuote() {
+      currentQuote++;
+
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
+
+      openQuote(currentQuote);
+    }
+
+    function previousQuote() {
+      currentQuote--;
+
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
+
+      openQuote(currentQuote);
+    }
+
+  </script>
+
+</body>
+</html>
