@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sadness — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 45px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🌧️ Sadness</h1>
+
+    <p class="intro">
+      Some days feel heavier than others.
+      These are the words for the feelings we don't always show.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <div id="quoteScreen">
+
+    <div class="screenContent">
+
+      <div class="number" id="quoteNumber"></div>
+
+      <div id="fullQuote"></div>
+
+      <div class="buttons">
+        <button onclick="previousQuote()">← Previous</button>
+        <button onclick="nextQuote()">Next →</button>
+        <button class="close" onclick="closeQuote()">✕ Back</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      "Sometimes sadness arrives without asking for a reason.",
+
+      "I can smile and still have a heavy heart.",
+
+      "Some days I don't need advice. I just need someone to understand.",
+
+      "Sadness becomes quieter when you stop pretending it isn't there.",
+
+      "Sometimes I miss the person I was before life became complicated.",
+
+      "There are days when everything feels normal except the heart.",
+
+      "I learned that you can be surrounded by people and still feel alone.",
+
+      "Some pain doesn't show on your face.",
+
+      "Sometimes the hardest part is explaining why you're sad when you don't even understand it yourself.",
+
+      "I wish some memories didn't become painful with time.",
+
+      "There are moments when silence feels heavier than words.",
+
+      "Sometimes I disappear for a while because I don't know how to explain what I'm feeling.",
+
+      "A quiet room can hold more emotions than a crowded place.",
+
+      "I miss things I know I can never have again.",
+
+      "Some days I just want everything to slow down.",
+
+      "I learned how to say 'I'm okay' even when I wasn't.",
+
+      "Sometimes the heart gets tired before the body does.",
+
+      "Not every sad feeling needs a reason.",
+
+      "Some memories still hurt even after you have accepted what happened.",
+
+      "I wish people could hear the things my silence is saying.",
+
+      "Sometimes sadness is simply missing a version of life that no longer exists.",
+
+      "I don't always want to talk about it. Sometimes I just want the feeling to pass.",
+
+      "There are nights when old memories become louder than today's happiness.",
+
+      "Sometimes you cry because words are no longer enough.",
+
+      "I learned to hide sadness behind ordinary conversations.",
+
+      "Some smiles are simply good manners hiding difficult days.",
+
+      "I wish I could explain the weight I sometimes carry without knowing where it came from.",
+
+      "Some days feel longer because the heart is tired.",
+
+      "Sometimes you need a quiet moment before you can find yourself again.",
+
+      "I miss people who probably don't even know I miss them.",
+
+      "Sadness can make familiar places feel completely different.",
+
+      "Sometimes the hardest thing is waking up and remembering what changed.",
+
+      "I wish certain memories came without the ache attached to them.",
+
+      "There are feelings I keep to myself because I don't want to burden anyone.",
+
+      "Sometimes being strong simply means making it through an ordinary day.",
+
+      "I have learned that sadness doesn't always look like tears.",
+
+      "Sometimes you feel empty even when your life is full.",
+
+      "I miss the days when happiness came without so much thinking.",
+
+      "Some moments hurt because they remind you of what used to be.",
+
+      "Sometimes I don't know whether I need rest, distance, or simply time.",
+
+      "Sadness can make you question things you once understood clearly.",
+
+      "There are days when even small things feel difficult.",
+
+      "I wish I could turn off the thoughts that make everything feel heavier.",
+
+      "Sometimes the heart remembers what the mind tries to forget.",
+
+      "I don't always know how to ask for comfort.",
+
+      "Some pain is quiet because you've carried it for so long.",
+
+      "Sometimes you miss someone and don't know what to do with the feeling.",
+
+      "I learned that healing doesn't mean you never feel sad again.",
+
+      "Some days I simply need to breathe and let the moment pass.",
+
+      "Sometimes sadness is the price of caring deeply.",
+
+      "I wish people understood that quietness doesn't always mean peace.",
+
+      "Some nights feel longer when your mind refuses to rest.",
+
+      "I miss the feeling of being completely carefree.",
+
+      "Sometimes happiness feels distant even when it is standing nearby.",
+
+      "I have memories I love and memories I wish I could forget.",
+
+      "Some days I don't want to be productive. I just want to feel okay.",
+
+      "Sometimes you become tired of explaining that you're tired.",
+
+      "I wish I could give my heart the same patience I give everyone else.",
+
+      "Some feelings stay hidden because they are difficult to name.",
+
+      "Sometimes loneliness feels strongest when everyone else seems happy.",
+
+      "I learned that being quiet can be a way of protecting yourself.",
+
+      "Some days I need space, not because I don't care, but because I care too much.",
+
+      "Sometimes the heart needs time to catch up with reality.",
+
+      "I miss conversations that used to make everything feel lighter.",
+
+      "Some memories arrive without warning and change your mood instantly.",
+
+      "Sometimes you feel sad simply because you remember how things used to be.",
+
+      "I wish I could revisit certain moments without knowing how they would end.",
+
+      "Some sadness cannot be solved. It can only be felt and eventually carried differently.",
+
+      "Sometimes I laugh because I don't know what else to do.",
+
+      "I learned to keep certain feelings private because not everyone knows how to handle them.",
+
+      "Some days the heart just wants to be left alone.",
+
+      "Sometimes you don't need someone to fix anything. You just need them to stay.",
+
+      "I miss the people who made ordinary days feel special.",
+
+      "Some sadness comes from realizing that nothing stays the same forever.",
+
+      "Sometimes the hardest goodbye is the one you never got to say properly.",
+
+      "I wish I had more moments with the people who mattered most.",
+
+      "Some days I feel everything at once and nothing at the same time.",
+
+      "Sometimes sadness makes you appreciate happiness more deeply.",
+
+      "I have learned not to judge myself for having difficult days.",
+
+      "Some feelings need patience more than solutions.",
+
+      "Sometimes the strongest person in the room is the one quietly fighting to keep going.",
+
+      "I wish I could explain why certain days are harder than others.",
+
+      "Some sadness comes from things that were never given a chance to become real.",
+
+      "Sometimes you miss a place because of the people who made it feel like home.",
+
+      "I learned that even strong people need moments where they don't have to be strong.",
+
+      "Some memories make you smile and hurt at the same time.",
+
+      "Sometimes the heart holds onto things long after the mind has accepted them.",
+
+      "I wish I could tell my younger self that difficult days eventually change.",
+
+      "Some nights are simply for resting, thinking, and letting tomorrow come.",
+
+      "Sometimes you don't need to understand the feeling immediately.",
+
+      "I learned that sadness can exist beside gratitude.",
+
+      "Some days I feel distant from everyone, even the people I love.",
+
+      "Sometimes the hardest part of sadness is feeling like nobody notices.",
+
+      "I wish people asked how I was doing and waited for the real answer.",
+
+      "Some feelings become easier when you stop fighting them.",
+
+      "Sometimes you have to give yourself permission to have a bad day.",
+
+      "I miss the version of myself who didn't overthink every little thing.",
+
+      "Some sadness comes from realizing that certain dreams may never happen.",
+
+      "Sometimes acceptance doesn't remove the sadness, but it makes it easier to carry.",
+
+      "I learned that missing someone doesn't mean you have to return to them.",
+
+      "Some days I just want a little peace inside my own mind.",
+
+      "Sometimes sadness is a reminder that something mattered.",
+
+      "I wish I could keep every beautiful moment from becoming a memory.",
+
+      "Some good memories hurt because they cannot happen again.",
+
+      "Sometimes you feel lonely because you don't feel understood.",
+
+      "I learned that not every emotion needs to be explained to everyone.",
+
+      "Some days I choose silence because words make the feeling harder to manage.",
+
+      "Sometimes you simply have to let the day end and try again tomorrow.",
+
+      "I wish I could make peace with every part of my past.",
+
+      "Some sadness fades slowly, one ordinary day at a time.",
+
+      "Sometimes the heart needs rest just like the body does.",
+
+      "I learned that healing can happen quietly.",
+
+      "Some days don't need to be perfect. They just need to end peacefully.",
+
+      "Sometimes tomorrow feels easier when you stop demanding that today be perfect.",
+
+      "I may not understand every feeling I have, but I can give myself time.",
+
+      "Some sadness becomes lighter when you stop carrying it alone.",
+
+      "Sometimes simply being here is enough for today.",
+
+      "I am learning that difficult feelings can pass without defining me.",
+
+      "Some days are heavy, but they are still only days.",
+
+      "Sometimes the heart needs time before it can feel hopeful again.",
+
+      "I don't have to hide every difficult feeling to be strong.",
+
+      "Some sadness is temporary, even when it feels permanent.",
+
+      "I am learning to be patient with myself on the days I feel low.",
+
+      "Sometimes the smallest reason to smile can make a heavy day feel different.",
+
+      "I hope tomorrow gives me something today could not.",
+
+      "Some days hurt, but that doesn't mean every day will.",
+
+      "I am learning that feeling sad does not mean I have lost my way.",
+
+      "Sometimes the clouds stay for a while, but they do not own the sky.",
+
+      "I may have difficult days, but I am still allowed to look forward to better ones.",
+
+      "Some feelings take time to settle, and that's okay.",
+
+      "Tomorrow doesn't have to repeat today.",
+
+      "Sometimes making it through the day is already something worth being proud of.",
+
+      "I am learning to give myself the same kindness I give to others.",
+
+      "Even the heaviest days eventually become yesterday.",
+
+      "Some sadness stays for a season, but seasons change.",
+
+      "I don't have to understand everything tonight. I can simply rest.",
+
+      "There is still room for better days, even after difficult ones.",
+
+      "Sometimes hope begins quietly, long before you notice it.",
+
+      "I am still here, still learning, and still becoming."
+
+    ];
+
+    const quoteList = document.getElementById("quoteList");
+
+    quotes.forEach((quote, index) => {
+
+      const div = document.createElement("div");
+
+      div.className = "quote";
+
+      div.textContent = quote;
+
+      div.onclick = () => openQuote(index);
+
+      quoteList.appendChild(div);
+
+    });
+
+    let currentQuote = 0;
+
+    function openQuote(index) {
+
+      currentQuote = index;
+
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
+
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(3, "0") +
+        " OF " +
+        quotes.length;
+
+      document.getElementById("quoteScreen").style.display = "flex";
+
+    }
+
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
+
+    function nextQuote() {
+
+      currentQuote++;
+
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
+
+      openQuote(currentQuote);
+
+    }
+
+    function previousQuote() {
+
+      currentQuote--;
+
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
+
+      openQuote(currentQuote);
+
+    }
+
+  </script>
+
+</body>
+</html>
