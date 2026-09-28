@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life | Giddie Rey Journal</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#080808;
+  color:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  padding:25px 15px 50px;
+}
+
+.container{
+  max-width:650px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.header h1{
+  font-size:35px;
+  margin-bottom:10px;
+}
+
+.header p{
+  color:#888;
+  line-height:1.6;
+}
+
+.quote{
+  background:#121212;
+  border:1px solid #292929;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:13px;
+  cursor:pointer;
+  line-height:1.6;
+  transition:.25s;
+}
+
+.quote:hover{
+  background:#1c1c1c;
+}
+
+.number{
+  display:block;
+  color:#666;
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  color:#aaa;
+  text-decoration:none;
+  margin-top:30px;
+}
+
+.footer{
+  text-align:center;
+  color:#444;
+  font-size:12px;
+  margin-top:35px;
+}
+
+/* FULL QUOTE */
+
+#quoteScreen{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#080808;
+  z-index:1000;
+  padding:25px;
+}
+
+.quoteContent{
+  min-height:90vh;
+  max-width:650px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  left:20px;
+  background:none;
+  border:none;
+  color:#aaa;
+  font-size:16px;
+  padding:10px;
+}
+
+.quoteNumber{
+  color:#666;
+  font-size:13px;
+}
+
+#bigQuote{
+  font-size:27px;
+  line-height:1.6;
+  margin:30px 0;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+}
+
+.buttons button{
+  background:#171717;
+  border:1px solid #303030;
+  color:white;
+  padding:13px 20px;
+  border-radius:25px;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>🖤 Life</h1>
+    <p>Words for the journey, the lessons, the struggle and the growth.</p>
+  </div>
+
+  <div id="quoteList"></div>
+
+  <a class="back" href="journal.html">← Back to Journal</a>
+
+  <div class="footer">
+    Giddie Rey Journal 🖤
+  </div>
+
+</div>
+
+<div id="quoteScreen">
+
+  <button class="close" onclick="closeQuote()">← Back</button>
+
+  <div class="quoteContent">
+
+    <div class="quoteNumber" id="quoteNumber"></div>
+
+    <div id="bigQuote"></div>
+
+    <div class="buttons">
+      <button onclick="previousQuote()">← Previous</button>
+      <button onclick="nextQuote()">Next →</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const quotes = [
+
+"Life doesn't always make sense while you're living it.",
+"Sometimes the hardest seasons teach you the strongest lessons.",
+"You don't have to have everything figured out today.",
+"Some days are for growing. Some days are simply for getting through.",
+"Life changes when you stop trying to control everything.",
+"Not every delay means you're being denied.",
+"Sometimes losing your way helps you discover yourself.",
+"Growth often begins where comfort ends.",
+"You can start again without pretending the past never happened.",
+"Some chapters are difficult because they are preparing you for better ones.",
+"Life is made of moments, not perfect days.",
+"Don't let one bad season convince you that your whole life is bad.",
+"Sometimes the quietest progress is still progress.",
+"You are allowed to outgrow the person you used to be.",
+"Some lessons only make sense after you've lived through them.",
+"Life doesn't promise easy roads. It promises opportunities to keep moving.",
+"Sometimes you need to pause before you can move forward.",
+"Your past can explain you without having to define you.",
+"Not everyone will understand your journey, and that's okay.",
+"Some things take time because they are worth building properly.",
+"Life becomes lighter when you stop carrying what isn't yours.",
+"Sometimes the best decision is simply to keep going.",
+"You don't need to compare your chapter to someone else's.",
+"Every day gives you another chance to choose differently.",
+"Some failures are lessons wearing difficult clothes.",
+"Life can change in a moment, but growth usually takes time.",
+"Don't rush your journey just because someone else seems ahead.",
+"Sometimes you learn more from what didn't work than from what did.",
+"Peace becomes valuable when you've experienced enough chaos.",
+"You can be grateful for where you are while still wanting more.",
+"Life is not a straight line. It's a collection of turns.",
+"Sometimes you have to let go of an old version of yourself.",
+"The person you become matters more than the mistakes you made.",
+"Some days you win. Some days you learn.",
+"Your journey doesn't need everyone's approval.",
+"Sometimes the smallest step forward is enough.",
+"Life teaches patience in ways we don't always appreciate at first.",
+"Don't let temporary problems make permanent decisions for you.",
+"Some doors close because you were meant to walk somewhere else.",
+"Life can be unfair, but that doesn't mean your story has to end there.",
+"Sometimes you have to trust yourself before others do.",
+"Your mistakes are part of your story, not the whole story.",
+"Some seasons are meant to challenge you, not break you.",
+"Life gets better when you stop trying to please everyone.",
+"You don't have to explain every decision you make for your growth.",
+"Sometimes starting over is actually moving forward.",
+"Your journey is still valuable even when it feels slow.",
+"Not every ending is a failure.",
+"Sometimes you find yourself after losing what you thought you needed.",
+"Life is easier when you focus on what you can control.",
+"Some people will only understand your value after you've stopped proving it.",
+"Don't let one person's opinion become your identity.",
+"Sometimes silence gives you answers that arguments never could.",
+"Life is too short to keep living for people's expectations.",
+"Your future deserves more attention than your past.",
+"Some dreams take longer because you're becoming ready for them.",
+"Sometimes the best thing you can do is keep showing up.",
+"Life doesn't require perfection. It requires presence.",
+"Some days will feel heavy. That doesn't mean they will always feel that way.",
+"Your pace is still a pace.",
+"Sometimes you need to rest without feeling guilty about it.",
+"Life changes when you learn to appreciate small things.",
+"Not every opportunity is meant for you.",
+"Some lessons arrive through people. Others arrive through experience.",
+"Your story can change direction at any point.",
+"Sometimes the strongest move is choosing peace.",
+"Life becomes clearer when you stop forcing what isn't working.",
+"Don't confuse being busy with making progress.",
+"Sometimes you need distance to understand what really matters.",
+"Your worth doesn't depend on how many people notice you.",
+"Life is full of moments you won't understand until later.",
+"Some struggles become stories you are proud to have survived.",
+"Sometimes you have to choose yourself without becoming selfish.",
+"Don't let fear make every decision for you.",
+"Life rewards consistency more often than perfection.",
+"Some dreams require patience before they become reality.",
+"Sometimes the answer is simply to try again.",
+"You can be tired and still be making progress.",
+"Life doesn't end because one plan didn't work.",
+"Some people leave lessons behind even when they don't stay.",
+"Your future isn't obligated to repeat your past.",
+"Sometimes the best growth happens quietly.",
+"Life becomes meaningful when you notice the moments you used to overlook.",
+"Don't underestimate what small habits can build over time.",
+"Sometimes you need to stop and appreciate how far you've come.",
+"Your journey doesn't have to look impressive to be meaningful.",
+"Some days are about surviving. Other days are about thriving.",
+"Life is a mixture of unexpected endings and beautiful beginnings.",
+"Sometimes you discover strength only because life gave you a reason to find it.",
+"You can change your direction without changing your worth.",
+"Some mistakes are expensive lessons, but lessons still have value.",
+"Life gets easier when you accept that you cannot control everything.",
+"Sometimes you have to walk away from what keeps you stuck.",
+"Your life is still yours even when things don't go according to plan.",
+"Some opportunities arrive disguised as uncomfortable changes.",
+"Don't let yesterday steal everything from today.",
+"Sometimes the best chapter starts after the hardest one.",
+"Life doesn't ask you to know everything. It asks you to keep learning.",
+"Some people will support you. Some will doubt you. Keep building anyway.",
+"Your progress may be invisible to others and still be real.",
+"Sometimes you need to become uncomfortable to become stronger.",
+"Life is about becoming, not arriving.",
+"Some moments feel ordinary until you realize they were important.",
+"Don't rush through today trying to reach tomorrow.",
+"Sometimes happiness is hidden inside simple routines.",
+"Life can surprise you when you stop expecting everything to happen one way.",
+"Some things cannot be changed, but they can be accepted.",
+"Your peace is worth protecting.",
+"Sometimes letting go creates space for something healthier.",
+"Life is not measured only by achievements.",
+"Some of the best memories are made without planning them.",
+"Don't let a difficult beginning convince you there won't be a beautiful ending.",
+"Sometimes you need to believe in your own ability to figure things out.",
+"Life becomes richer when you stop taking ordinary moments for granted.",
+"Some seasons teach you who you are.",
+"Your story is still being written.",
+"Sometimes the next step becomes clear only after you take the first one.",
+"Life doesn't need to be perfect to be meaningful.",
+"Some days teach patience. Others teach courage.",
+"Don't be ashamed of how long it took you to learn.",
+"Sometimes growth looks like becoming quieter, wiser, and more selective.",
+"Life changes when you stop chasing what keeps running away.",
+"Some endings are necessary for new beginnings.",
+"Your future can be different from everything you've known.",
+"Sometimes you need to trust the process even when you cannot see the result.",
+"Life is full of second chances if you are willing to take them.",
+"Some lessons hurt, but they can still make you wiser.",
+"Don't let temporary disappointment define permanent possibilities.",
+"Sometimes you have to choose progress over comfort.",
+"Life is not a race against everyone around you.",
+"Some people find success quickly. Others build it slowly. Both journeys are real.",
+"Your path is allowed to be different.",
+"Sometimes the best thing you can do is focus on today.",
+"Life gets better when you learn to appreciate what is already here.",
+"Some dreams need discipline more than motivation.",
+"Don't wait for perfect conditions before taking a meaningful step.",
+"Sometimes confidence comes after action, not before it.",
+"Life is built from the choices you repeat.",
+"Some days you will feel lost. Keep moving gently.",
+"Your mistakes don't cancel your potential.",
+"Sometimes you need to forgive yourself for not knowing what you know now.",
+"Life teaches everyone differently.",
+"Some opportunities require courage before they provide results.",
+"Don't let one setback become your entire identity.",
+"Sometimes a new beginning starts with one honest decision.",
+"Life is too valuable to spend entirely worrying about what people think.",
+"Some things become clearer with time.",
+"Your journey deserves patience.",
+"Sometimes the strongest version of you is built during quiet seasons.",
+"Life is a collection of lessons, memories, people, and choices.",
+"Some moments are difficult but still meaningful.",
+"Don't forget to enjoy the life you're working so hard to build.",
+"Sometimes slowing down helps you notice what rushing made you miss.",
+"Life can be uncertain and still be worth living fully.",
+"Some chapters are messy before they become meaningful.",
+"Your next chapter doesn't have to look like your last.",
+"Sometimes all you need is enough courage for one more step.",
+"Life is still happening while you're waiting for everything to make sense.",
+"Some lessons stay with you because they changed you.",
+"Don't measure your entire life by one difficult year.",
+"Sometimes peace comes from accepting what you cannot change.",
+"Life is not about avoiding every mistake. It's about learning from them.",
+"Some of the strongest people are still learning how to rest.",
+"Your story doesn't need to be perfect to be worth telling.",
+"Sometimes you have to stop looking backward to see what's ahead.",
+"Life can be rebuilt one decision at a time.",
+"Some days are reminders that you are stronger than you thought.",
+"Don't underestimate the power of starting small.",
+"Sometimes the life you want begins with letting go of what no longer fits.",
+"Life is about growth, not perfection.",
+"Some things take time because rushing them would change what they become.",
+"Your journey is yours. Walk it at your own pace.",
+"Sometimes the best thing about tomorrow is that it gives you another chance.",
+"Life keeps moving, and so can you."
+
+];
+
+let currentQuote = 0;
+
+const quoteList = document.getElementById("quoteList");
+
+quotes.forEach(function(quote,index){
+
+  const item = document.createElement("div");
+
+  item.className = "quote";
+
+  item.innerHTML =
+    '<span class="number">' +
+    String(index + 1).padStart(2,"0") +
+    '</span>' +
+    quote;
+
+  item.onclick = function(){
+    openQuote(index);
+  };
+
+  quoteList.appendChild(item);
+
+});
+
+function openQuote(index){
+
+  currentQuote = index;
+
+  document.getElementById("bigQuote").textContent =
+    quotes[currentQuote];
+
+  document.getElementById("quoteNumber").textContent =
+    "QUOTE " +
+    String(currentQuote + 1).padStart(2,"0") +
+    " OF " +
+    quotes.length;
+
+  document.getElementById("quoteScreen").style.display = "block";
+
+}
+
+function closeQuote(){
+
+  document.getElementById("quoteScreen").style.display = "none";
+
+}
+
+function nextQuote(){
+
+  currentQuote++;
+
+  if(currentQuote >= quotes.length){
+    currentQuote = 0;
+  }
+
+  openQuote(currentQuote);
+
+}
+
+function previousQuote(){
+
+  currentQuote--;
+
+  if(currentQuote < 0){
+    currentQuote = quotes.length - 1;
+  }
+
+  openQuote(currentQuote);
+
+}
+
+</script>
+
+</body>
+  </html>
