@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 30px;
+      border: 1px solid #333;
+      background: #151515;
+      color: white;
+      font-size: 16px;
+      outline: none;
+      margin-bottom: 25px;
+    }
+
+    .search-box:focus {
+      border-color: #777;
+    }
+
+    .result {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .result:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .category {
+      display: block;
+      color: #777;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #666;
+      margin-top: 40px;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 35px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🔍 Search</h1>
+
+    <p class="intro">
+      Search the Journal for the words you feel.
+    </p>
+
+    <input
+      type="text"
+      id="searchInput"
+      class="search-box"
+      placeholder="Search quotes..."
+      autocomplete="off"
+    >
+
+    <div id="results"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      {
+        text: "Sometimes you miss people who are better left in the past.",
+        category: "Regret",
+        link: "regret.html"
+      },
+
+      {
+        text: "Some nights feel longer when your thoughts refuse to sleep.",
+        category: "Overthinking",
+        link: "overthinking.html"
+      },
+
+      {
+        text: "Being surrounded by people doesn't always mean you feel less alone.",
+        category: "Lonely",
+        link: "lonely.html"
+      },
+
+      {
+        text: "Healing doesn't mean forgetting. It means learning to live without the pain controlling you.",
+        category: "Healing",
+        link: "healing.html"
+      },
+
+      {
+        text: "Some feelings stay hidden because words could never explain them properly.",
+        category: "Unspoken Feelings",
+        link: "unspoken.html"
+      },
+
+      {
+        text: "Sometimes peace begins when you stop explaining yourself.",
+        category: "Peace",
+        link: "peace.html"
+      },
+
+      {
+        text: "Not everyone who walks beside you is meant to stay until the end.",
+        category: "People & Friendship",
+        link: "people.html"
+      },
+
+      {
+        text: "You can love someone and still know that letting go is necessary.",
+        category: "Letting Go",
+        link: "letting-go.html"
+      },
+
+      {
+        text: "Life changes quietly before you even realize that you have changed.",
+        category: "Life",
+        link: "life.html"
+      },
+
+      {
+        text: "A broken heart doesn't mean your story is over.",
+        category: "Heartbreak",
+        link: "heartbreak.html"
+      },
+
+      {
+        text: "Sometimes you have to believe in tomorrow before you can see it.",
+        category: "Faith & Hope",
+        link: "faith.html"
+      },
+
+      {
+        text: "New beginnings often arrive disguised as endings.",
+        category: "New Beginnings",
+        link: "new-beginnings.html"
+      },
+
+      {
+        text: "You don't have to have everything figured out today.",
+        category: "Motivation",
+        link: "motivation.html"
+      },
+
+      {
+        text: "Looking at yourself honestly can be uncomfortable, but it can also change your life.",
+        category: "Self-Reflection",
+        link: "reflection.html"
+      },
+
+      {
+        text: "Some sadness cannot be explained. It simply needs time and kindness.",
+        category: "Sadness",
+        link: "sadness.html"
+      },
+
+      {
+        text: "Love can be beautiful when two people choose each other with honesty.",
+        category: "Love",
+        link: "love.html"
+      }
+
+    ];
+
+
+    const input = document.getElementById("searchInput");
+    const results = document.getElementById("results");
+
+
+    function showResults(searchTerm = "") {
+
+      results.innerHTML = "";
+
+      const term = searchTerm.toLowerCase().trim();
+
+      if (term === "") {
+        results.innerHTML =
+          '<div class="empty">Start typing to search the Journal.</div>';
+        return;
+      }
+
+      const matches = quotes.filter(item =>
+        item.text.toLowerCase().includes(term) ||
+        item.category.toLowerCase().includes(term)
+      );
+
+      if (matches.length === 0) {
+        results.innerHTML =
+          '<div class="empty">No quotes found. Try another word.</div>';
+        return;
+      }
+
+      matches.forEach(item => {
+
+        const div = document.createElement("div");
+
+        div.className = "result";
+
+        div.innerHTML = `
+          ${item.text}
+          <span class="category">${item.category}</span>
+        `;
+
+        div.onclick = () => {
+          window.location.href = item.link;
+        };
+
+        results.appendChild(div);
+
+      });
+
+    }
+
+
+    input.addEventListener("input", () => {
+      showResults(input.value);
+    });
+
+
+    showResults();
+
+  </script>
+
+</body>
+</html>
