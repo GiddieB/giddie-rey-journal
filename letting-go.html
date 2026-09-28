@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Letting Go — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 45px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🚪 Letting Go</h1>
+
+    <p class="intro">
+      Some things leave your life so you can finally
+      make room for what comes next.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <div id="quoteScreen">
+
+    <div class="screenContent">
+
+      <div class="number" id="quoteNumber"></div>
+
+      <div id="fullQuote"></div>
+
+      <div class="buttons">
+        <button onclick="previousQuote()">← Previous</button>
+        <button onclick="nextQuote()">Next →</button>
+        <button class="close" onclick="closeQuote()">✕ Back</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      "Sometimes letting go is the beginning of finding yourself again.",
+
+      "Not everything you lose was meant to stay.",
+
+      "I am learning that holding on can hurt more than moving forward.",
+
+      "Some chapters end because their purpose has already been fulfilled.",
+
+      "Letting go does not mean it never mattered.",
+
+      "Sometimes peace begins where attachment ends.",
+
+      "I can miss something and still know it is time to move on.",
+
+      "Not every goodbye needs anger. Some simply need acceptance.",
+
+      "I am learning to release what I cannot change.",
+
+      "Sometimes the hardest step is accepting that the past cannot be rewritten.",
+
+      "You can love a memory without living inside it.",
+
+      "Letting go means choosing the future over a version of the past.",
+
+      "Some things are easier to release when you stop waiting for them to become different.",
+
+      "I am learning that closure does not always come from another person.",
+
+      "Sometimes acceptance is the closure you were waiting for.",
+
+      "You cannot move forward while constantly reaching backward.",
+
+      "Some doors are meant to close quietly.",
+
+      "I do not need to carry every old story into my next chapter.",
+
+      "Letting go is not forgetting. It is making peace with what happened.",
+
+      "Sometimes you have to release the question before you can receive the answer.",
+
+      "I am learning that peace is worth more than forcing what no longer fits.",
+
+      "Some people are chapters, not entire books.",
+
+      "You can appreciate what something taught you without asking it to stay.",
+
+      "Sometimes the healthiest choice is to stop chasing what keeps walking away.",
+
+      "Letting go creates space for things I could not see while I was holding on.",
+
+      "I am learning to stop confusing familiarity with belonging.",
+
+      "Some endings hurt because they mattered, not because they were wrong.",
+
+      "You can be grateful for the past without wanting it back.",
+
+      "Sometimes moving on starts with one honest sentence: this is no longer for me.",
+
+      "I do not have to keep reopening a door just because I remember what was behind it.",
+
+      "Some memories deserve a place in the past.",
+
+      "Letting go means accepting that some questions may never have satisfying answers.",
+
+      "I am learning to stop looking for yesterday in today's people.",
+
+      "Sometimes you have to leave the old version of your life to meet the new one.",
+
+      "Not every ending needs another chance.",
+
+      "I can forgive without returning to the same situation.",
+
+      "Sometimes distance gives clarity that closeness never could.",
+
+      "Letting go is easier when you stop romanticizing what hurt you.",
+
+      "I am learning to remember things honestly, not only beautifully.",
+
+      "Some attachments survive because we fear what life will look like without them.",
+
+      "Sometimes the unknown is healthier than the familiar.",
+
+      "I do not need to understand every ending before accepting it.",
+
+      "Some things are not meant to be fixed; they are meant to be released.",
+
+      "Letting go can be an act of self-respect.",
+
+      "I am learning that peace sometimes requires walking away.",
+
+      "You can care about someone and still choose a different path.",
+
+      "Some relationships end without either person being completely wrong.",
+
+      "Sometimes people change, and the relationship changes with them.",
+
+      "I am learning to stop holding people to versions of themselves that no longer exist.",
+
+      "Some dreams change when we grow, and that is okay.",
+
+      "Letting go of one plan can make room for another.",
+
+      "I do not have to force a future just because I once imagined it.",
+
+      "Sometimes the life you want begins with releasing the life you expected.",
+
+      "I am learning to leave behind expectations that no longer serve me.",
+
+      "Not every missed opportunity was meant to become a regret.",
+
+      "Some things pass through our lives to teach us, not to stay forever.",
+
+      "Letting go is trusting that life can still be meaningful without what I lost.",
+
+      "I can acknowledge the pain without allowing it to control my future.",
+
+      "Sometimes healing starts when you stop checking what you already decided to leave.",
+
+      "I am learning not to revisit places that constantly disturb my peace.",
+
+      "Some memories become lighter when you stop fighting them.",
+
+      "Letting go does not erase the lesson.",
+
+      "I can carry the wisdom without carrying the weight.",
+
+      "Sometimes the person I need to release is the version of myself that kept settling.",
+
+      "I am learning to let go of guilt for choices I made with the understanding I had then.",
+
+      "The past deserves respect, but the future deserves attention.",
+
+      "Sometimes you have to stop explaining yourself to people committed to misunderstanding you.",
+
+      "I do not need permission to move forward.",
+
+      "Some people will never understand why you left, and you can still leave.",
+
+      "Letting go means accepting that you cannot control another person's choices.",
+
+      "I am learning to stop taking responsibility for things that were never mine.",
+
+      "Some burdens become lighter the moment you decide they are not yours.",
+
+      "You cannot change someone's heart by exhausting your own.",
+
+      "Sometimes walking away is the clearest answer.",
+
+      "I am learning that silence can also be closure.",
+
+      "Some goodbyes are necessary even when they are not easy.",
+
+      "Letting go is choosing not to keep arguing with reality.",
+
+      "I cannot force something to become what it was never meant to be.",
+
+      "Sometimes acceptance hurts less than endless resistance.",
+
+      "I am learning to stop asking why something ended and start asking what comes next.",
+
+      "The future cannot enter if I keep filling every space with the past.",
+
+      "Some memories should be visited, not moved back into.",
+
+      "Letting go gives tomorrow room to introduce itself.",
+
+      "I can miss the old days without trying to recreate them.",
+
+      "Sometimes nostalgia makes the past look better than it actually was.",
+
+      "I am learning to remember the whole story, not only my favorite parts.",
+
+      "Some endings are painful because they force us to accept reality.",
+
+      "You do not have to keep a connection alive just because it once meant everything.",
+
+      "Sometimes the kindest thing you can do for yourself is stop waiting.",
+
+      "I am learning that waiting for someone to change can become a life of its own.",
+
+      "Some expectations need to be released before peace can return.",
+
+      "Letting go means giving yourself permission to grow beyond what once defined you.",
+
+      "I am not betraying my past by choosing a different future.",
+
+      "Sometimes you have to stop looking for signs and start trusting your decision.",
+
+      "Some answers arrive after you stop asking the same question.",
+
+      "I am learning that moving forward does not require forgetting where I came from.",
+
+      "The past can be part of me without being in control of me.",
+
+      "Sometimes release is more powerful than revenge.",
+
+      "I do not need to prove that I was right before I move on.",
+
+      "Some battles end when you simply stop participating.",
+
+      "Letting go means refusing to spend tomorrow fighting yesterday.",
+
+      "I am learning that peace is not found by winning every argument.",
+
+      "Sometimes I need to accept that certain people will only understand me from their own perspective.",
+
+      "Not every misunderstanding deserves a lifetime of explanation.",
+
+      "Some relationships end because two people are growing in different directions.",
+
+      "I can respect what we had without pretending it still works.",
+
+      "Letting go can be painful and still be the right direction for my life.",
+
+      "I am learning to release the need for everything to end perfectly.",
+
+      "Some endings are messy because real life is messy.",
+
+      "You can leave without hatred.",
+
+      "You can move on without becoming cold.",
+
+      "You can forgive without forgetting the lesson.",
+
+      "I am learning to choose peace over the need to be understood.",
+
+      "Sometimes the strongest goodbye is the one you never need to repeat.",
+
+      "Some people belong in your memories, not in your daily life.",
+
+      "Letting go does not make the past meaningless.",
+
+      "It simply means the past no longer gets to decide what happens next.",
+
+      "I am learning to trust that life can surprise me after disappointment.",
+
+      "Some endings create opportunities I could not have imagined before.",
+
+      "I do not know what I will find after letting go, but I know I deserve room to find it.",
+
+      "Sometimes losing something creates space for discovering something better suited to who I am becoming.",
+
+      "I am learning to stop holding onto what keeps teaching me the same painful lesson.",
+
+      "The moment I stop forcing what is not working, I can finally notice what is.",
+
+      "Some things leave because they were never meant to follow me into the next chapter.",
+
+      "Letting go is not weakness. Sometimes it takes more strength to release than to hold.",
+
+      "I am learning that peace can be a destination too.",
+
+      "There is freedom in no longer needing the past to change.",
+
+      "Sometimes acceptance is the final gift we give ourselves.",
+
+      "I can honor what happened and still choose what happens next.",
+
+      "The past taught me enough. I do not need to live there anymore.",
+
+      "Some doors close so I can finally notice another one opening.",
+
+      "I am learning to trust the space created by letting go.",
+
+      "Not everything needs to come with me.",
+
+      "Some things belong exactly where they are: behind me.",
+
+      "I am allowed to outgrow what once felt like home.",
+
+      "Sometimes the bravest thing is to stop holding on.",
+
+      "Letting go is not the end of my story.",
+
+      "It is simply the moment I decide to turn the page."
+
+    ];
+
+    const quoteList = document.getElementById("quoteList");
+
+    quotes.forEach((quote, index) => {
+      const div = document.createElement("div");
+      div.className = "quote";
+      div.textContent = quote;
+      div.onclick = () => openQuote(index);
+      quoteList.appendChild(div);
+    });
+
+    let currentQuote = 0;
+
+    function openQuote(index) {
+      currentQuote = index;
+
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
+
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(3, "0") +
+        " OF " +
+        quotes.length;
+
+      document.getElementById("quoteScreen").style.display = "flex";
+    }
+
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
+
+    function nextQuote() {
+      currentQuote++;
+
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
+
+      openQuote(currentQuote);
+    }
+
+    function previousQuote() {
+      currentQuote--;
+
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
+
+      openQuote(currentQuote);
+    }
+
+  </script>
+
+</body>
+</html>
