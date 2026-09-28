@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motivation — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 45px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🔥 Motivation</h1>
+
+    <p class="intro">
+      Keep moving. Keep learning. Keep becoming.
+      Your next chapter is still being written.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <div id="quoteScreen">
+
+    <div class="screenContent">
+
+      <div class="number" id="quoteNumber"></div>
+
+      <div id="fullQuote"></div>
+
+      <div class="buttons">
+        <button onclick="previousQuote()">← Previous</button>
+        <button onclick="nextQuote()">Next →</button>
+        <button class="close" onclick="closeQuote()">✕ Back</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      "You do not need to see the whole path to take the next step.",
+
+      "Small progress is still progress.",
+
+      "Your future is built by the choices you repeat today.",
+
+      "Do not wait for motivation to become consistent.",
+
+      "Sometimes discipline carries you when motivation disappears.",
+
+      "You are capable of more than your doubts suggest.",
+
+      "Start with what you have and improve along the way.",
+
+      "One difficult day does not cancel all your progress.",
+
+      "Keep going even when the results are not visible yet.",
+
+      "The work you do quietly can create a future everyone notices.",
+
+      "You do not have to be perfect to make progress.",
+
+      "Every expert once had a first attempt.",
+
+      "Do not let fear decide what you are capable of.",
+
+      "Your current situation is not your final destination.",
+
+      "Sometimes the hardest step is simply starting.",
+
+      "Consistency can take you places motivation cannot.",
+
+      "You are allowed to begin slowly.",
+
+      "Progress becomes powerful when you refuse to stop.",
+
+      "Do not compare your first chapter to someone else's tenth.",
+
+      "Your journey has its own timing.",
+
+      "Every mistake can teach you something useful.",
+
+      "Failure is information, not a permanent identity.",
+
+      "Try again with what you learned the first time.",
+
+      "You can improve without being ashamed of where you started.",
+
+      "The goal is not to become perfect. The goal is to become better.",
+
+      "A little effort every day can become something big.",
+
+      "Do not underestimate the power of showing up.",
+
+      "Your habits are quietly building your future.",
+
+      "If you want different results, be willing to try different actions.",
+
+      "Sometimes you need to believe before you see the evidence.",
+
+      "Your potential grows when you challenge your comfort zone.",
+
+      "Comfort can feel safe, but growth often begins beyond it.",
+
+      "Do not let one setback convince you to quit.",
+
+      "A setback can slow you down without stopping you.",
+
+      "You have survived difficult days before.",
+
+      "That means you already know how to keep going.",
+
+      "The version of you you want to become needs your effort today.",
+
+      "Do something today that your future self will appreciate.",
+
+      "You do not need everyone's approval to pursue your goals.",
+
+      "Your path does not have to make sense to everyone else.",
+
+      "Keep learning even when nobody is clapping.",
+
+      "The quiet seasons can still produce strong results.",
+
+      "Do not confuse slow progress with no progress.",
+
+      "Some results take longer because they require deeper work.",
+
+      "Your effort matters even when nobody notices it.",
+
+      "Keep building.",
+
+      "Keep improving.",
+
+      "Keep learning.",
+
+      "Keep trying.",
+
+      "Keep moving.",
+
+      "You are not behind. You are on your own timeline.",
+
+      "The only way to guarantee no progress is to stop trying.",
+
+      "You cannot change yesterday, but you can influence tomorrow.",
+
+      "One decision can change the direction of your life.",
+
+      "One habit can change your daily life.",
+
+      "One opportunity can open another door.",
+
+      "Stay ready for the opportunities you have been preparing for.",
+
+      "Preparation makes confidence stronger.",
+
+      "The work nobody sees often creates the results everybody sees.",
+
+      "Do not wait until you feel confident to begin.",
+
+      "Confidence often comes from doing the thing you were afraid to do.",
+
+      "You learn by trying.",
+
+      "You improve by practicing.",
+
+      "You grow by challenging yourself.",
+
+      "You become stronger by refusing to give up easily.",
+
+      "Do not let temporary discomfort control permanent decisions.",
+
+      "Sometimes the hard choice leads to the better direction.",
+
+      "Your dreams deserve more than excuses.",
+
+      "Give your goals a chance before deciding they are impossible.",
+
+      "You will never know what you can achieve if you never try.",
+
+      "Start before you feel completely ready.",
+
+      "Learn as you go.",
+
+      "Adjust when necessary.",
+
+      "Keep your eyes on progress, not perfection.",
+
+      "Your future needs action, not only wishes.",
+
+      "Dreams become goals when you give them a plan.",
+
+      "Goals become reality through consistent action.",
+
+      "Do not let planning become another form of procrastination.",
+
+      "Take one useful step today.",
+
+      "Then take another tomorrow.",
+
+      "Small actions repeated over time create big changes.",
+
+      "You do not have to change everything at once.",
+
+      "Change one thing and build from there.",
+
+      "Your pace can be slow and still be forward.",
+
+      "Rest when necessary, but do not surrender your direction.",
+
+      "You can pause without quitting.",
+
+      "You can struggle without failing.",
+
+      "You can start over without starting from nothing.",
+
+      "Every experience has something to teach you.",
+
+      "Use your past as a lesson, not a prison.",
+
+      "You have more control over your next step than you think.",
+
+      "Focus on what you can control.",
+
+      "Release what you cannot.",
+
+      "Protect your attention because it shapes your direction.",
+
+      "What you repeatedly focus on can influence what you become.",
+
+      "Feed your mind with things that help you grow.",
+
+      "Surround yourself with people who encourage progress.",
+
+      "Learn from people who are ahead without comparing your worth to theirs.",
+
+      "Someone else's success does not make your journey smaller.",
+
+      "There is room for you to succeed in your own way.",
+
+      "Do not let comparison steal your motivation.",
+
+      "Your competition is often the version of yourself you are trying to improve.",
+
+      "Become better than you were yesterday.",
+
+      "Measure progress by growth, not applause.",
+
+      "You do not need an audience to make meaningful progress.",
+
+      "Keep working even when nobody is watching.",
+
+      "Private discipline creates public results.",
+
+      "Your future self will thank you for today's effort.",
+
+      "Do not sacrifice your long-term goals for temporary comfort.",
+
+      "Some rewards require patience.",
+
+      "Some dreams require persistence.",
+
+      "Some opportunities require preparation.",
+
+      "Keep preparing.",
+
+      "Keep believing in your ability to learn.",
+
+      "You can learn what you do not know.",
+
+      "You can improve what you are not good at yet.",
+
+      "Being inexperienced is not the same as being incapable.",
+
+      "Give yourself permission to be a beginner.",
+
+      "Every skill starts with repetition.",
+
+      "Every achievement starts with an attempt.",
+
+      "Every journey starts somewhere.",
+
+      "Your beginning does not have to look impressive.",
+
+      "It only has to be real.",
+
+      "Do not let embarrassment stop you from learning.",
+
+      "Ask questions.",
+
+      "Make mistakes.",
+
+      "Correct them.",
+
+      "Try again.",
+
+      "That is how growth works.",
+
+      "You are building something every time you choose progress over excuses.",
+
+      "Some days your best will look different from other days.",
+
+      "Give yourself grace while still holding yourself accountable.",
+
+      "Be patient with the process and serious about the effort.",
+
+      "You can be tired and still take one small step.",
+
+      "You can be uncertain and still move forward.",
+
+      "You can be afraid and still be brave.",
+
+      "Courage is not always loud.",
+
+      "Sometimes courage is simply trying again.",
+
+      "Do not let yesterday's disappointment decide today's effort.",
+
+      "Your next opportunity may be closer than you think.",
+
+      "Stay prepared.",
+
+      "Stay curious.",
+
+      "Stay consistent.",
+
+      "Stay humble.",
+
+      "Stay focused.",
+
+      "Your story is still being written.",
+
+      "There are goals you have not reached yet.",
+
+      "There are places you have not seen yet.",
+
+      "There are lessons you have not learned yet.",
+
+      "There are opportunities you have not discovered yet.",
+
+      "So keep moving.",
+
+      "Keep becoming.",
+
+      "Keep believing in your ability to grow.",
+
+      "The person you want to become is built one decision at a time.",
+
+      "Do not quit simply because the journey became difficult.",
+
+      "Difficult does not mean impossible.",
+
+      "Slow does not mean stuck.",
+
+      "Uncertain does not mean hopeless.",
+
+      "Starting late does not mean you cannot finish.",
+
+      "A new attempt can produce a new result.",
+
+      "Keep giving yourself another chance.",
+
+      "Keep choosing progress.",
+
+      "Keep choosing discipline.",
+
+      "Keep choosing growth.",
+
+      "One day you will look back and realize the small steps mattered.",
+
+      "The effort you make today can become the strength you rely on tomorrow.",
+
+      "Your future is worth the work.",
+
+      "Your goals are worth the patience.",
+
+      "Your growth is worth the discomfort.",
+
+      "And your journey is worth continuing.",
+
+      "Do not stop here."
+
+    ];
+
+    const quoteList = document.getElementById("quoteList");
+
+    quotes.forEach((quote, index) => {
+      const div = document.createElement("div");
+      div.className = "quote";
+      div.textContent = quote;
+      div.onclick = () => openQuote(index);
+      quoteList.appendChild(div);
+    });
+
+    let currentQuote = 0;
+
+    function openQuote(index) {
+      currentQuote = index;
+
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
+
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(3, "0") +
+        " OF " +
+        quotes.length;
+
+      document.getElementById("quoteScreen").style.display = "flex";
+    }
+
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
+
+    function nextQuote() {
+      currentQuote++;
+
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
+
+      openQuote(currentQuote);
+    }
+
+    function previousQuote() {
+      currentQuote--;
+
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
+
+      openQuote(currentQuote);
+    }
+
+  </script>
+
+</body>
+</html>
