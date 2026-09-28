@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Quotes — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      line-height: 1.6;
+    }
+
+    .remove {
+      display: block;
+      margin-top: 15px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 20px;
+      background: #252525;
+      color: white;
+      cursor: pointer;
+    }
+
+    .empty {
+      text-align: center;
+      color: #666;
+      margin-top: 50px;
+      line-height: 1.7;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 35px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>❤️ Saved Quotes</h1>
+
+    <p class="intro">
+      The words you chose to keep.
+    </p>
+
+    <div id="savedQuotes"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <script>
+
+    const savedQuotes =
+      JSON.parse(localStorage.getItem("giddieSavedQuotes")) || [];
+
+    const container = document.getElementById("savedQuotes");
+
+    function displaySavedQuotes() {
+
+      container.innerHTML = "";
+
+      if (savedQuotes.length === 0) {
+
+        container.innerHTML = `
+          <div class="empty">
+            You haven't saved any quotes yet.<br><br>
+            Open a quote and tap ❤️ Save.
+          </div>
+        `;
+
+        return;
+      }
+
+      savedQuotes.forEach((quote, index) => {
+
+        const div = document.createElement("div");
+
+        div.className = "quote";
+
+        div.innerHTML = `
+          ${quote}
+          <button class="remove" onclick="removeQuote(${index})">
+            Remove ❤️
+          </button>
+        `;
+
+        container.appendChild(div);
+
+      });
+
+    }
+
+    function removeQuote(index) {
+
+      savedQuotes.splice(index, 1);
+
+      localStorage.setItem(
+        "giddieSavedQuotes",
+        JSON.stringify(savedQuotes)
+      );
+
+      displaySavedQuotes();
+
+    }
+
+    displaySavedQuotes();
+
+  </script>
+
+</body>
+                        </html>
