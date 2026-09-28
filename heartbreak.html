@@ -1,385 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heartbreak | Giddie Rey Journal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartbreak — Giddie Rey Journal</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body{
-  background:#080808;
-  color:white;
-  font-family:Arial,sans-serif;
-  min-height:100vh;
-  padding:25px 15px 50px;
-}
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
 
-.container{
-  max-width:650px;
-  margin:auto;
-}
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
 
-.header{
-  text-align:center;
-  margin-bottom:30px;
-}
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
 
-.header h1{
-  font-size:35px;
-  margin-bottom:10px;
-}
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
 
-.header p{
-  color:#888;
-  line-height:1.6;
-}
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-.quote{
-  background:#121212;
-  border:1px solid #292929;
-  border-radius:16px;
-  padding:20px;
-  margin-bottom:13px;
-  cursor:pointer;
-  line-height:1.6;
-  transition:.25s;
-}
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
 
-.quote:hover{
-  background:#1c1c1c;
-}
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
 
-.number{
-  display:block;
-  color:#666;
-  font-size:12px;
-  margin-bottom:7px;
-}
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
 
-.back{
-  display:block;
-  text-align:center;
-  color:#aaa;
-  text-decoration:none;
-  margin-top:30px;
-}
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
 
-.footer{
-  text-align:center;
-  color:#444;
-  font-size:12px;
-  margin-top:35px;
-}
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
 
-/* FULL QUOTE */
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
 
-#quoteScreen{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#080808;
-  z-index:1000;
-  padding:25px;
-}
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-.quoteContent{
-  min-height:90vh;
-  max-width:650px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.close{
-  position:absolute;
-  top:20px;
-  left:20px;
-  background:none;
-  border:none;
-  color:#aaa;
-  font-size:16px;
-  padding:10px;
-}
+    .save {
+      background: #b00020;
+      color: white;
+    }
 
-.quoteNumber{
-  color:#666;
-  font-size:13px;
-}
+    .saved {
+      background: #333;
+      color: white;
+    }
 
-#bigQuote{
-  font-size:27px;
-  line-height:1.6;
-  margin:30px 0;
-}
-
-.buttons{
-  display:flex;
-  gap:12px;
-}
-
-.buttons button{
-  background:#171717;
-  border:1px solid #303030;
-  color:white;
-  padding:13px 20px;
-  border-radius:25px;
-  font-size:14px;
-}
-</style>
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <div class="header">
     <h1>🥀 Heartbreak</h1>
-    <p>Tap a quote to read it on its own.</p>
+
+    <p class="intro">
+      Some feelings hurt because they once meant everything.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
   </div>
 
-  <div id="quoteList"></div>
+  <div id="quoteScreen">
 
-  <a class="back" href="journal.html">← Back to Journal</a>
+    <div class="screenContent">
 
-  <div class="footer">
-    Giddie Rey Journal 🖤
-  </div>
+      <div class="number" id="quoteNumber"></div>
 
-</div>
+      <div id="fullQuote"></div>
 
+      <div class="buttons">
 
-<div id="quoteScreen">
+        <button onclick="previousQuote()">← Previous</button>
 
-  <button class="close" onclick="closeQuote()">← Back</button>
+        <button onclick="nextQuote()">Next →</button>
 
-  <div class="quoteContent">
+        <button id="saveButton" class="save" onclick="saveQuote()">
+          ❤️ Save
+        </button>
 
-    <div class="quoteNumber" id="quoteNumber"></div>
+        <button class="close" onclick="closeQuote()">
+          ✕ Back
+        </button>
 
-    <div id="bigQuote"></div>
+      </div>
 
-    <div class="buttons">
-      <button onclick="previousQuote()">← Previous</button>
-      <button onclick="nextQuote()">Next →</button>
     </div>
 
   </div>
 
-</div>
+  <script>
 
+    const quotes = [
 
-<script>
+      "Sometimes the hardest goodbye is the one you never got to say.",
+      "I miss what we were, even though I know we cannot go back.",
+      "Some memories stay long after the person has left.",
+      "It hurts when someone becomes a stranger after once feeling like home.",
+      "Not every ending comes with an explanation.",
+      "Sometimes you have to accept that the person you wanted is no longer part of your story.",
+      "The hardest part is remembering the good days while knowing they are over.",
+      "You can forgive someone and still choose not to return.",
+      "Some people leave quietly, but their absence speaks loudly.",
+      "I learned that missing someone does not always mean you should go back.",
+      "A goodbye can change everything in a single moment.",
+      "Sometimes the heart needs time to understand what the mind already knows.",
+      "It is strange how someone can mean so much and become a memory.",
+      "I stopped waiting for an explanation that was never coming.",
+      "Some endings hurt because they were never meant to happen.",
+      "You cannot force someone to stay where they no longer want to be.",
+      "The memories are beautiful, but they belong to yesterday.",
+      "Sometimes letting go is the only way to make room for peace.",
+      "I wish some moments could have lasted longer.",
+      "The hardest thing is accepting that things have changed.",
+      "Some people teach you love, while others teach you how to let go.",
+      "I remember the person you were before everything changed.",
+      "Sometimes closure is simply accepting that there will be no closure.",
+      "The heart remembers things the mind tries to forget.",
+      "It is okay to miss someone without bringing them back into your life.",
+      "Some chapters end before we are ready to turn the page.",
+      "I wanted forever, but life gave me a memory.",
+      "You can care about someone and still choose yourself.",
+      "Some wounds need patience, not another conversation.",
+      "The silence after goodbye can feel louder than the goodbye itself.",
+      "I learned that not every promise survives time.",
+      "Sometimes people change, and sometimes we finally notice.",
+      "What once felt permanent can become a distant memory.",
+      "I stopped asking why and started accepting what happened.",
+      "Some connections are meant to teach us, not stay with us.",
+      "The hardest memories are often the ones we once treasured.",
+      "You do not have to hate someone to move on from them.",
+      "Sometimes the best thing you can do is stop looking back.",
+      "I still remember, but remembering no longer has to mean returning.",
+      "Some goodbyes are painful because they make room for something new.",
+      "You cannot rewrite yesterday, but you can choose what tomorrow becomes.",
+      "Sometimes losing a connection helps you understand yourself better.",
+      "I wanted answers, but eventually I learned to live without them.",
+      "The past can be meaningful without becoming your future.",
+      "Some memories fade slowly, and that is okay.",
+      "Healing begins when you stop fighting what you cannot change.",
+      "You deserve peace even when your heart still has questions.",
+      "One day the memory will feel lighter than it does today.",
+      "An ending can hurt and still be the beginning of something better."
 
-const quotes = [
+    ];
 
-"Sometimes the person you miss is the same person you had to learn to live without.",
-"I didn't stop caring. I just stopped showing it.",
-"We went from talking every day to becoming strangers with memories.",
-"The hardest goodbye is the one you never got to say properly.",
-"I still remember the version of us that believed we'd last.",
-"You left, but somehow your memories stayed behind.",
-"It hurts when someone becomes a memory while they're still alive.",
-"I miss who we were before everything changed.",
-"Some people leave quietly, but their absence makes the loudest noise.",
-"I wish I could forget you as easily as you forgot me.",
-"We had something beautiful, and somehow we still lost it.",
-"I stopped checking my phone, but I never stopped hoping.",
-"You became a chapter I keep rereading even though I know the ending.",
-"Some memories hurt more because they were once beautiful.",
-"I never expected forever to have an expiration date.",
-"We didn't become strangers overnight. We slowly stopped choosing each other.",
-"I miss the conversations more than I miss the person.",
-"The saddest part is knowing I would still answer if you called.",
-"You taught me how beautiful love could feel, then taught me how painful losing it could be.",
-"I kept making excuses for your absence until I realized I was only avoiding the truth.",
-"Sometimes closure is accepting that you won't get an explanation.",
-"I wanted a future with you. You wanted a life without me.",
-"We stopped talking, but my mind never stopped talking about you.",
-"I wonder if you ever miss me the way I sometimes miss you.",
-"It's strange how someone can feel like home and then become a place you can't return to.",
-"I wasn't ready to lose you, but I was slowly losing myself trying to keep you.",
-"You promised forever. I guess forever meant something different to you.",
-"I deleted the messages, but the memories didn't disappear.",
-"Some endings don't need an argument. Sometimes people simply stop caring.",
-"I still remember the little things you probably forgot.",
-"The hardest thing was accepting that you were no longer mine to miss.",
-"I gave you my trust, and losing it changed the way I see people.",
-"We had so many plans for tomorrow, and then tomorrow came without us.",
-"I wish memories came with an off button.",
-"You moved on, and I was left learning how to do the same.",
-"I don't hate you. I just hate how much losing you changed me.",
-"Sometimes I miss you. Sometimes I miss who I was when I had you.",
-"We were once everything to each other. Now we're barely a conversation.",
-"I wish I knew our last conversation was going to be our last.",
-"Some people become lessons disguised as love.",
-"I stayed because I remembered who you used to be.",
-"You changed, and I kept loving the person I remembered.",
-"Sometimes the heart understands the truth long before the mind accepts it.",
-"I kept waiting for the old you to come back.",
-"We lost each other while trying to prove who cared less.",
-"I never wanted perfect. I only wanted something real.",
-"It's painful when your favorite memories become the reason you can't move forward.",
-"I learned that missing someone doesn't mean you should go back.",
-"You were my favorite person. Now you're my favorite memory.",
-"Some people leave your life but never leave your thoughts.",
-"I wish I could tell my past self how this story would end.",
-"We had a thousand reasons to stay, but somehow goodbye became the easiest choice.",
-"It hurts when the person who once knew everything about you becomes someone who knows nothing anymore.",
-"I stopped expecting messages, but I never stopped noticing your name.",
-"There are memories I smile at and memories I wish I could erase.",
-"I gave you chances because I loved you. I left because I finally understood myself.",
-"Sometimes loving someone means accepting that they no longer belong in your life.",
-"You didn't just leave my life. You changed the way I remember it.",
-"I thought losing you would be temporary. Then the days became months.",
-"I wonder how many times we almost fixed things before we finally gave up.",
-"I still remember the first time you made me feel special.",
-"Maybe we were right people at the wrong time.",
-"I wanted answers. All I got was silence.",
-"The relationship ended, but the questions stayed.",
-"I stopped blaming you when I realized people can only love from where they are.",
-"Sometimes you have to accept that an apology will never come.",
-"I miss when your name on my phone meant something good was about to happen.",
-"We used to talk about everything. Now I don't even know how your day went.",
-"I never thought our memories would become something I had to heal from.",
-"The hardest part wasn't losing you. It was losing the future I imagined with you.",
-"I kept hoping for a different ending to a story that had already ended.",
-"You became distant before you ever said goodbye.",
-"Sometimes the silence after goodbye says everything words couldn't.",
-"I learned to stop asking why someone chose not to stay.",
-"You can't force someone to value what they already decided to lose.",
-"There was a time I couldn't imagine my life without you. Now I'm learning to imagine it again.",
-"I don't regret loving you. I regret forgetting myself while doing it.",
-"Some goodbyes happen long before the final words are spoken.",
-"I wanted consistency. You gave me memories.",
-"It hurts when effort becomes one-sided and silence becomes normal.",
-"I kept believing in us even after you stopped believing.",
-"Maybe the lesson wasn't how to keep you. Maybe it was how to let go.",
-"I still wonder what we could have been if we had tried a little longer.",
-"Some people are meant to be memories, not permanent chapters.",
-"I wanted your presence, not another promise.",
-"We both changed, but only one of us admitted it.",
-"I stopped asking you to stay when I realized staying should never have to be begged for.",
-"The hardest truth is that sometimes love isn't enough.",
-"You were once my everyday. Now you're someone I remember occasionally.",
-"I thought time would erase the memories. It only taught me how to carry them differently.",
-"I don't miss the arguments. I miss the days before we had them.",
-"We lost something neither of us knew how to repair.",
-"I wish I could tell you how much the little things meant to me.",
-"You became a stranger I still know by heart.",
-"Some memories feel like home until you realize you can never return.",
-"I finally accepted that missing you doesn't mean I made the wrong decision.",
-"We didn't fail because we stopped loving. We failed because we stopped understanding each other.",
-"I wish you well, even if I wish things had ended differently.",
-"There are people you forgive without ever letting them back into your life.",
-"One day your name will just be a memory that doesn't hurt anymore.",
-"I stopped looking for you in every crowd.",
-"The memories stayed because they mattered, not because I was meant to stay stuck in them.",
-"I learned that an ending can still be beautiful when it teaches you something.",
-"Sometimes you don't need another conversation. You need peace.",
-"I hope someday I remember you without wondering what went wrong.",
-"We were a beautiful story that simply reached its final page.",
-"I no longer need you to understand why I had to leave.",
-"Some chapters hurt to close because they meant so much while they were open.",
-"I gave myself permission to miss you without going back.",
-"Healing didn't make me forget you. It made remembering you easier.",
-"One day I will think of us and simply smile at how much we once meant to each other.",
-"I stopped waiting for an apology and started choosing peace.",
-"You were part of my story, but you don't have to be part of every chapter.",
-"Sometimes letting go is the kindest thing you can do for yourself.",
-"I finally understood that moving forward doesn't mean pretending nothing happened.",
-"What we had mattered, even if it didn't last.",
-"I can appreciate the memories without wishing for the past.",
-"Some endings hurt because they make room for a version of you that needed to grow.",
-"I don't need to hate you to move on from you.",
-"Maybe the greatest goodbye is the moment you finally choose peace over what keeps hurting you."
+    const quoteList = document.getElementById("quoteList");
 
-];
+    quotes.forEach((quote, index) => {
 
-let currentQuote = 0;
+      const div = document.createElement("div");
 
-const quoteList = document.getElementById("quoteList");
+      div.className = "quote";
+      div.textContent = quote;
 
-quotes.forEach(function(quote,index){
+      div.onclick = () => openQuote(index);
 
-  const item = document.createElement("div");
+      quoteList.appendChild(div);
 
-  item.className = "quote";
+    });
 
-  item.innerHTML =
-    '<span class="number">' +
-    String(index + 1).padStart(2,"0") +
-    '</span>' +
-    quote;
+    let currentQuote = 0;
 
-  item.onclick = function(){
-    openQuote(index);
-  };
+    function openQuote(index) {
 
-  quoteList.appendChild(item);
+      currentQuote = index;
 
-});
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
 
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(3, "0") +
+        " OF " +
+        quotes.length;
 
-function openQuote(index){
+      updateSaveButton();
 
-  currentQuote = index;
+      document.getElementById("quoteScreen").style.display = "flex";
+    }
 
-  document.getElementById("bigQuote").textContent =
-    quotes[currentQuote];
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
 
-  document.getElementById("quoteNumber").textContent =
-    "QUOTE " +
-    String(currentQuote + 1).padStart(2,"0") +
-    " OF " +
-    quotes.length;
+    function nextQuote() {
 
-  document.getElementById("quoteScreen").style.display = "block";
+      currentQuote++;
 
-}
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
 
+      openQuote(currentQuote);
+    }
 
-function closeQuote(){
+    function previousQuote() {
 
-  document.getElementById("quoteScreen").style.display = "none";
+      currentQuote--;
 
-}
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
 
+      openQuote(currentQuote);
+    }
 
-function nextQuote(){
+    function getSavedQuotes() {
 
-  currentQuote++;
+      return JSON.parse(
+        localStorage.getItem("giddieSavedQuotes")
+      ) || [];
 
-  if(currentQuote >= quotes.length){
-    currentQuote = 0;
-  }
+    }
 
-  openQuote(currentQuote);
+    function saveQuote() {
 
-}
+      let savedQuotes = getSavedQuotes();
 
+      const quote = quotes[currentQuote];
 
-function previousQuote(){
+      if (!savedQuotes.includes(quote)) {
 
-  currentQuote--;
+        savedQuotes.push(quote);
 
-  if(currentQuote < 0){
-    currentQuote = quotes.length - 1;
-  }
+        localStorage.setItem(
+          "giddieSavedQuotes",
+          JSON.stringify(savedQuotes)
+        );
 
-  openQuote(currentQuote);
+      }
 
-}
+      updateSaveButton();
+    }
 
-</script>
+    function updateSaveButton() {
+
+      const button = document.getElementById("saveButton");
+
+      const savedQuotes = getSavedQuotes();
+
+      if (savedQuotes.includes(quotes[currentQuote])) {
+
+        button.textContent = "✓ Saved";
+        button.className = "saved";
+
+      } else {
+
+        button.textContent = "❤️ Save";
+        button.className = "save";
+
+      }
+    }
+
+  </script>
 
 </body>
-</html>
+    </html>
