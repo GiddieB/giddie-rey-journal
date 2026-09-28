@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Beginnings — Giddie Rey Journal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #080808;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 25px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin: 20px 0 10px;
+    }
+
+    .intro {
+      text-align: center;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 12px 0;
+      color: #ddd;
+      line-height: 1.6;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .quote:hover {
+      background: #202020;
+      transform: translateY(-2px);
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin: 30px 0 10px;
+      color: #888;
+      text-decoration: none;
+    }
+
+    #quoteScreen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #050505;
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .screenContent {
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .number {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+    }
+
+    #fullQuote {
+      font-size: 26px;
+      line-height: 1.6;
+      margin-bottom: 45px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 13px 20px;
+      border-radius: 25px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>🌅 New Beginnings</h1>
+
+    <p class="intro">
+      Every ending leaves a little room for something new.
+      Sometimes all you need is the courage to begin again.
+    </p>
+
+    <div id="quoteList"></div>
+
+    <a class="back" href="journal.html">← Back to Journal</a>
+
+  </div>
+
+  <div id="quoteScreen">
+
+    <div class="screenContent">
+
+      <div class="number" id="quoteNumber"></div>
+
+      <div id="fullQuote"></div>
+
+      <div class="buttons">
+        <button onclick="previousQuote()">← Previous</button>
+        <button onclick="nextQuote()">Next →</button>
+        <button class="close" onclick="closeQuote()">✕ Back</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    const quotes = [
+
+      "Every morning is proof that life gives us another chance.",
+
+      "A new beginning does not require a perfect past.",
+
+      "Sometimes the best chapter starts after the hardest ending.",
+
+      "You are allowed to begin again as many times as you need.",
+
+      "The past may explain you, but it does not have to define you.",
+
+      "Every new chapter begins with one small decision.",
+
+      "Starting over is not failure. Sometimes it is courage.",
+
+      "There is still time to become someone you are proud of.",
+
+      "A fresh start can begin with simply choosing differently today.",
+
+      "You do not need to know the whole road before taking the first step.",
+
+      "Sometimes a new beginning looks like an ordinary morning.",
+
+      "The future is waiting for choices the past never had.",
+
+      "You can rebuild slowly and still build something beautiful.",
+
+      "One chapter ending does not mean the book is finished.",
+
+      "Sometimes you have to close the old door before you can notice the new one.",
+
+      "Your next chapter does not need permission from your previous one.",
+
+      "A new beginning starts when you stop believing the old story is the only story.",
+
+      "You can change direction without changing your worth.",
+
+      "Every step forward counts, even the quiet ones.",
+
+      "Sometimes starting again is exactly what you needed.",
+
+      "The future does not have to repeat the past.",
+
+      "You are not too late to begin something meaningful.",
+
+      "A small beginning can eventually become a completely different life.",
+
+      "Do not underestimate what one brave decision can change.",
+
+      "Some endings create space for opportunities you could not see before.",
+
+      "The first step may be uncomfortable, but it can still be the right one.",
+
+      "You can start again without explaining every detail of your past.",
+
+      "New beginnings often arrive disguised as uncertainty.",
+
+      "You do not need to feel ready to take a meaningful step.",
+
+      "Sometimes confidence comes after you begin, not before.",
+
+      "A fresh start is a reminder that yesterday does not own tomorrow.",
+
+      "Your mistakes can become lessons instead of permanent labels.",
+
+      "There is something powerful about deciding to try again.",
+
+      "The person you become tomorrow is shaped by what you choose today.",
+
+      "Sometimes life gives you a blank page because the old story has finished.",
+
+      "You can create something new from what remains.",
+
+      "Beginning again does not erase what happened. It simply changes what happens next.",
+
+      "Every new season asks you to leave something behind.",
+
+      "You may not know where the road ends, but you can still take the next step.",
+
+      "A new beginning can be quiet and still be important.",
+
+      "Sometimes the greatest transformation begins with a simple decision to stop giving up.",
+
+      "You have survived enough chapters to know that chapters change.",
+
+      "The future is not obligated to look like your past.",
+
+      "You can become more than the circumstances that introduced you to life.",
+
+      "Every sunrise carries a little possibility.",
+
+      "Starting over is easier when you stop comparing your beginning to someone else's middle.",
+
+      "Your pace does not make your journey less valuable.",
+
+      "Some dreams need a second attempt.",
+
+      "A failed attempt is not the same thing as a failed life.",
+
+      "You can try again with more wisdom than you had before.",
+
+      "Sometimes the second beginning is stronger because the first one taught you what mattered.",
+
+      "You do not need to be fearless to begin.",
+
+      "Courage is moving forward while uncertainty is still present.",
+
+      "The next chapter can surprise you.",
+
+      "Do not close your heart to tomorrow because yesterday disappointed you.",
+
+      "A new beginning is an invitation, not a guarantee.",
+
+      "You cannot discover what is ahead if you refuse to move.",
+
+      "Sometimes a new environment helps you see an old problem differently.",
+
+      "Growth often begins when comfort stops being enough.",
+
+      "The person you are becoming may require different choices from the person you used to be.",
+
+      "New beginnings require room, and sometimes room requires release.",
+
+      "You can leave the past behind without disrespecting where you came from.",
+
+      "A fresh start is not about becoming perfect. It is about becoming intentional.",
+
+      "Every day gives you another opportunity to make a different choice.",
+
+      "You can change your habits one small decision at a time.",
+
+      "Some of the best things in life begin with uncertainty.",
+
+      "Not knowing what comes next does not mean nothing good is coming.",
+
+      "Sometimes you discover your strength only after you are forced to begin again.",
+
+      "A new chapter may feel unfamiliar because you have never lived it before.",
+
+      "Give yourself permission to grow beyond old expectations.",
+
+      "You are allowed to surprise yourself.",
+
+      "Sometimes the life you want begins with one uncomfortable change.",
+
+      "New beginnings are easier when you stop demanding immediate results.",
+
+      "A seed does not become a tree overnight.",
+
+      "Slow progress is still progress toward something new.",
+
+      "Do not judge a new chapter by the difficulty of its first page.",
+
+      "Some beginnings feel small because you cannot see what they will become yet.",
+
+      "The future is built from ordinary choices repeated consistently.",
+
+      "You can start with what you have and learn along the way.",
+
+      "You do not need perfect circumstances to make progress.",
+
+      "Sometimes the right time is simply the moment you decide to begin.",
+
+      "A new beginning can start with changing one thought.",
+
+      "Then one habit. Then one decision. Then an entirely new direction.",
+
+      "You are never finished growing.",
+
+      "There is always another lesson, another opportunity, another morning.",
+
+      "Sometimes the greatest comeback begins quietly.",
+
+      "You can rebuild your confidence through small promises you keep to yourself.",
+
+      "Every promise kept to yourself becomes evidence that you can trust yourself.",
+
+      "A fresh start becomes stronger when you stop looking for the perfect moment.",
+
+      "There may never be a perfect time, but there can be a meaningful first step.",
+
+      "Your new chapter deserves your attention.",
+
+      "Do not let an old disappointment steal a new opportunity.",
+
+      "Some opportunities arrive only after you finally stop waiting for the past.",
+
+      "The future needs your presence more than the past needs your attention.",
+
+      "You can make peace with yesterday and still be excited about tomorrow.",
+
+      "A new beginning is not a promise that everything will be easy.",
+
+      "It is a promise that something can be different.",
+
+      "Sometimes different is exactly what you need.",
+
+      "You can create a new direction without having every detail planned.",
+
+      "Trust yourself enough to take the first step.",
+
+      "Your first step does not have to impress anyone.",
+
+      "It only has to move you forward.",
+
+      "The beginning may be messy, but it can still be meaningful.",
+
+      "Do not wait for everyone to understand the change you are making.",
+
+      "Sometimes growth looks strange to people who knew your old version.",
+
+      "You are allowed to become unfamiliar to people who only knew your past.",
+
+      "A new chapter may require a new mindset.",
+
+      "What worked before may not be what works next.",
+
+      "Be willing to learn again.",
+
+      "Be willing to start small.",
+
+      "Be willing to be a beginner.",
+
+      "There is no shame in rebuilding.",
+
+      "There is no shame in trying again.",
+
+      "There is no shame in choosing a different path.",
+
+      "Sometimes the strongest people are the ones willing to start from zero.",
+
+      "Your starting point does not determine your destination.",
+
+      "The distance between where you are and where you want to be is crossed one step at a time.",
+
+      "Every step teaches you something the starting line could not.",
+
+      "You may not recognize yourself after enough growth.",
+
+      "And that can be a beautiful thing.",
+
+      "Some versions of you existed only to prepare you for the next one.",
+
+      "Do not be afraid of becoming someone new.",
+
+      "The future version of you needs the courage of today's you.",
+
+      "Your story can change direction without losing its meaning.",
+
+      "A new beginning can be the answer to an old prayer.",
+
+      "Sometimes what feels like an ending is simply a redirection.",
+
+      "Trust that a different road can still lead somewhere beautiful.",
+
+      "You do not need to know how everything will work out.",
+
+      "You only need enough courage for the next step.",
+
+      "Tomorrow is another page.",
+
+      "Write something different on it.",
+
+      "Let the past teach you, not control you.",
+
+      "Let today prepare you, not pressure you.",
+
+      "Let tomorrow remain a possibility.",
+
+      "You have more chapters ahead than you can see.",
+
+      "So begin again.",
+
+      "Begin slowly.",
+
+      "Begin scared.",
+
+      "Begin uncertain.",
+
+      "Just begin.",
+
+      "Because sometimes the most beautiful part of the story starts after you thought it was over."
+
+    ];
+
+    const quoteList = document.getElementById("quoteList");
+
+    quotes.forEach((quote, index) => {
+      const div = document.createElement("div");
+      div.className = "quote";
+      div.textContent = quote;
+      div.onclick = () => openQuote(index);
+      quoteList.appendChild(div);
+    });
+
+    let currentQuote = 0;
+
+    function openQuote(index) {
+      currentQuote = index;
+
+      document.getElementById("fullQuote").textContent =
+        quotes[currentQuote];
+
+      document.getElementById("quoteNumber").textContent =
+        "QUOTE " +
+        String(currentQuote + 1).padStart(3, "0") +
+        " OF " +
+        quotes.length;
+
+      document.getElementById("quoteScreen").style.display = "flex";
+    }
+
+    function closeQuote() {
+      document.getElementById("quoteScreen").style.display = "none";
+    }
+
+    function nextQuote() {
+      currentQuote++;
+
+      if (currentQuote >= quotes.length) {
+        currentQuote = 0;
+      }
+
+      openQuote(currentQuote);
+    }
+
+    function previousQuote() {
+      currentQuote--;
+
+      if (currentQuote < 0) {
+        currentQuote = quotes.length - 1;
+      }
+
+      openQuote(currentQuote);
+    }
+
+  </script>
+
+</body>
+</html>
