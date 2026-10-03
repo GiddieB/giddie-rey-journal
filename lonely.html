@@ -53,6 +53,7 @@ body{
 
 .quote:hover{
   background:#1c1c1c;
+  transform:translateY(-2px);
 }
 
 .number{
@@ -123,17 +124,38 @@ body{
 
 .buttons{
   display:flex;
-  gap:12px;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
 }
 
 .buttons button{
+  border:none;
+  padding:13px 18px;
+  border-radius:25px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
   background:#171717;
   border:1px solid #303030;
   color:white;
-  padding:13px 20px;
-  border-radius:25px;
-  font-size:14px;
 }
+
+.save{
+  background:#b00020 !important;
+  border:none !important;
+}
+
+.saved{
+  background:#333 !important;
+  color:white !important;
+}
+
+.next,
+.previous{
+  background:#171717 !important;
+}
+
 </style>
 </head>
 
@@ -143,12 +165,17 @@ body{
 
   <div class="header">
     <h1>🌑 Lonely</h1>
-    <p>For the nights when silence feels louder than words.</p>
+
+    <p>
+      For the nights when silence feels louder than words.
+    </p>
   </div>
 
   <div id="quoteList"></div>
 
-  <a class="back" href="journal.html">← Back to Journal</a>
+  <a class="back" href="journal.html">
+    ← Back to Journal
+  </a>
 
   <div class="footer">
     Giddie Rey Journal 🖤
@@ -158,7 +185,9 @@ body{
 
 <div id="quoteScreen">
 
-  <button class="close" onclick="closeQuote()">← Back</button>
+  <button class="close" onclick="closeQuote()">
+    ← Back
+  </button>
 
   <div class="quoteContent">
 
@@ -167,8 +196,19 @@ body{
     <div id="bigQuote"></div>
 
     <div class="buttons">
-      <button onclick="previousQuote()">← Previous</button>
-      <button onclick="nextQuote()">Next →</button>
+
+      <button class="previous" onclick="previousQuote()">
+        ← Previous
+      </button>
+
+      <button class="next" onclick="nextQuote()">
+        Next →
+      </button>
+
+      <button id="saveButton" class="save" onclick="saveQuote()">
+        ❤️ Save
+      </button>
+
     </div>
 
   </div>
@@ -341,6 +381,8 @@ function openQuote(index){
     " OF " +
     quotes.length;
 
+  updateSaveButton();
+
   document.getElementById("quoteScreen").style.display = "block";
 
 }
@@ -375,7 +417,58 @@ function previousQuote(){
 
 }
 
+function getSavedQuotes(){
+
+  return JSON.parse(
+    localStorage.getItem("giddieSavedQuotes")
+  ) || [];
+
+}
+
+function saveQuote(){
+
+  let savedQuotes = getSavedQuotes();
+
+  const quote = quotes[currentQuote];
+
+  if(!savedQuotes.includes(quote)){
+
+    savedQuotes.push(quote);
+
+    localStorage.setItem(
+      "giddieSavedQuotes",
+      JSON.stringify(savedQuotes)
+    );
+
+  }
+
+  updateSaveButton();
+
+}
+
+function updateSaveButton(){
+
+  const button =
+    document.getElementById("saveButton");
+
+  const savedQuotes =
+    getSavedQuotes();
+
+  if(savedQuotes.includes(quotes[currentQuote])){
+
+    button.textContent = "✓ Saved";
+    button.className = "saved";
+
+  }else{
+
+    button.textContent = "❤️ Save";
+    button.className = "save";
+
+  }
+
+}
+
 </script>
 
 </body>
-  </html>
+</html>
