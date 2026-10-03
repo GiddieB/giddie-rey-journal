@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love | Giddie Rey Journal</title>
-
-<style>
+<title>Love | Giddie Rey Journal</title><style>
 *{
   box-sizing:border-box;
   margin:0;
@@ -14,96 +11,97 @@
 
 body{
   background:#080808;
-  color:white;
+  color:#fff;
   font-family:Arial,sans-serif;
   min-height:100vh;
 }
 
 .header{
-  padding:22px 18px 12px;
   text-align:center;
+  padding:25px 15px 15px;
 }
 
 .header h1{
   font-size:28px;
-  letter-spacing:1px;
 }
 
 .header p{
   color:#888;
-  margin-top:7px;
+  margin-top:8px;
   font-size:14px;
 }
 
 .quotes{
-  padding:20px 16px 100px;
+  padding:20px 15px 100px;
 }
 
 .quote{
   background:#111;
-  border:1px solid #222;
-  border-radius:14px;
-  padding:22px 18px;
+  border:1px solid #252525;
+  border-radius:15px;
+  padding:20px;
   margin-bottom:15px;
-  line-height:1.6;
   font-size:17px;
+  line-height:1.6;
   cursor:pointer;
-  transition:0.2s;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .quote:active{
-  transform:scale(0.98);
-  background:#181818;
+  background:#1c1c1c;
+  transform:scale(.98);
 }
 
 .number{
   color:#666;
   font-size:12px;
-  margin-bottom:8px;
+  margin-bottom:7px;
 }
 
 .back{
   position:fixed;
-  bottom:20px;
+  bottom:18px;
   left:50%;
   transform:translateX(-50%);
-  background:white;
-  color:black;
+  background:#fff;
+  color:#000;
   text-decoration:none;
   padding:12px 28px;
   border-radius:25px;
   font-weight:bold;
+  z-index:50;
 }
 
-/* SINGLE QUOTE SCREEN */
+/* SINGLE QUOTE */
 
 .single{
   display:none;
   position:fixed;
   inset:0;
+  width:100%;
+  height:100%;
   background:#080808;
-  z-index:1000;
-  padding:25px 20px;
+  z-index:9999;
+  padding:20px;
   flex-direction:column;
 }
 
 .single-top{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 }
 
 .single-top button{
   background:#111;
+  color:#fff;
   border:1px solid #333;
-  color:white;
-  padding:10px 15px;
+  padding:10px 16px;
   border-radius:20px;
-  font-size:14px;
 }
 
 .quote-number{
-  color:#666;
+  color:#777;
   font-size:13px;
 }
 
@@ -113,7 +111,7 @@ body{
   align-items:center;
   justify-content:center;
   text-align:center;
-  padding:30px 10px;
+  padding:20px;
 }
 
 .single-content p{
@@ -131,127 +129,33 @@ body{
 }
 
 .single-buttons button{
-  border:none;
+  background:#181818;
+  color:#fff;
+  border:1px solid #333;
   padding:13px 18px;
   border-radius:25px;
   font-weight:bold;
-  cursor:pointer;
-  background:#181818;
-  color:white;
-  border:1px solid #333;
 }
 
 .single-buttons .save{
-  background:white;
-  color:black;
+  background:#fff;
+  color:#000;
 }
-
-.single-buttons button:active{
-  transform:scale(0.96);
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="header">
+</style></head><body><div class="header">
   <h1>❤️ Love</h1>
   <p>Words for the hearts that love deeply.</p>
-</div>
+</div><div class="quotes"><div class="quote" data-index="0"><div class="number">01</div>Love feels different when you finally feel safe enough to be yourself.</div><div class="quote" data-index="1"><div class="number">02</div>I don't need perfect love. I just need something honest.</div><div class="quote" data-index="2"><div class="number">03</div>Sometimes one person becomes your favorite part of every ordinary day.</div><div class="quote" data-index="3"><div class="number">04</div>Real love is choosing each other even when life isn't easy.</div><div class="quote" data-index="4"><div class="number">05</div>I never knew a person could feel like home until I met you.</div><div class="quote" data-index="5"><div class="number">06</div>Love isn't always loud. Sometimes it is simply staying.</div><div class="quote" data-index="6"><div class="number">07</div>The right person makes you feel heard without making you beg to be understood.</div><div class="quote" data-index="7"><div class="number">08</div>I love the kind of love that brings peace instead of confusion.</div><div class="quote" data-index="8"><div class="number">09</div>Some people enter your life quietly and become everything.</div><div class="quote" data-index="9"><div class="number">10</div>My favorite memories are the ones that have you somewhere inside them.</div><div class="quote" data-index="10"><div class="number">11</div>Love is remembering the little things because they matter to someone you care about.</div><div class="quote" data-index="11"><div class="number">12</div>When I care, I care deeply. There is no halfway in my heart.</div><div class="quote" data-index="12"><div class="number">13</div>Being loved by someone who understands your silence is a beautiful thing.</div><div class="quote" data-index="13"><div class="number">14</div>I don't want temporary feelings. I want something that survives difficult days.</div><div class="quote" data-index="14"><div class="number">15</div>Sometimes the best love story is simply two people who never stopped choosing each other.</div><div class="quote" data-index="15"><div class="number">16</div>Your presence can turn an ordinary moment into something I'll remember.</div><div class="quote" data-index="16"><div class="number">17</div>Love should feel like a place where your heart can finally rest.</div><div class="quote" data-index="17"><div class="number">18</div>I may not say it every day, but you mean more to me than words can explain.</div><div class="quote" data-index="18"><div class="number">19</div>There is something beautiful about being someone's first thought and safe place.</div><div class="quote" data-index="19"><div class="number">20</div>If love is a choice, I hope we keep choosing each other.</div><div class="quote" data-index="20"><div class="number">21</div>I don't want someone who only loves the easy version of me.</div><div class="quote" data-index="21"><div class="number">22</div>The deepest love is often found in the smallest acts of care.</div><div class="quote" data-index="22"><div class="number">23</div>Sometimes all the heart wants is one person who doesn't give up easily.</div><div class="quote" data-index="23"><div class="number">24</div>Love becomes beautiful when both hearts feel equally valued.</div><div class="quote" data-index="24"><div class="number">25</div>I want a love that feels calm, honest, and impossible to fake.</div><div class="quote" data-index="25"><div class="number">26</div>Some hugs say everything the mouth doesn't know how to explain.</div><div class="quote" data-index="26"><div class="number">27</div>When someone truly matters, even their smallest happiness matters to you.</div><div class="quote" data-index="27"><div class="number">28</div>Love is not about finding someone perfect. It is about finding someone genuine.</div><div class="quote" data-index="28"><div class="number">29</div>I hope we never become strangers after once knowing each other's hearts.</div><div class="quote" data-index="29"><div class="number">30</div>Some hearts are worth protecting, even when love feels scary.</div></div><a href="index.html" class="back">← Back</a>
 
-<div class="quotes">
-
-<div class="quote" onclick="openQuote(0)"><div class="number">01</div>Love feels different when you finally feel safe enough to be yourself.</div>
-
-<div class="quote" onclick="openQuote(1)"><div class="number">02</div>I don't need perfect love. I just need something honest.</div>
-
-<div class="quote" onclick="openQuote(2)"><div class="number">03</div>Sometimes one person becomes your favorite part of every ordinary day.</div>
-
-<div class="quote" onclick="openQuote(3)"><div class="number">04</div>Real love is choosing each other even when life isn't easy.</div>
-
-<div class="quote" onclick="openQuote(4)"><div class="number">05</div>I never knew a person could feel like home until I met you.</div>
-
-<div class="quote" onclick="openQuote(5)"><div class="number">06</div>Love isn't always loud. Sometimes it is simply staying.</div>
-
-<div class="quote" onclick="openQuote(6)"><div class="number">07</div>The right person makes you feel heard without making you beg to be understood.</div>
-
-<div class="quote" onclick="openQuote(7)"><div class="number">08</div>I love the kind of love that brings peace instead of confusion.</div>
-
-<div class="quote" onclick="openQuote(8)"><div class="number">09</div>Some people enter your life quietly and become everything.</div>
-
-<div class="quote" onclick="openQuote(9)"><div class="number">10</div>My favorite memories are the ones that have you somewhere inside them.</div>
-
-<div class="quote" onclick="openQuote(10)"><div class="number">11</div>Love is remembering the little things because they matter to someone you care about.</div>
-
-<div class="quote" onclick="openQuote(11)"><div class="number">12</div>When I care, I care deeply. There is no halfway in my heart.</div>
-
-<div class="quote" onclick="openQuote(12)"><div class="number">13</div>Being loved by someone who understands your silence is a beautiful thing.</div>
-
-<div class="quote" onclick="openQuote(13)"><div class="number">14</div>I don't want temporary feelings. I want something that survives difficult days.</div>
-
-<div class="quote" onclick="openQuote(14)"><div class="number">15</div>Sometimes the best love story is simply two people who never stopped choosing each other.</div>
-
-<div class="quote" onclick="openQuote(15)"><div class="number">16</div>Your presence can turn an ordinary moment into something I'll remember.</div>
-
-<div class="quote" onclick="openQuote(16)"><div class="number">17</div>Love should feel like a place where your heart can finally rest.</div>
-
-<div class="quote" onclick="openQuote(17)"><div class="number">18</div>I may not say it every day, but you mean more to me than words can explain.</div>
-
-<div class="quote" onclick="openQuote(18)"><div class="number">19</div>There is something beautiful about being someone's first thought and safe place.</div>
-
-<div class="quote" onclick="openQuote(19)"><div class="number">20</div>If love is a choice, I hope we keep choosing each other.</div>
-
-<div class="quote" onclick="openQuote(20)"><div class="number">21</div>I don't want someone who only loves the easy version of me.</div>
-
-<div class="quote" onclick="openQuote(21)"><div class="number">22</div>The deepest love is often found in the smallest acts of care.</div>
-
-<div class="quote" onclick="openQuote(22)"><div class="number">23</div>Sometimes all the heart wants is one person who doesn't give up easily.</div>
-
-<div class="quote" onclick="openQuote(23)"><div class="number">24</div>Love becomes beautiful when both hearts feel equally valued.</div>
-
-<div class="quote" onclick="openQuote(24)"><div class="number">25</div>I want a love that feels calm, honest, and impossible to fake.</div>
-
-<div class="quote" onclick="openQuote(25)"><div class="number">26</div>Some hugs say everything the mouth doesn't know how to explain.</div>
-
-<div class="quote" onclick="openQuote(26)"><div class="number">27</div>When someone truly matters, even their smallest happiness matters to you.</div>
-
-<div class="quote" onclick="openQuote(27)"><div class="number">28</div>Love is not about finding someone perfect. It is about finding someone genuine.</div>
-
-<div class="quote" onclick="openQuote(28)"><div class="number">29</div>I hope we never become strangers after once knowing each other's hearts.</div>
-
-<div class="quote" onclick="openQuote(29)"><div class="number">30</div>Some hearts are worth protecting, even when love feels scary.</div>
-
-</div>
-
-<a href="index.html" class="back">← Back</a>
-
-
-<!-- SINGLE QUOTE VIEW -->
-
-<div class="single" id="singleQuote">
-
-  <div class="single-top">
-    <button onclick="closeQuote()">← Back</button>
+<div class="single" id="singleQuote">  <div class="single-top">
+    <button id="backButton">← Back</button>
     <div class="quote-number" id="quoteNumber">01 / 30</div>
-  </div>
-
-  <div class="single-content">
+  </div>  <div class="single-content">
     <p id="quoteText"></p>
-  </div>
-
-  <div class="single-buttons">
-    <button onclick="previousQuote()">← Previous</button>
-
-    <button class="save" onclick="saveQuote()">♡ Save</button>
-
-    <button onclick="nextQuote()">Next →</button>
-  </div>
-
-</div>
-
-
-<script>
+  </div>  <div class="single-buttons">
+    <button id="previousButton">← Previous</button>
+    <button class="save" id="saveButton">♡ Save</button>
+    <button id="nextButton">Next →</button>
+  </div></div><script>
 
 const quotes = [
 "Love feels different when you finally feel safe enough to be yourself.",
@@ -288,20 +192,32 @@ const quotes = [
 
 let currentIndex = 0;
 
-function openQuote(index){
-  currentIndex = index;
-  showQuote();
+const singleQuote = document.getElementById("singleQuote");
+const quoteText = document.getElementById("quoteText");
+const quoteNumber = document.getElementById("quoteNumber");
+const saveButton = document.getElementById("saveButton");
 
-  document.getElementById("singleQuote").style.display = "flex";
-  document.body.style.overflow = "hidden";
-}
+document.querySelectorAll(".quote").forEach(function(card){
+
+  card.addEventListener("click", function(){
+
+    currentIndex = Number(this.dataset.index);
+
+    showQuote();
+
+    singleQuote.style.display = "flex";
+
+    document.body.style.overflow = "hidden";
+
+  });
+
+});
 
 function showQuote(){
 
-  document.getElementById("quoteText").textContent =
-    quotes[currentIndex];
+  quoteText.textContent = quotes[currentIndex];
 
-  document.getElementById("quoteNumber").textContent =
+  quoteNumber.textContent =
     String(currentIndex + 1).padStart(2,"0") +
     " / " +
     String(quotes.length).padStart(2,"0");
@@ -310,11 +226,14 @@ function showQuote(){
 }
 
 function closeQuote(){
-  document.getElementById("singleQuote").style.display = "none";
+
+  singleQuote.style.display = "none";
+
   document.body.style.overflow = "auto";
 }
 
 function nextQuote(){
+
   currentIndex++;
 
   if(currentIndex >= quotes.length){
@@ -325,6 +244,7 @@ function nextQuote(){
 }
 
 function previousQuote(){
+
   currentIndex--;
 
   if(currentIndex < 0){
@@ -337,17 +257,26 @@ function previousQuote(){
 function saveQuote(){
 
   let savedQuotes =
-    JSON.parse(localStorage.getItem("savedQuotes")) || [];
+    JSON.parse(localStorage.getItem("savedQuotes") || "[]");
 
   const quote = quotes[currentIndex];
 
-  if(!savedQuotes.includes(quote)){
+  if(savedQuotes.includes(quote)){
+
+    savedQuotes = savedQuotes.filter(function(item){
+      return item !== quote;
+    });
+
+  }else{
+
     savedQuotes.push(quote);
-    localStorage.setItem(
-      "savedQuotes",
-      JSON.stringify(savedQuotes)
-    );
+
   }
+
+  localStorage.setItem(
+    "savedQuotes",
+    JSON.stringify(savedQuotes)
+  );
 
   updateSaveButton();
 }
@@ -355,19 +284,26 @@ function saveQuote(){
 function updateSaveButton(){
 
   let savedQuotes =
-    JSON.parse(localStorage.getItem("savedQuotes")) || [];
-
-  const button =
-    document.querySelector(".save");
+    JSON.parse(localStorage.getItem("savedQuotes") || "[]");
 
   if(savedQuotes.includes(quotes[currentIndex])){
-    button.textContent = "♥ Saved";
+    saveButton.textContent = "♥ Saved";
   }else{
-    button.textContent = "♡ Save";
+    saveButton.textContent = "♡ Save";
   }
 }
 
-</script>
+document.getElementById("backButton")
+.addEventListener("click", closeQuote);
 
-</body>
-  </html>
+document.getElementById("nextButton")
+.addEventListener("click", nextQuote);
+
+document.getElementById("previousButton")
+.addEventListener("click", previousQuote);
+
+document.getElementById("saveButton")
+.addEventListener("click", saveQuote);
+
+</script></body>
+</html>
