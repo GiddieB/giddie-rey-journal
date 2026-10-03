@@ -1,538 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>People & Friendship — Giddie Rey Journal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People | Giddie Rey Journal</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      min-height: 100vh;
-      background: #080808;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 25px;
-    }
+body{
+  background:#080808;
+  color:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
 
-    .container {
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
-    }
+.header{
+  padding:22px 18px 12px;
+  text-align:center;
+}
 
-    h1 {
-      text-align: center;
-      font-size: 32px;
-      margin: 20px 0 10px;
-    }
+.header h1{
+  font-size:28px;
+  letter-spacing:1px;
+}
 
-    .intro {
-      text-align: center;
-      color: #999;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
+.header p{
+  color:#888;
+  margin-top:7px;
+  font-size:14px;
+}
 
-    .quote {
-      background: #151515;
-      border: 1px solid #292929;
-      border-radius: 15px;
-      padding: 20px;
-      margin: 12px 0;
-      color: #ddd;
-      line-height: 1.6;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.quotes{
+  padding:20px 16px 100px;
+}
 
-    .quote:hover {
-      background: #202020;
-      transform: translateY(-2px);
-    }
+.quote{
+  background:#111;
+  border:1px solid #222;
+  border-radius:14px;
+  padding:22px 18px;
+  margin-bottom:15px;
+  line-height:1.6;
+  font-size:17px;
+}
 
-    .back {
-      display: block;
-      text-align: center;
-      margin: 30px 0 10px;
-      color: #888;
-      text-decoration: none;
-    }
+.number{
+  color:#666;
+  font-size:12px;
+  margin-bottom:8px;
+}
 
-    #quoteScreen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #050505;
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-    }
+.back{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  color:black;
+  text-decoration:none;
+  padding:12px 28px;
+  border-radius:25px;
+  font-weight:bold;
+}
 
-    .screenContent {
-      width: 100%;
-      max-width: 600px;
-      text-align: center;
-    }
-
-    .number {
-      color: #666;
-      font-size: 13px;
-      letter-spacing: 2px;
-      margin-bottom: 35px;
-    }
-
-    #fullQuote {
-      font-size: 26px;
-      line-height: 1.6;
-      margin-bottom: 45px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    button {
-      border: none;
-      padding: 13px 20px;
-      border-radius: 25px;
-      background: white;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close {
-      background: #222;
-      color: white;
-    }
-  </style>
+.back:hover{
+  background:#ddd;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="header">
+  <h1>🤝 People</h1>
+  <p>Some people stay. Some people teach you why they had to leave.</p>
+</div>
 
-    <h1>👥 People & Friendship</h1>
+<div class="quotes">
 
-    <p class="intro">
-      Some people teach you love.<br>
-      Others teach you lessons you never asked for.
-    </p>
+<div class="quote"><div class="number">01</div>Not everyone who smiles with you is happy for you.</div>
 
-    <div id="quoteList"></div>
+<div class="quote"><div class="number">02</div>People change, and sometimes all you can do is accept it.</div>
 
-    <a class="back" href="journal.html">← Back to Journal</a>
+<div class="quote"><div class="number">03</div>Some people only remember you when they need something.</div>
 
-  </div>
+<div class="quote"><div class="number">04</div>Sometimes the people you trusted most become the reason you trust less.</div>
 
-  <div id="quoteScreen">
+<div class="quote"><div class="number">05</div>Not everyone deserves the same version of you.</div>
 
-    <div class="screenContent">
+<div class="quote"><div class="number">06</div>People show you who they are when they no longer need anything from you.</div>
 
-      <div class="number" id="quoteNumber"></div>
+<div class="quote"><div class="number">07</div>It's painful when someone familiar slowly becomes a stranger.</div>
 
-      <div id="fullQuote"></div>
+<div class="quote"><div class="number">08</div>Some people are only meant to be chapters in your story.</div>
 
-      <div class="buttons">
-        <button onclick="previousQuote()">← Previous</button>
-        <button onclick="nextQuote()">Next →</button>
-        <button class="close" onclick="closeQuote()">✕ Back</button>
-      </div>
+<div class="quote"><div class="number">09</div>Distance can reveal who genuinely cares.</div>
 
-    </div>
+<div class="quote"><div class="number">10</div>Never force a connection that only survives when you carry it.</div>
 
-  </div>
+<div class="quote"><div class="number">11</div>Sometimes people leave because their role in your life is finished.</div>
 
-  <script>
+<div class="quote"><div class="number">12</div>Some people know your story but still choose to misunderstand you.</div>
 
-    const quotes = [
+<div class="quote"><div class="number">13</div>Be careful with people who only celebrate you when you're below them.</div>
 
-      "Some people only remember your value when they need something from you.",
+<div class="quote"><div class="number">14</div>Sometimes losing someone teaches you more than keeping them.</div>
 
-      "Not everyone who calls you a friend truly knows how to be one.",
+<div class="quote"><div class="number">15</div>You can appreciate someone's memories without inviting them back into your life.</div>
 
-      "Sometimes losing a friend hurts more than losing a relationship.",
+<div class="quote"><div class="number">16</div>Some people will never understand your value because they became too comfortable with your presence.</div>
 
-      "People change, and sometimes the hardest part is accepting that you changed too.",
+<div class="quote"><div class="number">17</div>Don't confuse being surrounded by people with being understood.</div>
 
-      "I stopped chasing friendships that only existed when I made the effort.",
+<div class="quote"><div class="number">18</div>Sometimes the people closest to you know the least about how you really feel.</div>
 
-      "Some friendships end long before the goodbye is ever spoken.",
+<div class="quote"><div class="number">19</div>People can miss you and still not know how to treat you.</div>
 
-      "You can miss someone and still know they no longer belong in your life.",
+<div class="quote"><div class="number">20</div>Some people teach you what love feels like. Others teach you what it shouldn't feel like.</div>
 
-      "The saddest friendships are the ones where only one person is still trying.",
+<div class="quote"><div class="number">21</div>Never let someone's temporary presence make you question your permanent worth.</div>
 
-      "Sometimes silence reveals who actually cares enough to check on you.",
+<div class="quote"><div class="number">22</div>People remember your mistakes longer than they remember your kindness.</div>
 
-      "Not everyone deserves the same access to your heart.",
+<div class="quote"><div class="number">23</div>Sometimes silence tells you more about a person than their words ever could.</div>
 
-      "I learned that being surrounded by people doesn't mean you aren't lonely.",
+<div class="quote"><div class="number">24</div>Some people only value you after they lose access to you.</div>
 
-      "Some people know your story but still choose to misunderstand you.",
+<div class="quote"><div class="number">25</div>You don't have to hate someone just because you no longer belong in each other's lives.</div>
 
-      "Real friendship doesn't disappear when life becomes difficult.",
+<div class="quote"><div class="number">26</div>People come and go, but the lessons they leave can stay forever.</div>
 
-      "Some people are only loyal when everything is going their way.",
+<div class="quote"><div class="number">27</div>Sometimes you outgrow people without realizing it.</div>
 
-      "I stopped explaining my absence to people who never noticed my presence.",
+<div class="quote"><div class="number">28</div>Pay attention to consistency, not just beautiful words.</div>
 
-      "A true friend doesn't make you feel like you are constantly competing for their attention.",
+<div class="quote"><div class="number">29</div>The right people won't make you constantly question where you stand.</div>
 
-      "Sometimes the person you trusted most becomes the reason you trust less.",
+<div class="quote"><div class="number">30</div>Keep the people who bring honesty, peace, respect, and genuine care into your life.</div>
 
-      "People can promise forever and still leave without warning.",
+</div>
 
-      "Some friendships are lessons disguised as memories.",
-
-      "I don't hate people who left. I just stopped expecting them to return.",
-
-      "The hardest part of losing someone is remembering who you were with them.",
-
-      "Some people only love the version of you that benefits them.",
-
-      "Friendship should never feel like begging someone to stay.",
-
-      "I started noticing who checked on me without needing anything.",
-
-      "Some people disappear when you stop being useful to them.",
-
-      "Not every connection is meant to last forever.",
-
-      "Sometimes people grow apart without anyone being the villain.",
-
-      "I would rather have two genuine friends than twenty people who barely care.",
-
-      "Some people celebrate you only when your success doesn't make them uncomfortable.",
-
-      "A friend who respects your boundaries is worth more than a crowd that ignores them.",
-
-      "Sometimes you outgrow people you once thought you would grow old with.",
-
-      "People can sit beside you every day and still know nothing about your heart.",
-
-      "I learned to stop forcing closeness where distance felt natural.",
-
-      "Some friendships survive distance. Others don't survive honesty.",
-
-      "You discover people's intentions when you stop doing everything for them.",
-
-      "A genuine friend won't make you question whether they genuinely care.",
-
-      "Sometimes the person you defend is the same person quietly hurting you.",
-
-      "Not everyone who laughs with you would stand beside you when life gets hard.",
-
-      "Some people want your presence but never value your feelings.",
-
-      "I stopped giving unlimited chances to people who kept repeating the same mistake.",
-
-      "The people who truly care don't need reminders to check on you.",
-
-      "Some friendships become memories because the people involved became different.",
-
-      "You don't have to hate someone just because the friendship ended.",
-
-      "Sometimes growing means leaving behind people who refuse to grow with you.",
-
-      "I learned that loyalty is shown in actions, not promises.",
-
-      "Some people only notice your absence after they become comfortable with your presence.",
-
-      "A friendship built on secrets eventually becomes a friendship built on fear.",
-
-      "People reveal themselves when you stop giving them what they want.",
-
-      "Sometimes you realize you were the only one protecting the friendship.",
-
-      "I stopped confusing familiarity with genuine connection.",
-
-      "Some people are close to you because they know you, not because they value you.",
-
-      "The right people won't make you feel difficult for having feelings.",
-
-      "Some friendships end because one person keeps growing while the other refuses to.",
-
-      "I don't need perfect friends. I need honest ones.",
-
-      "A friend who can correct you without humiliating you is rare.",
-
-      "Some people remember your mistakes better than they remember your kindness.",
-
-      "Sometimes people judge the chapter they never stayed long enough to understand.",
-
-      "You can be a good friend and still be wrong for someone.",
-
-      "Not every disagreement means the friendship is over.",
-
-      "Real friends can disagree without turning disagreement into disrespect.",
-
-      "Some people leave when you stop tolerating their disrespect.",
-
-      "I learned that being available all the time can make people take you for granted.",
-
-      "Some friendships are beautiful until jealousy enters the room.",
-
-      "You can forgive someone without trusting them the same way again.",
-
-      "Sometimes trust doesn't break loudly. It disappears quietly.",
-
-      "The strongest friendships survive uncomfortable conversations.",
-
-      "Some people only support you when nobody is watching.",
-
-      "I noticed who clapped for me when there was nothing to gain.",
-
-      "A friend who is happy for your success is a blessing.",
-
-      "Sometimes people compete with you while pretending to support you.",
-
-      "You learn a lot about someone by watching how they treat people they don't need.",
-
-      "Some people are kind to you only when they want something.",
-
-      "I stopped explaining my worth to people committed to misunderstanding me.",
-
-      "A friendship shouldn't leave you constantly wondering where you stand.",
-
-      "Sometimes you don't lose a friend. You lose the idea you had of them.",
-
-      "People can change overnight, but the memories don't disappear that quickly.",
-
-      "Some friendships become distant because life takes people in different directions.",
-
-      "I don't regret caring. I just learned where to place my care.",
-
-      "Some people teach you what friendship should never feel like.",
-
-      "The right friend can make an ordinary day feel unforgettable.",
-
-      "Sometimes one honest friend is enough to make you feel understood.",
-
-      "A genuine friendship doesn't require pretending to be someone else.",
-
-      "Some people know exactly how to hurt you because you once trusted them completely.",
-
-      "The closer you let someone get, the more power they have to disappoint you.",
-
-      "Sometimes the person you thought would stay becomes the person you have to let go.",
-
-      "I learned that not everyone who knows my secrets deserves to know my future.",
-
-      "Some people apologize only because they don't want consequences.",
-
-      "Real apologies come with changed behavior.",
-
-      "Some friendships are held together by memories long after the connection is gone.",
-
-      "You shouldn't have to beg someone to value your friendship.",
-
-      "Sometimes walking away is the only way to stop repeating the same hurt.",
-
-      "People who truly care will make room for your feelings.",
-
-      "Some people listen only to find something they can use against you later.",
-
-      "I became quieter after realizing not everyone deserved my honesty.",
-
-      "A good friend doesn't make your problems feel like an inconvenience.",
-
-      "Sometimes you can love your friends and still need distance from them.",
-
-      "Some people become strangers because the friendship no longer feels safe.",
-
-      "The people who stay during your worst moments are the ones you remember during your best.",
-
-      "Some friendships are tested by distance, others by success.",
-
-      "You learn who your friends are when you have nothing to offer.",
-
-      "Some people disappear when you need them and return when they need you.",
-
-      "I stopped measuring friendship by how long we knew each other.",
-
-      "Time doesn't make a friendship genuine. Actions do.",
-
-      "Some people are present in your life but absent from your heart.",
-
-      "A friend should be someone you can be quiet around without feeling uncomfortable.",
-
-      "Sometimes the deepest friendships don't need constant conversation.",
-
-      "The people who understand your silence are often the people who know your heart.",
-
-      "Some friends don't need daily contact to remain important.",
-
-      "Distance can reveal whether a friendship was genuine or convenient.",
-
-      "Sometimes people leave because they were never meant to stay.",
-
-      "I learned not to take every goodbye as a failure.",
-
-      "Some endings protect you from relationships you were too afraid to leave.",
-
-      "You don't have to keep every person who once mattered.",
-
-      "Some people belong in your memories, not in your future.",
-
-      "Growing apart doesn't erase the good moments you shared.",
-
-      "Sometimes gratitude is the best way to say goodbye.",
-
-      "I can appreciate what we had without pretending we still have it.",
-
-      "Some friendships were meant to last a season, not a lifetime.",
-
-      "People enter your life for different reasons, and not all of them are permanent.",
-
-      "The hardest friendships to leave are sometimes the ones that taught you the most.",
-
-      "Some people teach you loyalty by showing you what betrayal feels like.",
-
-      "I learned to watch actions when words started becoming meaningless.",
-
-      "Trust is easy to lose and difficult to rebuild.",
-
-      "Some friendships don't need saving. They need accepting.",
-
-      "I stopped forcing people to stay where their heart had already left.",
-
-      "The right people won't make you feel like a burden for needing them.",
-
-      "Sometimes friendship means knowing when to give someone space.",
-
-      "People who respect you won't make you choose between your peace and their presence.",
-
-      "I would rather walk alone than keep walking with people who constantly make me feel alone.",
-
-      "Some people only value you after they lose access to you.",
-
-      "Sometimes your absence teaches people more than your presence ever did.",
-
-      "I stopped trying to prove that I was worth keeping.",
-
-      "The people meant for you won't require you to destroy yourself to keep them.",
-
-      "Some friendships end because the truth finally becomes louder than the memories.",
-
-      "Not every person who leaves is an enemy.",
-
-      "Not every person who stays is a friend.",
-
-      "Sometimes the people closest to you know the least about what you're going through.",
-
-      "I learned that friendship is not measured by how often we talk, but by how genuine the connection feels.",
-
-      "Some people become family without sharing your blood.",
-
-      "A real friend can see your flaws without using them against you.",
-
-      "Some friendships are built on laughter, others on surviving difficult seasons together.",
-
-      "The best friends don't just celebrate your good days. They sit with you through the bad ones.",
-
-      "Sometimes one loyal person is worth more than a room full of familiar faces.",
-
-      "I stopped looking for many friends and started looking for genuine ones.",
-
-      "Some people make life lighter simply by being present.",
-
-      "A true friend reminds you who you are when life makes you forget.",
-
-      "Some people don't need to fix your problems. Their presence is enough.",
-
-      "The people who truly care won't make you question whether you matter.",
-
-      "Friendship is beautiful when both people choose it, not when one person keeps chasing it.",
-
-      "Some connections are quiet but unforgettable.",
-
-      "The people who make you feel safe are worth keeping close.",
-
-      "Sometimes life removes people because you were holding onto what had already ended.",
-
-      "I learned to appreciate people without becoming dependent on their presence.",
-
-      "Some people leave footprints on your heart even after they leave your life.",
-
-      "At the end of the day, genuine people are rare, and that is why they are precious."
-
-    ];
-
-    const quoteList = document.getElementById("quoteList");
-
-    quotes.forEach((quote, index) => {
-
-      const div = document.createElement("div");
-
-      div.className = "quote";
-
-      div.textContent = quote;
-
-      div.onclick = () => openQuote(index);
-
-      quoteList.appendChild(div);
-
-    });
-
-    let currentQuote = 0;
-
-    function openQuote(index) {
-
-      currentQuote = index;
-
-      document.getElementById("fullQuote").textContent =
-        quotes[currentQuote];
-
-      document.getElementById("quoteNumber").textContent =
-        "QUOTE " +
-        String(currentQuote + 1).padStart(3, "0") +
-        " OF " +
-        quotes.length;
-
-      document.getElementById("quoteScreen").style.display = "flex";
-
-    }
-
-    function closeQuote() {
-      document.getElementById("quoteScreen").style.display = "none";
-    }
-
-    function nextQuote() {
-
-      currentQuote++;
-
-      if (currentQuote >= quotes.length) {
-        currentQuote = 0;
-      }
-
-      openQuote(currentQuote);
-
-    }
-
-    function previousQuote() {
-
-      currentQuote--;
-
-      if (currentQuote < 0) {
-        currentQuote = quotes.length - 1;
-      }
-
-      openQuote(currentQuote);
-
-    }
-
-  </script>
+<a href="index.html" class="back">← Back</a>
 
 </body>
-  </html>
+</html>
