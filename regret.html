@@ -1,496 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Regret — Giddie Rey Journal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regret | Giddie Rey Journal</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      min-height: 100vh;
-      background: #080808;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 25px;
-    }
+body{
+  background:#080808;
+  color:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
 
-    .container {
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
-    }
+.header{
+  padding:22px 18px 12px;
+  text-align:center;
+}
 
-    h1 {
-      text-align: center;
-      font-size: 32px;
-      margin: 20px 0 10px;
-    }
+.header h1{
+  font-size:28px;
+  letter-spacing:1px;
+}
 
-    .intro {
-      text-align: center;
-      color: #999;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
+.header p{
+  color:#888;
+  margin-top:7px;
+  font-size:14px;
+}
 
-    .quote {
-      background: #151515;
-      border: 1px solid #292929;
-      border-radius: 15px;
-      padding: 20px;
-      margin: 12px 0;
-      color: #ddd;
-      line-height: 1.6;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.quotes{
+  padding:20px 16px 100px;
+}
 
-    .quote:hover {
-      background: #202020;
-      transform: translateY(-2px);
-    }
+.quote{
+  background:#111;
+  border:1px solid #222;
+  border-radius:14px;
+  padding:22px 18px;
+  margin-bottom:15px;
+  line-height:1.6;
+  font-size:17px;
+}
 
-    .back {
-      display: block;
-      text-align: center;
-      margin: 30px 0 10px;
-      color: #888;
-      text-decoration: none;
-    }
+.number{
+  color:#666;
+  font-size:12px;
+  margin-bottom:8px;
+}
 
-    #quoteScreen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #050505;
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-    }
+.back{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  color:black;
+  text-decoration:none;
+  padding:12px 28px;
+  border-radius:25px;
+  font-weight:bold;
+}
 
-    .screenContent {
-      width: 100%;
-      max-width: 600px;
-      text-align: center;
-    }
-
-    .number {
-      color: #666;
-      font-size: 13px;
-      letter-spacing: 2px;
-      margin-bottom: 35px;
-    }
-
-    #fullQuote {
-      font-size: 26px;
-      line-height: 1.6;
-      margin-bottom: 45px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    button {
-      border: none;
-      padding: 13px 20px;
-      border-radius: 25px;
-      background: white;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close {
-      background: #222;
-      color: white;
-    }
-  </style>
+.back:hover{
+  background:#ddd;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="header">
+  <h1>🥀 Regret</h1>
+  <p>For the things we wish we could do differently.</p>
+</div>
 
-    <h1>⏳ Regret</h1>
+<div class="quotes">
 
-    <p class="intro">
-      Some regrets are not about what happened,
-      but about what we wish we had done differently.
-    </p>
+<div class="quote"><div class="number">01</div>Sometimes I wish I could go back and choose differently.</div>
 
-    <div id="quoteList"></div>
+<div class="quote"><div class="number">02</div>The hardest part of regret is knowing the past doesn't have an edit button.</div>
 
-    <a class="back" href="journal.html">← Back to Journal</a>
+<div class="quote"><div class="number">03</div>I regret the words I said and the ones I was too afraid to say.</div>
 
-  </div>
+<div class="quote"><div class="number">04</div>Sometimes we understand someone's value only after we lose them.</div>
 
-  <div id="quoteScreen">
+<div class="quote"><div class="number">05</div>I wish I had listened to my heart before it became too late.</div>
 
-    <div class="screenContent">
+<div class="quote"><div class="number">06</div>Some mistakes become memories we carry longer than we expected.</div>
 
-      <div class="number" id="quoteNumber"></div>
+<div class="quote"><div class="number">07</div>I wish I had appreciated those moments while they were still mine.</div>
 
-      <div id="fullQuote"></div>
+<div class="quote"><div class="number">08</div>Sometimes the apology we need most is the one we owe ourselves.</div>
 
-      <div class="buttons">
-        <button onclick="previousQuote()">← Previous</button>
-        <button onclick="nextQuote()">Next →</button>
-        <button class="close" onclick="closeQuote()">✕ Back</button>
-      </div>
+<div class="quote"><div class="number">09</div>I regret staying quiet when my heart was begging me to speak.</div>
 
-    </div>
+<div class="quote"><div class="number">10</div>Some doors closed because I waited too long to walk through them.</div>
 
-  </div>
+<div class="quote"><div class="number">11</div>I wish I had known that some moments would never happen again.</div>
 
-  <script>
+<div class="quote"><div class="number">12</div>Regret teaches lessons that sometimes arrive too late.</div>
 
-    const quotes = [
+<div class="quote"><div class="number">13</div>I still think about what could have happened if I had tried.</div>
 
-      "Sometimes I regret the words I said, and sometimes I regret the ones I never did.",
+<div class="quote"><div class="number">14</div>Sometimes I miss the person I was before I made that choice.</div>
 
-      "I wish I had realized the value of that moment while I was still living it.",
+<div class="quote"><div class="number">15</div>I wish I had asked instead of assuming.</div>
 
-      "Some regrets arrive long after the chance to change anything has passed.",
+<div class="quote"><div class="number">16</div>Some goodbyes hurt because we know we could have done more.</div>
 
-      "I wonder how different things would be if I had made one different choice.",
+<div class="quote"><div class="number">17</div>I regret giving my best to people who treated it like nothing.</div>
 
-      "The hardest part of regret is knowing the past cannot hear your apology.",
+<div class="quote"><div class="number">18</div>Sometimes the smallest decision can change an entire chapter of your life.</div>
 
-      "I should have appreciated what I had before I learned what it meant to lose it.",
+<div class="quote"><div class="number">19</div>I wish I had realized that the ordinary days were actually precious.</div>
 
-      "Sometimes I miss the person I was before certain choices changed me.",
+<div class="quote"><div class="number">20</div>Regret is remembering the moment and wishing you understood it differently.</div>
 
-      "I wish I had listened when my heart was warning me.",
+<div class="quote"><div class="number">21</div>I should have said "I love you" more often.</div>
 
-      "Some mistakes become memories that visit you when everything gets quiet.",
+<div class="quote"><div class="number">22</div>I should have walked away sooner from what kept hurting me.</div>
 
-      "I regret staying silent when honesty could have changed everything.",
+<div class="quote"><div class="number">23</div>Sometimes I regret trusting people who had already shown me who they were.</div>
 
-      "Sometimes we understand the lesson only after the moment is gone.",
+<div class="quote"><div class="number">24</div>I wish I had stopped worrying about what people thought and lived more freely.</div>
 
-      "I wish I had held on a little longer before letting go.",
+<div class="quote"><div class="number">25</div>Some regrets cannot be changed, only understood.</div>
 
-      "There are choices I would change if life gave me one more chance.",
+<div class="quote"><div class="number">26</div>I regret the time I wasted trying to prove my worth.</div>
 
-      "I regret giving chances to people who kept showing me why they didn't deserve them.",
+<div class="quote"><div class="number">27</div>Sometimes I wish I had been kinder to myself.</div>
 
-      "Sometimes the past feels close enough to touch but too far away to fix.",
+<div class="quote"><div class="number">28</div>What hurts most is knowing that one honest conversation might have changed everything.</div>
 
-      "I wish I had asked one more question before walking away.",
+<div class="quote"><div class="number">29</div>I cannot change yesterday, but I can stop repeating it.</div>
 
-      "Some goodbyes become painful because we didn't know they were final.",
+<div class="quote"><div class="number">30</div>Maybe the lesson hidden inside regret is learning to choose differently next time.</div>
 
-      "I regret thinking I had more time.",
+</div>
 
-      "Sometimes the biggest regret is realizing you were happy and didn't know it.",
-
-      "I wish I had noticed the little moments before they became memories.",
-
-      "There are people I would talk to again if pride had never gotten in the way.",
-
-      "I regret allowing fear to make decisions for me.",
-
-      "Sometimes the opportunity disappears while you're still trying to find the courage.",
-
-      "I wish I had said 'thank you' more often.",
-
-      "Some regrets are simply moments we wish we could experience with today's understanding.",
-
-      "I regret believing that everything would always remain the same.",
-
-      "Sometimes you don't miss the person. You miss the chance you had with them.",
-
-      "I wish I had been honest about how much I cared.",
-
-      "There are memories I would rewrite if I could.",
-
-      "I regret the times I chose pride when I could have chosen peace.",
-
-      "Sometimes one decision changes the direction of an entire life.",
-
-      "I wish I had stopped and thought before speaking.",
-
-      "Some words cannot be taken back no matter how sincere the apology is.",
-
-      "I regret expecting people to stay simply because I would have stayed.",
-
-      "Sometimes we lose something because we were too afraid to fight for it.",
-
-      "I wish I had understood that some moments don't come twice.",
-
-      "Regret is remembering what mattered after you stopped treating it like it did.",
-
-      "I regret ignoring the signs because I wanted the outcome to be different.",
-
-      "Sometimes we hold onto people until holding on hurts more than letting go.",
-
-      "I wish I had spent less time worrying about tomorrow and more time living today.",
-
-      "Some of my biggest regrets started with the words 'it doesn't matter.'",
-
-      "I regret the times I pretended not to care when I cared deeply.",
-
-      "Sometimes the apology you need most is the one you should have given sooner.",
-
-      "I wish I had known that silence could become a permanent goodbye.",
-
-      "Some memories hurt because they remind us of what we failed to appreciate.",
-
-      "I regret letting fear convince me that I wasn't ready.",
-
-      "Sometimes you only understand someone's importance after their absence becomes normal.",
-
-      "I wish I had taken more chances on the things that mattered.",
-
-      "Regret teaches lessons that comfort never could.",
-
-      "I regret waiting for the perfect time when I could have simply started.",
-
-      "Sometimes the chance we wanted disappears because we kept waiting.",
-
-      "I wish I had trusted myself more.",
-
-      "Some regrets come from choosing what was easy instead of what was right for me.",
-
-      "I regret confusing patience with allowing myself to be hurt repeatedly.",
-
-      "Sometimes we walk away and spend years wondering what would have happened if we stayed.",
-
-      "I wish I had asked for help when I needed it.",
-
-      "Some mistakes don't define you, but they can change the way you see yourself.",
-
-      "I regret the moments when I allowed someone else's opinion to silence my own.",
-
-      "Sometimes you realize too late that you were waiting for someone who wasn't coming back.",
-
-      "I wish I had protected my peace sooner.",
-
-      "Some regrets are about people. Others are about the version of yourself you abandoned.",
-
-      "I regret spending so much energy trying to prove myself to people who had already made up their minds.",
-
-      "Sometimes the thing you fear losing is already slipping away while you hesitate.",
-
-      "I wish I had taken that conversation more seriously.",
-
-      "Some regrets begin with thinking you will always have another opportunity.",
-
-      "I regret assuming people knew how I felt without me saying it.",
-
-      "Sometimes the words 'I love you' arrive too late.",
-
-      "I wish I had told certain people how much they meant to me.",
-
-      "Regret is sometimes the price of waiting too long.",
-
-      "I regret the doors I closed because I was afraid of what was on the other side.",
-
-      "Sometimes we choose comfort and later wonder what courage could have given us.",
-
-      "I wish I had believed in myself before someone else believed in me.",
-
-      "Some regrets become reminders rather than reasons to stay stuck.",
-
-      "I regret letting one bad moment convince me that everything was hopeless.",
-
-      "Sometimes one careless sentence can become a memory that lasts for years.",
-
-      "I wish I had walked away before the situation became harder to leave.",
-
-      "Regret often begins where honesty ends.",
-
-      "I regret pretending I was okay when I needed someone to notice.",
-
-      "Sometimes you lose people because you assume they already know you care.",
-
-      "I wish I had asked what they needed instead of assuming I knew.",
-
-      "Some choices make sense at the time and painful sense later.",
-
-      "I regret giving my best to people who only gave me their convenience.",
-
-      "Sometimes the past teaches you what your present self refuses to repeat.",
-
-      "I wish I had valued myself enough to leave sooner.",
-
-      "Regret can make yesterday feel louder than today.",
-
-      "I regret all the moments I allowed comparison to steal my happiness.",
-
-      "Sometimes we spend years wishing for a different past instead of creating a different future.",
-
-      "I wish I had realized that not every battle needed to be won.",
-
-      "Some regrets are reminders that you survived choices you wouldn't make again.",
-
-      "I regret being afraid of failure more than I regret failing.",
-
-      "Sometimes the chance to say goodbye disappears before we realize we needed it.",
-
-      "I wish I had stopped apologizing for being myself.",
-
-      "Regret taught me that protecting my peace should not have been an afterthought.",
-
-      "I regret the time I wasted waiting for someone to become who I hoped they would be.",
-
-      "Sometimes you don't regret leaving. You regret staying as long as you did.",
-
-      "I wish I had recognized the difference between love and attachment sooner.",
-
-      "Some regrets are simply reminders that you were human and still learning.",
-
-      "I regret letting one person's opinion become the voice inside my head.",
-
-      "Sometimes the hardest thing to accept is that you cannot go back.",
-
-      "I wish I had stopped trying to fix what was never mine to fix.",
-
-      "Regret becomes lighter when you turn the lesson into growth.",
-
-      "I regret not giving myself permission to start over sooner.",
-
-      "Sometimes the person you need to forgive is yourself.",
-
-      "I wish I had understood that making a mistake didn't make me a failure.",
-
-      "Some regrets remain because we keep punishing ourselves for things we cannot change.",
-
-      "I regret the chances I never took because I was afraid of what people would think.",
-
-      "Sometimes courage arrives after the opportunity has already passed.",
-
-      "I wish I had spent less time trying to be understood by everyone.",
-
-      "Regret doesn't change yesterday, but it can change what you do tomorrow.",
-
-      "I regret the moments when I chose fear over possibility.",
-
-      "Sometimes you have to accept that the past is a teacher, not a place to live.",
-
-      "I wish I had realized that some endings were actually new beginnings.",
-
-      "Some regrets disappear when you finally forgive yourself.",
-
-      "I regret not believing that better days could exist.",
-
-      "Sometimes we carry old decisions long after they have stopped controlling our lives.",
-
-      "I wish I had known that healing would require letting some memories stay in the past.",
-
-      "Regret is painful, but it can become wisdom when you learn from it.",
-
-      "I regret the things I didn't do more than the things I tried and failed at.",
-
-      "Sometimes the past cannot be changed, but the meaning we give it can.",
-
-      "I wish I had understood sooner that I deserved peace too.",
-
-      "Some regrets are proof that you have grown enough to see things differently now.",
-
-      "I regret yesterday, but I don't want to waste today regretting it.",
-
-      "Sometimes the best apology to your past is to make better choices in your future.",
-
-      "I wish I could go back, but maybe moving forward is what I actually need.",
-
-      "Regret may stay as a memory, but it doesn't have to remain a prison.",
-
-      "Some things cannot be undone, only understood.",
-
-      "I regret what happened, but I am learning not to let it decide who I become.",
-
-      "Sometimes accepting the past is the first step toward finally living again.",
-
-      "I wish I had known then what I know now.",
-
-      "Maybe the lesson was never to change the past, but to become wiser because of it.",
-
-      "The past gave me regrets, but it also gave me lessons I carry forward.",
-
-      "I cannot rewrite yesterday, but I can choose what tomorrow looks like.",
-
-      "Some regrets will always hurt a little, but they don't have to hurt forever.",
-
-      "I am learning to forgive the version of me who didn't know what I know today."
-
-    ];
-
-    const quoteList = document.getElementById("quoteList");
-
-    quotes.forEach((quote, index) => {
-
-      const div = document.createElement("div");
-
-      div.className = "quote";
-
-      div.textContent = quote;
-
-      div.onclick = () => openQuote(index);
-
-      quoteList.appendChild(div);
-
-    });
-
-    let currentQuote = 0;
-
-    function openQuote(index) {
-
-      currentQuote = index;
-
-      document.getElementById("fullQuote").textContent =
-        quotes[currentQuote];
-
-      document.getElementById("quoteNumber").textContent =
-        "QUOTE " +
-        String(currentQuote + 1).padStart(3, "0") +
-        " OF " +
-        quotes.length;
-
-      document.getElementById("quoteScreen").style.display = "flex";
-
-    }
-
-    function closeQuote() {
-      document.getElementById("quoteScreen").style.display = "none";
-    }
-
-    function nextQuote() {
-
-      currentQuote++;
-
-      if (currentQuote >= quotes.length) {
-        currentQuote = 0;
-      }
-
-      openQuote(currentQuote);
-
-    }
-
-    function previousQuote() {
-
-      currentQuote--;
-
-      if (currentQuote < 0) {
-        currentQuote = quotes.length - 1;
-      }
-
-      openQuote(currentQuote);
-
-    }
-
-  </script>
+<a href="index.html" class="back">← Back</a>
 
 </body>
   </html>
