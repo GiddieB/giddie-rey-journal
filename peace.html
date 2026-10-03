@@ -1,327 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Peace — Giddie Rey Journal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peace | Giddie Rey Journal</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      min-height: 100vh;
-      background: #080808;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 25px;
-    }
+body{
+  background:#080808;
+  color:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
 
-    .container {
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
-    }
+.header{
+  padding:22px 18px 12px;
+  text-align:center;
+}
 
-    h1 {
-      text-align: center;
-      font-size: 32px;
-      margin: 20px 0 10px;
-    }
+.header h1{
+  font-size:28px;
+  letter-spacing:1px;
+}
 
-    .intro {
-      text-align: center;
-      color: #999;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
+.header p{
+  color:#888;
+  margin-top:7px;
+  font-size:14px;
+}
 
-    .quote {
-      background: #151515;
-      border: 1px solid #292929;
-      border-radius: 15px;
-      padding: 20px;
-      margin: 12px 0;
-      color: #ddd;
-      line-height: 1.6;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.quotes{
+  padding:20px 16px 100px;
+}
 
-    .quote:hover {
-      background: #202020;
-      transform: translateY(-2px);
-    }
+.quote{
+  background:#111;
+  border:1px solid #222;
+  border-radius:14px;
+  padding:22px 18px;
+  margin-bottom:15px;
+  line-height:1.6;
+  font-size:17px;
+}
 
-    .back {
-      display: block;
-      text-align: center;
-      margin: 30px 0 10px;
-      color: #888;
-      text-decoration: none;
-    }
+.number{
+  color:#666;
+  font-size:12px;
+  margin-bottom:8px;
+}
 
-    #quoteScreen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #050505;
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-    }
+.back{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  color:black;
+  text-decoration:none;
+  padding:12px 28px;
+  border-radius:25px;
+  font-weight:bold;
+}
 
-    .screenContent {
-      width: 100%;
-      max-width: 600px;
-      text-align: center;
-    }
-
-    .number {
-      color: #666;
-      font-size: 13px;
-      letter-spacing: 2px;
-      margin-bottom: 35px;
-    }
-
-    #fullQuote {
-      font-size: 26px;
-      line-height: 1.6;
-      margin-bottom: 45px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    button {
-      border: none;
-      padding: 13px 20px;
-      border-radius: 25px;
-      background: white;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close {
-      background: #222;
-      color: white;
-    }
-  </style>
+.back:hover{
+  background:#ddd;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="header">
+  <h1>🕊️ Peace</h1>
+  <p>Sometimes peace is choosing yourself and walking away.</p>
+</div>
 
-    <h1>🕊️ Peace</h1>
+<div class="quotes">
 
-    <p class="intro">
-      Sometimes peace begins when you stop fighting what you cannot control.
-    </p>
+<div class="quote"><div class="number">01</div>Peace became more important when I realized not everything deserves a reaction.</div>
 
-    <div id="quoteList"></div>
+<div class="quote"><div class="number">02</div>I stopped explaining myself. Peace became louder than proving a point.</div>
 
-    <a class="back" href="journal.html">← Back to Journal</a>
+<div class="quote"><div class="number">03</div>Sometimes protecting your peace means disappointing people.</div>
 
-  </div>
+<div class="quote"><div class="number">04</div>Not every argument deserves your energy.</div>
 
-  <div id="quoteScreen">
+<div class="quote"><div class="number">05</div>There is freedom in no longer needing everyone to understand you.</div>
 
-    <div class="screenContent">
+<div class="quote"><div class="number">06</div>Peace is leaving without needing the last word.</div>
 
-      <div class="number" id="quoteNumber"></div>
+<div class="quote"><div class="number">07</div>I would rather have a quiet heart than a loud life.</div>
 
-      <div id="fullQuote"></div>
+<div class="quote"><div class="number">08</div>Sometimes distance is not hatred. It is self-respect.</div>
 
-      <div class="buttons">
-        <button onclick="previousQuote()">← Previous</button>
-        <button onclick="nextQuote()">Next →</button>
-        <button class="close" onclick="closeQuote()">✕ Back</button>
-      </div>
+<div class="quote"><div class="number">09</div>My peace is too expensive to spend on unnecessary drama.</div>
 
-    </div>
+<div class="quote"><div class="number">10</div>You don't have to respond to everything you feel.</div>
 
-  </div>
+<div class="quote"><div class="number">11</div>Peace begins when you stop fighting battles that were never yours.</div>
 
-  <script>
+<div class="quote"><div class="number">12</div>Some people only understand your value after you stop chasing them.</div>
 
-    const quotes = [
+<div class="quote"><div class="number">13</div>Silence can be a form of peace, not weakness.</div>
 
-      "Peace is realizing that not everything deserves a response.",
+<div class="quote"><div class="number">14</div>I don't need revenge. I need peace.</div>
 
-      "Sometimes protecting your peace means walking away without explaining yourself.",
+<div class="quote"><div class="number">15</div>Sometimes the healthiest answer is simply to walk away.</div>
 
-      "I stopped chasing answers when I realized some questions were never meant to be answered.",
+<div class="quote"><div class="number">16</div>Protect the part of you that still knows how to be calm.</div>
 
-      "Peace feels different when you finally stop trying to control everything.",
+<div class="quote"><div class="number">17</div>Peace is learning that you cannot control how people treat you, only how you respond.</div>
 
-      "Not every goodbye needs anger. Some endings simply need acceptance.",
+<div class="quote"><div class="number">18</div>You can love someone and still choose peace over their presence.</div>
 
-      "I would rather have a quiet life than a loud life filled with unnecessary drama.",
+<div class="quote"><div class="number">19</div>Some doors are better left closed when opening them only brings confusion.</div>
 
-      "Sometimes the strongest thing you can do is remain calm.",
+<div class="quote"><div class="number">20</div>A peaceful life may look boring to people addicted to chaos.</div>
 
-      "You don't have to attend every argument you are invited to.",
+<div class="quote"><div class="number">21</div>Sometimes you find peace by accepting that you will never get an explanation.</div>
 
-      "Peace begins when you stop needing everyone to understand you.",
+<div class="quote"><div class="number">22</div>I no longer chase closure from people who gave me confusion.</div>
 
-      "Some people only disturb your peace because you keep giving them access to it.",
+<div class="quote"><div class="number">23</div>Peace is being comfortable with your own company.</div>
 
-      "I learned that silence can be more powerful than an explanation.",
+<div class="quote"><div class="number">24</div>You don't have to carry every problem that comes your way.</div>
 
-      "You can care about someone and still choose distance.",
+<div class="quote"><div class="number">25</div>Let people misunderstand you if explaining yourself costs your peace.</div>
 
-      "A peaceful heart doesn't mean a problem-free life.",
+<div class="quote"><div class="number">26</div>Sometimes peace looks like saying no without feeling guilty.</div>
 
-      "Sometimes peace looks like choosing not to reply.",
+<div class="quote"><div class="number">27</div>The less you force, the more peaceful life becomes.</div>
 
-      "I stopped forcing things and started letting life unfold.",
+<div class="quote"><div class="number">28</div>Not everyone needs access to your thoughts, your heart, or your life.</div>
 
-      "There is freedom in accepting what you cannot change.",
+<div class="quote"><div class="number">29</div>Choose the kind of peace that doesn't require pretending.</div>
 
-      "My peace became more important than proving my point.",
+<div class="quote"><div class="number">30</div>At some point, you stop asking who was right and start asking what gives you peace.</div>
 
-      "You don't need closure from everyone. Sometimes acceptance is enough.",
+</div>
 
-      "I no longer chase people who make me question my worth.",
-
-      "Peace is knowing when enough is enough.",
-
-      "Some chapters end quietly because they have already said everything they needed to say.",
-
-      "I don't want revenge. I want peace.",
-
-      "Growing up taught me that not every battle deserves my energy.",
-
-      "Sometimes you find peace when you stop expecting people to behave the way you would.",
-
-      "I am learning to leave things where they ended.",
-
-      "A calm mind can see what an emotional heart cannot.",
-
-      "I don't need to win every argument. I just need to protect my peace.",
-
-      "Peace is choosing yourself without needing permission.",
-
-      "Some distance is not hatred. Sometimes it is healing.",
-
-      "The older I get, the more I value quiet mornings and peaceful nights.",
-
-      "I stopped explaining myself to people who had already decided what to believe.",
-
-      "Peace came when I accepted that some people will never understand my side.",
-
-      "Sometimes the best response is no response.",
-
-      "I would rather lose an argument than lose my peace.",
-
-      "You can forgive someone without inviting them back into your life.",
-
-      "Peace is not weakness. Sometimes it takes strength to remain calm.",
-
-      "I stopped carrying conversations that were never mine to carry.",
-
-      "Not everything deserves your attention.",
-
-      "Some things become lighter when you stop talking about them.",
-
-      "I am choosing peace over unnecessary explanations.",
-
-      "There is nothing wrong with becoming quieter when life becomes louder.",
-
-      "Sometimes leaving peacefully is more powerful than staying to prove a point.",
-
-      "I don't need everyone around me. I need the right energy around me.",
-
-      "Peace is when your happiness no longer depends on someone else's behavior.",
-
-      "I stopped looking for peace in places that constantly disturbed me.",
-
-      "Sometimes distance is the answer your heart was afraid to accept.",
-
-      "You don't have to hate someone to let them go.",
-
-      "My peace is something I protect now.",
-
-      "I am learning that letting things be is also a form of strength.",
-
-      "A peaceful life may look boring to some people, but to me it feels priceless."
-
-    ];
-
-    const quoteList = document.getElementById("quoteList");
-
-    quotes.forEach((quote, index) => {
-
-      const div = document.createElement("div");
-
-      div.className = "quote";
-
-      div.textContent = quote;
-
-      div.onclick = () => openQuote(index);
-
-      quoteList.appendChild(div);
-
-    });
-
-    let currentQuote = 0;
-
-    function openQuote(index) {
-
-      currentQuote = index;
-
-      document.getElementById("fullQuote").textContent =
-        quotes[currentQuote];
-
-      document.getElementById("quoteNumber").textContent =
-        "QUOTE " +
-        String(currentQuote + 1).padStart(2, "0") +
-        " OF " +
-        quotes.length;
-
-      document.getElementById("quoteScreen").style.display = "flex";
-
-    }
-
-    function closeQuote() {
-      document.getElementById("quoteScreen").style.display = "none";
-    }
-
-    function nextQuote() {
-
-      currentQuote++;
-
-      if (currentQuote >= quotes.length) {
-        currentQuote = 0;
-      }
-
-      openQuote(currentQuote);
-
-    }
-
-    function previousQuote() {
-
-      currentQuote--;
-
-      if (currentQuote < 0) {
-        currentQuote = quotes.length - 1;
-      }
-
-      openQuote(currentQuote);
-
-    }
-
-  </script>
+<a href="index.html" class="back">← Back</a>
 
 </body>
-</html>
+                     </html>
