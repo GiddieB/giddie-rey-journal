@@ -1,321 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Overthinking — Giddie Rey Journal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Overthinking | Giddie Rey Journal</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      min-height: 100vh;
-      background: #080808;
-      color: white;
-      font-family: Arial, sans-serif;
-      padding: 25px;
-    }
+body{
+  background:#080808;
+  color:white;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
 
-    .container {
-      width: 100%;
-      max-width: 600px;
-      margin: auto;
-    }
+.header{
+  padding:22px 18px 12px;
+  text-align:center;
+}
 
-    h1 {
-      text-align: center;
-      font-size: 32px;
-      margin: 20px 0 10px;
-    }
+.header h1{
+  font-size:28px;
+  letter-spacing:1px;
+}
 
-    .intro {
-      text-align: center;
-      color: #999;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
+.header p{
+  color:#888;
+  margin-top:7px;
+  font-size:14px;
+}
 
-    .quote {
-      background: #151515;
-      border: 1px solid #292929;
-      border-radius: 15px;
-      padding: 20px;
-      margin: 12px 0;
-      color: #ddd;
-      line-height: 1.6;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.quotes{
+  padding:20px 16px 100px;
+}
 
-    .quote:hover {
-      background: #202020;
-      transform: translateY(-2px);
-    }
+.quote{
+  background:#111;
+  border:1px solid #222;
+  border-radius:14px;
+  padding:22px 18px;
+  margin-bottom:15px;
+  line-height:1.6;
+  font-size:17px;
+}
 
-    .back {
-      display: block;
-      text-align: center;
-      margin: 30px 0 10px;
-      color: #888;
-      text-decoration: none;
-    }
+.number{
+  color:#666;
+  font-size:12px;
+  margin-bottom:8px;
+}
 
-    #quoteScreen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: #050505;
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-    }
+.back{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  color:black;
+  text-decoration:none;
+  padding:12px 28px;
+  border-radius:25px;
+  font-weight:bold;
+}
 
-    .screenContent {
-      width: 100%;
-      max-width: 600px;
-      text-align: center;
-    }
-
-    .number {
-      color: #666;
-      font-size: 13px;
-      letter-spacing: 2px;
-      margin-bottom: 35px;
-    }
-
-    #fullQuote {
-      font-size: 26px;
-      line-height: 1.6;
-      margin-bottom: 45px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    button {
-      border: none;
-      padding: 13px 20px;
-      border-radius: 25px;
-      background: #fff;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close {
-      background: #222;
-      color: white;
-    }
-  </style>
+.back:hover{
+  background:#ddd;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="header">
+  <h1>🧠 Overthinking</h1>
+  <p>When the mind keeps asking questions the heart can't answer.</p>
+</div>
 
-    <h1>🧠 Overthinking</h1>
+<div class="quotes">
 
-    <p class="intro">
-      Sometimes the loudest battles happen inside a quiet mind.
-    </p>
+<div class="quote"><div class="number">01</div>Sometimes my biggest problem is the conversation I had a hundred times in my head.</div>
 
-    <div id="quoteList"></div>
+<div class="quote"><div class="number">02</div>I can turn one small moment into a thousand different possibilities.</div>
 
-    <a class="back" href="journal.html">← Back to Journal</a>
+<div class="quote"><div class="number">03</div>The hardest battles are sometimes the ones nobody can see inside your mind.</div>
 
-  </div>
+<div class="quote"><div class="number">04</div>I wish I could turn my thoughts off for just one night.</div>
 
-  <div id="quoteScreen">
+<div class="quote"><div class="number">05</div>Sometimes silence feels louder than words because my mind fills in the blanks.</div>
 
-    <div class="screenContent">
+<div class="quote"><div class="number">06</div>I keep looking for hidden meanings in things that may have meant nothing.</div>
 
-      <div class="number" id="quoteNumber"></div>
+<div class="quote"><div class="number">07</div>My mind asks questions my heart is too tired to answer.</div>
 
-      <div id="fullQuote"></div>
+<div class="quote"><div class="number">08</div>One unanswered message can become an entire story in my head.</div>
 
-      <div class="buttons">
-        <button onclick="previousQuote()">← Previous</button>
-        <button onclick="nextQuote()">Next →</button>
-        <button class="close" onclick="closeQuote()">✕ Back</button>
-      </div>
+<div class="quote"><div class="number">09</div>I replay old conversations hoping to find the moment everything changed.</div>
 
-    </div>
+<div class="quote"><div class="number">10</div>Sometimes I don't need an answer. I just need my mind to be quiet.</div>
 
-  </div>
+<div class="quote"><div class="number">11</div>Overthinking makes simple things feel complicated.</div>
 
-  <script>
+<div class="quote"><div class="number">12</div>I analyze the smallest details because my mind doesn't know how to let things be.</div>
 
-    const quotes = [
+<div class="quote"><div class="number">13</div>The problem isn't always what happened. Sometimes it's everything I imagine happened.</div>
 
-      "My mind keeps creating conversations I'll never have.",
+<div class="quote"><div class="number">14</div>I create endings to stories that haven't even finished.</div>
 
-      "Sometimes I don't need an answer. I just need my mind to stop asking questions.",
+<div class="quote"><div class="number">15</div>My mind can turn a quiet moment into a storm.</div>
 
-      "I replay moments that probably meant nothing to you.",
+<div class="quote"><div class="number">16</div>I wonder if people notice how much I think about the things they casually say.</div>
 
-      "The hardest part of overthinking is arguing with possibilities that may never happen.",
+<div class="quote"><div class="number">17</div>Sometimes I wish people knew how deeply their smallest actions can affect me.</div>
 
-      "I can turn one small moment into a thousand different meanings.",
+<div class="quote"><div class="number">18</div>I don't always need reassurance, but my mind keeps asking for it.</div>
 
-      "Some nights my thoughts are louder than everything around me.",
+<div class="quote"><div class="number">19</div>The hardest part is not knowing whether I'm thinking deeply or simply thinking too much.</div>
 
-      "I wonder why I still think about things everyone else has already forgotten.",
+<div class="quote"><div class="number">20</div>I can be surrounded by people and still be alone with my thoughts.</div>
 
-      "My mind remembers everything my heart is trying to forget.",
+<div class="quote"><div class="number">21</div>My mind remembers details my heart wishes it could forget.</div>
 
-      "I read between lines that were never written.",
+<div class="quote"><div class="number">22</div>Sometimes I read the same message again just to understand the tone.</div>
 
-      "Sometimes silence makes me create answers that hurt more than the truth.",
+<div class="quote"><div class="number">23</div>I hate how one small change in someone's behavior can make me question everything.</div>
 
-      "I wish I could switch my thoughts off for just one night.",
+<div class="quote"><div class="number">24</div>My brain doesn't understand the meaning of "let it go."</div>
 
-      "The conversation ended hours ago, but my mind is still responding.",
+<div class="quote"><div class="number">25</div>I can find ten reasons to worry before finding one reason to relax.</div>
 
-      "I overthink because I care about things I wish I didn't.",
+<div class="quote"><div class="number">26</div>Sometimes I miss the version of me that didn't question everything.</div>
 
-      "One unanswered message can become an entire story in my head.",
+<div class="quote"><div class="number">27</div>My thoughts become loudest when everything around me becomes quiet.</div>
 
-      "I don't know what's worse: knowing the truth or imagining it.",
+<div class="quote"><div class="number">28</div>I wish I could stop caring about things I cannot control.</div>
 
-      "My mind keeps asking 'what if?' even when there is nothing left to change.",
+<div class="quote"><div class="number">29</div>Sometimes I convince myself something is wrong before anything is actually wrong.</div>
 
-      "I analyze people's words long after they've forgotten saying them.",
+<div class="quote"><div class="number">30</div>I don't know whether I need an explanation or simply peace.</div>
 
-      "Sometimes I create problems simply because my mind hates uncertainty.",
+<div class="quote"><div class="number">31</div>My mind keeps searching for answers that may not exist.</div>
 
-      "I can be surrounded by people and still be alone with my thoughts.",
+<div class="quote"><div class="number">32</div>Sometimes I turn someone's silence into a thousand assumptions.</div>
 
-      "I wish my thoughts came with an off button.",
+<div class="quote"><div class="number">33</div>I remember what people said years ago and still wonder what they meant.</div>
 
-      "The smallest change in someone's tone can keep me thinking all night.",
+<div class="quote"><div class="number">34</div>My thoughts don't knock before entering. They just arrive.</div>
 
-      "I keep searching for hidden meanings because I’m afraid of the obvious one.",
+<div class="quote"><div class="number">35</div>Sometimes I overthink because uncertainty feels harder than a painful answer.</div>
 
-      "My mind doesn't rest just because the world does.",
+<div class="quote"><div class="number">36</div>I wish my mind could understand that not everything needs an explanation.</div>
 
-      "I think about things I should have said, things I shouldn't have said, and things that no longer matter.",
+<div class="quote"><div class="number">37</div>One thought leads to another until I forget what started it all.</div>
 
-      "Sometimes I miss people simply because my mind keeps returning to them.",
+<div class="quote"><div class="number">38</div>Sometimes I worry about losing people who haven't even left.</div>
 
-      "I don't always need someone to hurt me; sometimes my thoughts do enough.",
+<div class="quote"><div class="number">39</div>My mind creates questions faster than life can provide answers.</div>
 
-      "I have lost sleep over conversations that lasted less than a minute.",
+<div class="quote"><div class="number">40</div>I can turn a simple goodbye into a question about the entire relationship.</div>
 
-      "My imagination can turn uncertainty into fear before reality even arrives.",
+<div class="quote"><div class="number">41</div>Sometimes I wish I could believe things are okay without needing proof.</div>
 
-      "I wish I could stop caring about every little detail.",
+<div class="quote"><div class="number">42</div>I think too much about yesterday and worry too much about tomorrow.</div>
 
-      "Some questions become heavier when you never get an answer.",
+<div class="quote"><div class="number">43</div>The present moment disappears when my mind is somewhere else.</div>
 
-      "I keep checking memories like there might be a different ending hidden inside them.",
+<div class="quote"><div class="number">44</div>I know I should stop thinking about it, but my mind hasn't learned how.</div>
 
-      "My mind keeps reopening doors my heart already closed.",
+<div class="quote"><div class="number">45</div>Sometimes I need sleep, but my thoughts have other plans.</div>
 
-      "I can forgive someone and still spend months wondering why they did it.",
+<div class="quote"><div class="number">46</div>I question my own feelings because I question everything.</div>
 
-      "Sometimes I'm not sad. I'm just thinking too much.",
+<div class="quote"><div class="number">47</div>My mind can make me doubt things I once felt certain about.</div>
 
-      "The problem with overthinking is that every possibility starts feeling like the truth.",
+<div class="quote"><div class="number">48</div>Sometimes peace begins with accepting that you won't know everything.</div>
 
-      "I wish I could trust the moment without trying to predict what comes next.",
+<div class="quote"><div class="number">49</div>Not every thought deserves your attention.</div>
 
-      "I turn silence into meaning and distance into a thousand explanations.",
+<div class="quote"><div class="number">50</div>Sometimes the answer is simply to stop searching for one.</div>
 
-      "My thoughts know exactly which memories to visit when I need sleep.",
+<div class="quote"><div class="number">51</div>My mind wants certainty from a world that cannot promise it.</div>
 
-      "I keep asking myself questions that only time can answer.",
+<div class="quote"><div class="number">52</div>I am learning that silence doesn't always mean something is wrong.</div>
 
-      "Maybe nothing happened. Maybe my mind just made everything bigger.",
+<div class="quote"><div class="number">53</div>Sometimes I create problems because my mind is uncomfortable with uncertainty.</div>
 
-      "I wish I could experience a moment without immediately analyzing it.",
+<div class="quote"><div class="number">54</div>I don't have to solve every thought that crosses my mind.</div>
 
-      "Sometimes I don't miss the person. I miss the version of life I imagined with them.",
+<div class="quote"><div class="number">55</div>Some questions become smaller when you stop feeding them.</div>
 
-      "My mind keeps preparing me for pain that hasn't even arrived.",
+<div class="quote"><div class="number">56</div>Peace comes when you stop treating every thought like a fact.</div>
 
-      "I worry about losing things I haven't even lost yet.",
+<div class="quote"><div class="number">57</div>Sometimes the kindest thing you can tell yourself is, "I don't know yet."</div>
 
-      "Some nights I fight battles that exist only inside my thoughts.",
+<div class="quote"><div class="number">58</div>My mind may be loud, but I don't have to listen to every thought.</div>
 
-      "I can find ten reasons to worry where there is only one reason to breathe.",
+<div class="quote"><div class="number">59</div>Not everything needs to be figured out tonight.</div>
 
-      "I keep looking for certainty in situations that were never certain.",
+<div class="quote"><div class="number">60</div>Sometimes the best answer is to breathe, let go, and allow tomorrow to come.</div>
 
-      "The more I think, the less I understand.",
+</div>
 
-      "Sometimes my thoughts need comfort more than they need answers.",
-
-      "I wish I could stop turning every little thing into something personal."
-
-    ];
-
-    const quoteList = document.getElementById("quoteList");
-
-    quotes.forEach((quote, index) => {
-
-      const div = document.createElement("div");
-
-      div.className = "quote";
-
-      div.textContent = quote;
-
-      div.onclick = () => openQuote(index);
-
-      quoteList.appendChild(div);
-
-    });
-
-    let currentQuote = 0;
-
-    function openQuote(index) {
-      currentQuote = index;
-
-      document.getElementById("fullQuote").textContent =
-        quotes[currentQuote];
-
-      document.getElementById("quoteNumber").textContent =
-        "QUOTE " +
-        String(currentQuote + 1).padStart(2, "0") +
-        " OF " +
-        quotes.length;
-
-      document.getElementById("quoteScreen").style.display = "flex";
-    }
-
-    function closeQuote() {
-      document.getElementById("quoteScreen").style.display = "none";
-    }
-
-    function nextQuote() {
-      currentQuote++;
-
-      if (currentQuote >= quotes.length) {
-        currentQuote = 0;
-      }
-
-      openQuote(currentQuote);
-    }
-
-    function previousQuote() {
-      currentQuote--;
-
-      if (currentQuote < 0) {
-        currentQuote = quotes.length - 1;
-      }
-
-      openQuote(currentQuote);
-    }
-
-  </script>
+<a href="index.html" class="back">← Back</a>
 
 </body>
-</html>
+  </html>
