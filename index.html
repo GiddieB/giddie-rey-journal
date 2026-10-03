@@ -1,99 +1,181 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Giddie Rey Journal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Giddie Rey Journal</title><style>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      min-height: 100vh;
-      background: #080808;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 25px;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    .home {
-      width: 100%;
-      max-width: 500px;
-    }
+body{
+  min-height:100vh;
+  background:#070707;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
 
-    .tag {
-      color: #777;
-      letter-spacing: 4px;
-      font-size: 12px;
-      margin-bottom: 25px;
-      text-transform: uppercase;
-    }
+/* HERO */
 
-    h1 {
-      font-size: 42px;
-      margin-bottom: 18px;
-    }
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px 20px;
+  position:relative;
+  overflow:hidden;
+}
 
-    .intro {
-      color: #aaa;
-      line-height: 1.7;
-      margin-bottom: 35px;
-    }
+.hero::before{
+  content:"";
+  position:absolute;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  background:#1b1b1b;
+  filter:blur(100px);
+  opacity:.5;
+  top:-100px;
+  left:-100px;
+}
 
-    .enter {
-      display: inline-block;
-      padding: 16px 35px;
-      background: white;
-      color: black;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+.hero::after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:#151515;
+  filter:blur(100px);
+  opacity:.5;
+  bottom:-100px;
+  right:-100px;
+}
 
-    .enter:hover {
-      transform: scale(1.05);
-      background: #ddd;
-    }
+.hero-content{
+  max-width:600px;
+  position:relative;
+  z-index:2;
+}
 
-    .footer {
-      margin-top: 60px;
-      color: #555;
-      font-size: 13px;
-    }
-  </style>
-</head>
+.logo{
+  font-size:13px;
+  letter-spacing:5px;
+  color:#777;
+  text-transform:uppercase;
+  margin-bottom:25px;
+}
 
-<body>
+h1{
+  font-size:clamp(42px,10vw,72px);
+  line-height:1;
+  margin-bottom:22px;
+  letter-spacing:-2px;
+}
 
-  <main class="home">
+.subtitle{
+  color:#999;
+  font-size:16px;
+  line-height:1.8;
+  max-width:480px;
+  margin:auto;
+}
 
-    <div class="tag">Giddie Rey Journal</div>
+.enter{
+  display:inline-block;
+  margin-top:35px;
+  padding:15px 32px;
+  border-radius:30px;
+  background:#fff;
+  color:#000;
+  text-decoration:none;
+  font-weight:bold;
+  transition:.25s;
+}
 
-    <h1>Welcome to the Journal</h1>
+.enter:hover{
+  transform:translateY(-3px);
+}
 
-    <p class="intro">
-      Words for the feelings we struggle to explain.
-      Stories of love, loneliness, heartbreak, healing and life.
-    </p>
+.enter:active{
+  transform:scale(.96);
+}
 
-    <a class="enter" href="journal.html">
-      ENTER THE JOURNAL
-    </a>
+/* QUICK LINKS */
 
-    <div class="footer">
-      © 2026 Giddie Rey Journal
-    </div>
+.quick{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
 
-  </main>
+.quick a{
+  color:#aaa;
+  text-decoration:none;
+  border:1px solid #252525;
+  padding:10px 16px;
+  border-radius:22px;
+  font-size:13px;
+  background:#0d0d0d;
+}
 
-</body>
+.quick a:active{
+  background:#181818;
+}
+
+/* FOOTER */
+
+.footer{
+  position:absolute;
+  bottom:20px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#444;
+  font-size:12px;
+  z-index:3;
+}
+
+</style></head><body><section class="hero">  <div class="hero-content"><div class="logo">
+  Giddie Rey Journal
+</div>
+
+<h1>
+  Feel it.<br>
+  Read it.
+</h1>
+
+<p class="subtitle">
+  A quiet place for the thoughts we cannot always say out loud.
+  Love, heartbreak, loneliness, healing, life and everything in between.
+</p>
+
+<a href="journal.html" class="enter">
+  ENTER THE JOURNAL →
+</a>
+
+<div class="quick">
+
+  <a href="love.html">❤️ Love</a>
+
+  <a href="heartbreak.html">💔 Heartbreak</a>
+
+  <a href="lonely.html">🥀 Lonely</a>
+
+  <a href="healing.html">🌿 Healing</a>
+
+</div>
+
+  </div>  <div class="footer">
+    © 2026 Giddie Rey Journal
+  </div></section></body>
 </html>
