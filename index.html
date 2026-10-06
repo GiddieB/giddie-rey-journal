@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>Giddie Rey Journal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#070707;
+  --panel:#101010;
+  --panel2:#151515;
+  --text:#f4f1ed;
+  --muted:#aaa39b;
+  --line:rgba(255,255,255,.12);
+  --accent:#d8a0b8;
+  --accent2:#a98bd0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  line-height:1.5;
+}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 5%;
+  background:linear-gradient(to bottom,rgba(0,0,0,.82),transparent);
+  transition:.3s;
+}
+.nav.scrolled{background:rgba(7,7,7,.92);backdrop-filter:blur(14px)}
+.logo{
+  font-family:"Cormorant Garamond",serif;
+  font-size:28px;
+  font-style:italic;
+  font-weight:600;
+}
+.logo small{
+  display:block;
+  font-family:Inter,sans-serif;
+  font-size:8px;
+  letter-spacing:5px;
+  font-style:normal;
+  text-align:center;
+  margin-top:-5px;
+}
+.navlinks{display:flex;gap:28px;align-items:center}
+.navlinks a{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:#ddd;
+}
+.navlinks a:hover{color:white}
+.menu{display:none;background:none;border:0;color:white;font-size:25px}
+
+.hero{
+  min-height:780px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.90) 0%,rgba(0,0,0,.64) 36%,rgba(0,0,0,.18) 72%,rgba(0,0,0,.55) 100%),
+    linear-gradient(0deg,#070707 0%,transparent 30%),
+    url("journal-hero.png") center/cover no-repeat;
+}
+.hero:after{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 70% 50%,transparent 0,rgba(0,0,0,.12) 45%,rgba(0,0,0,.5) 100%);
+  pointer-events:none;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  width:min(720px,90%);
+  margin-left:7%;
+  padding-top:70px;
+}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:5px;
+  font-size:11px;
+  color:#d8d2cc;
+  margin-bottom:14px;
+}
+.hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(58px,8vw,105px);
+  line-height:.82;
+  font-weight:500;
+  font-style:italic;
+  margin-bottom:20px;
+}
+.hero h1 span{
+  display:block;
+  font-family:Inter,sans-serif;
+  font-style:normal;
+  font-size:clamp(13px,1.5vw,18px);
+  letter-spacing:9px;
+  margin:18px 0 0 8px;
+}
+.hero-copy{
+  max-width:500px;
+  color:#d0cbc5;
+  font-family:"Cormorant Garamond",serif;
+  font-size:22px;
+}
+.search{
+  margin-top:28px;
+  width:min(530px,100%);
+  display:flex;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(10px);
+  border-radius:999px;
+  overflow:hidden;
+}
+.search input{
+  flex:1;
+  background:transparent;
+  border:0;
+  outline:0;
+  color:white;
+  padding:15px 20px;
+}
+.search button{
+  border:0;
+  background:white;
+  color:#111;
+  width:54px;
+  cursor:pointer;
+}
+
+.section{padding:78px 6%}
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin-bottom:30px;
+}
+.kicker{
+  text-transform:uppercase;
+  letter-spacing:4px;
+  font-size:10px;
+  color:var(--muted);
+}
+.section h2{
+  font-family:"Cormorant Garamond",serif;
+  font-size:46px;
+  font-weight:500;
+  margin-top:4px;
+}
+.count{font-size:11px;color:#999;letter-spacing:2px}
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+.card{
+  min-height:170px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:linear-gradient(145deg,#151515,#0b0b0b);
+  padding:22px;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+}
+.card:before{
+  content:"";
+  position:absolute;
+  width:130px;height:130px;
+  border-radius:50%;
+  right:-55px;top:-55px;
+  background:radial-gradient(circle,rgba(216,160,184,.18),transparent 68%);
+}
+.card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(216,160,184,.5);
+  box-shadow:0 16px 45px rgba(0,0,0,.4);
+}
+.icon{
+  font-size:25px;
+  margin-bottom:22px;
+}
+.card h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:25px;
+  font-weight:600;
+}
+.card p{font-size:11px;color:#aaa;margin-top:3px}
+.arrow{position:absolute;right:20px;bottom:18px;color:#aaa}
+
+.feature{
+  margin-top:55px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  background:#0e0e0e;
+}
+.feature-photo{
+  min-height:330px;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.08),rgba(0,0,0,.55)),
+    url("journal-hero.png") center 37%/cover no-repeat;
+}
+.feature-text{padding:45px}
+.feature-text h3{
+  font-family:"Cormorant Garamond",serif;
+  font-size:39px;
+  line-height:1;
+  margin:12px 0 20px;
+}
+.feature-text p{color:#b8b2ac;font-size:14px}
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  border:1px solid #555;
+  border-radius:999px;
+  padding:11px 18px;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+.btn:hover{background:white;color:#111}
+
+.footer{
+  padding:35px 6%;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:#888;
+  font-size:11px;
+}
+.footer strong{color:#eee;font-family:"Cormorant Garamond",serif;font-size:22px}
+
+@media(max-width:900px){
+  .categories{grid-template-columns:repeat(2,1fr)}
+  .feature{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+  .nav{padding:16px 5%}
+  .navlinks{
+    display:none;
+    position:absolute;
+    top:65px;left:5%;right:5%;
+    flex-direction:column;
+    align-items:flex-start;
+    padding:20px;
+    background:#101010;
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  .navlinks.open{display:flex}
+  .menu{display:block}
+  .hero{min-height:720px;background-position:62% center}
+  .hero-content{margin-left:6%;padding-top:80px}
+  .hero h1{font-size:67px}
+  .hero-copy{font-size:19px}
+  .section{padding:60px 5%}
+  .categories{grid-template-columns:1fr}
+  .card{min-height:145px}
+  .section h2{font-size:38px}
+  .feature-text{padding:30px}
+  .feature-text h3{font-size:32px}
+  .footer{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#">Giddie Rey<small>JOURNAL</small></a>
+  <nav class="navlinks" id="navlinks">
+    <a href="#">Home</a>
+    <a href="#categories">Categories</a>
+    <a href="anonymous.html">Anonymous Room</a>
+    <a href="saved.html">Saved</a>
+    <a href="search.html">Search</a>
+  </nav>
+  <button class="menu" id="menu">☰</button>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">Welcome to</div>
+    <h1>Giddie Rey<span>JOURNAL</span></h1>
+    <p class="hero-copy">Real thoughts. Deep feelings. Quiet words for the things we don't always know how to say.</p>
+    <form class="search" onsubmit="goSearch(event)">
+      <input id="searchInput" placeholder="Search quotes, categories..." aria-label="Search">
+      <button type="submit">→</button>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="categories">
+  <div class="section-head">
+    <div>
+      <div class="kicker">Explore your thoughts</div>
+      <h2>16 Categories</h2>
+    </div>
+    <div class="count">WORDS FOR EVERY FEELING</div>
+  </div>
+
+  <div class="categories">
+    <a class="card" href="heartbreak.html"><div class="icon">💔</div><h3>Heartbreak</h3><p>The pain that teaches...</p><span class="arrow">→</span></a>
+    <a class="card" href="lonely.html"><div class="icon">◯</div><h3>Lonely</h3><p>Not alone in your thoughts...</p><span class="arrow">→</span></a>
+    <a class="card" href="love.html"><div class="icon">♡</div><h3>Love</h3><p>Real love. Real feelings...</p><span class="arrow">→</span></a>
+    <a class="card" href="life.html"><div class="icon">☼</div><h3>Life</h3><p>The journey, not just the destination...</p><span class="arrow">→</span></a>
+
+    <a class="card" href="healing.html"><div class="icon">✿</div><h3>Healing</h3><p>You'll be okay...</p><span class="arrow">→</span></a>
+    <a class="card" href="overthinking.html"><div class="icon">◎</div><h3>Overthinking</h3><p>Same mind, different loops...</p><span class="arrow">→</span></a>
+    <a class="card" href="peace.html"><div class="icon">☾</div><h3>Peace</h3><p>A calm mind is powerful...</p><span class="arrow">→</span></a>
+    <a class="card" href="people.html"><div class="icon">♧</div><h3>People & Friendship</h3><p>Real ones stay...</p><span class="arrow">→</span></a>
+
+    <a class="card" href="unspoken.html"><div class="icon">♡</div><h3>Unspoken Feelings</h3><p>Some words never get said...</p><span class="arrow">→</span></a>
+    <a class="card" href="regret.html"><div class="icon">↶</div><h3>Regret</h3><p>Lessons from the past...</p><span class="arrow">→</span></a>
+    <a class="card" href="sadness.html"><div class="icon">☁</div><h3>Sadness</h3><p>It's okay to not be okay...</p><span class="arrow">→</span></a>
+    <a class="card" href="reflection.html"><div class="icon">◉</div><h3>Self-Reflection</h3><p>Know yourself better...</p><span class="arrow">→</span></a>
+
+    <a class="card" href="faith.html"><div class="icon">✝</div><h3>Faith & Hope</h3><p>God's plan is always right...</p><span class="arrow">→</span></a>
+    <a class="card" href="letting-go.html"><div class="icon">⌁</div><h3>Letting Go</h3><p>Not everything is meant to stay...</p><span class="arrow">→</span></a>
+    <a class="card" href="motivation.html"><div class="icon">⌁</div><h3>Motivation</h3><p>Keep going...</p><span class="arrow">→</span></a>
+    <a class="card" href="new-beginnings.html"><div class="icon">✦</div><h3>New Beginnings</h3><p>A fresh start is possible...</p><span class="arrow">→</span></a>
+  </div>
+
+  <div class="feature">
+    <div class="feature-photo"></div>
+    <div class="feature-text">
+      <div class="kicker">Today's journal thought</div>
+      <h3>Some thoughts are too heavy for the world, but not for here.</h3>
+      <p>A quiet place for words, feelings, memories, healing and everything in between.</p>
+      <a class="btn" href="anonymous.html">Enter Anonymous Room</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div><strong>Giddie Rey Journal</strong><br>More than just quotes...</div>
+  <div>© 2026 Giddie Rey Journal</div>
+</footer>
+
+<script>
+const nav=document.getElementById("nav");
+const menu=document.getElementById("menu");
+const links=document.getElementById("navlinks");
+
+window.addEventListener("scroll",()=>nav.classList.toggle("scrolled",scrollY>40));
+menu.addEventListener("click",()=>links.classList.toggle("open"));
+
+function goSearch(e){
+  e.preventDefault();
+  const q=document.getElementById("searchInput").value.trim();
+  if(q) location.href="search.html?q="+encodeURIComponent(q);
+  else location.href="search.html";
+}
+</script>
+</body>
+</html>
